@@ -23,6 +23,7 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       '@': resolve('src'),
+      'components': resolve('src/components'),
     }
   },
   module: {
@@ -65,10 +66,11 @@ module.exports = {
         test: /\.pug$/,
         loader: 'pug'
       },
-      {
-        test: /\.scss$/,
-        loader: "style!css!sass?sourceMap",
-      }
+      
+      // {
+      //   test: /\.scss$/,
+      //   loader: "style!css!sass?sourceMap",
+      // }
     ]
   }
 }

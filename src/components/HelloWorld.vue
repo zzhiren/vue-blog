@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     login() {
-      axios.post("#/login",{
+      axios.post("/login",{
         username: this.username,
         password: this.password
       }).then((response) =>{

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import axios from 'axios'
+import 'components/common/scss/base.scss'
 
 Vue.config.productionTip = false
 
