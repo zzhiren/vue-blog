@@ -66,11 +66,10 @@ module.exports = {
         test: /\.pug$/,
         loader: 'pug'
       },
-      
-      // {
-      //   test: /\.scss$/,
-      //   loader: "style!css!sass?sourceMap",
-      // }
+      {
+        test: /\.scss$/,
+        loader: "style!css!sass?sourceMap",
+      }
     ]
   }
 }

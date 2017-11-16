@@ -14,6 +14,7 @@ export default {
 $height: 63px;
 .topheader{
     width: 100%;
+    position: fixed;
     height: $height;
     background-color: rgba(0,0,0,0.75);
     .content{
@@ -27,7 +28,7 @@ $height: 63px;
         }
         .motto{
             color: gray;
-            font-size: 20px;
+            font-size: 16px;
             margin-left: 40px;
         }
     }

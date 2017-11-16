@@ -1,7 +1,7 @@
 <template lang='pug'>
 div#app
   div.bg
-
+  div.fliter
   top-header
   router-view
 </template>
@@ -25,7 +25,8 @@ export default {
     background: url(./assets/bg1.jpg) center top;
     background-size: cover;
     background-repeat: no-repeat;
-    filter: blur(0.8px);
+    background-attachment:fixed;
+    // filter: blur(0.8px);
     // margin: -30px;
     background-size: cover;
     position: absolute;
@@ -34,8 +35,11 @@ export default {
     z-index: -1;
   }
 }
-body{
+body,h1,h2,h3,h4{
   padding: 0;
   margin: 0;
+}
+h4{
+  font-size: 14px;
 }
 </style>
