@@ -16,7 +16,8 @@ $height: 63px;
     width: 100%;
     position: fixed;
     height: $height;
-    background-color: rgba(0,0,0,0.75);
+    background-color: rgba(0,0,0,0.8);
+    z-index: 999;
     .content{
         width: $width;
         height: $height;

@@ -37,7 +37,7 @@ $margin-top: 79px;
 .home{
   width: 100%;
   // height: 100%;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.4);
   .content{
     width: $width;
     display: flex;
@@ -49,8 +49,7 @@ $margin-top: 79px;
       height: 100px;
       .nav-list{
         width: 161px;
-        background: $black;
-        opacity: .6;
+        background: rgba(0, 0, 0, 0.4);
         .nav-item{
           width: 161px;
           height: 42px;
@@ -69,8 +68,7 @@ $margin-top: 79px;
           }
         }
         .active{
-          background: $black;
-          opacity: 1;
+          background: rgba(0, 0, 0, 0.4);
           color: white;
         }
       }
