@@ -8,6 +8,7 @@ div#app
 
 <script>
 import TopHeader from "./components/common/vue/TopHeader";
+import FCCIcon from './assets/FCC-fontIcon/css/fccHangzhou.css';
 export default {
   name: "app",
   components: {
@@ -38,8 +39,6 @@ body {
   width: 100%;
   z-index: -1;
   overflow-x: hidden;
-}
-body {
   &::-webkit-scrollbar {
     width: 5px;
     height: 16px;
@@ -57,11 +56,13 @@ body {
     background-color: #555;
   }
 }
+
 body,
 h1,
 h2,
 h3,
-h4 {
+h4,
+p {
   padding: 0;
   margin: 0;
 }

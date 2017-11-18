@@ -49,7 +49,8 @@ $margin-top: 79px;
       height: 100px;
       .nav-list{
         width: 161px;
-        background: rgba(0, 0, 0, 0.4);
+        // background: rgba(0, 0, 0, 0.2);
+        // background: rgba(0, 0, 0, 0.4);
         .nav-item{
           width: 161px;
           height: 42px;
@@ -68,7 +69,7 @@ $margin-top: 79px;
           }
         }
         .active{
-          background: rgba(0, 0, 0, 0.4);
+          background: rgba(0, 0, 0, 1);
           color: white;
         }
       }
