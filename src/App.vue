@@ -1,7 +1,6 @@
 <template lang='pug'>
 div#app
-  div.bg
-  div.fliter
+  div#bg.bg
   top-header
   router-view
 </template>
@@ -26,7 +25,7 @@ export default {
 body {
   // background: white;
   opacity: 1;
-  background: url(./assets/bg4.jpg) center top;
+  // background: url(./assets/bg4.jpg) center top;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;

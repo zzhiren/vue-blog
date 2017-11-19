@@ -37,7 +37,7 @@ $margin-top: 79px;
 .home{
   width: 100%;
   // height: 100%;
-  background: rgba(0, 0, 0, 0.4);
+  // background: rgba(0, 0, 0, 0.4);
   .content{
     width: $width;
     display: flex;

@@ -92,6 +92,40 @@
                 span.meta-span 121
                 i.fcc-attach.icon-font
                 span.meta-span code
+      div.blog-list
+          div.item-thumb
+            img#img(src="../../assets/bg4.jpg")
+          div.item-body
+              h4.title 欢喜勇猛，向死而生
+              p.preface 天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？
+              div.meta 
+                i.fcc-time.icon-font
+                span.meta-span 2017/11/11
+                i.fcc-eye.icon-font
+                span.meta-span 256
+                i.fcc-male.icon-font 
+                span.meta-span 10
+                i.fcc-heart.icon-font
+                span.meta-span 121
+                i.fcc-attach.icon-font
+                span.meta-span code
+      div.blog-list
+          div.item-thumb
+            img#img(src="../../assets/bg4.jpg")
+          div.item-body
+              h4.title 欢喜勇猛，向死而生
+              p.preface 天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？
+              div.meta 
+                i.fcc-time.icon-font
+                span.meta-span 2017/11/11
+                i.fcc-eye.icon-font
+                span.meta-span 256
+                i.fcc-male.icon-font 
+                span.meta-span 10
+                i.fcc-heart.icon-font
+                span.meta-span 121
+                i.fcc-attach.icon-font
+                span.meta-span code
 </template>
 <script>
 import img1 from "../../assets/alone.jpg";
@@ -146,6 +180,7 @@ export default {
     width: 595px;
     height: 210px;
     position: relative;
+    z-index: 1;
     #swiper-img {
       width: 595px;
       transition: transform 0.5s linear;
