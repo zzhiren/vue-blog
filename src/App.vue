@@ -22,10 +22,14 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.active{
+          background: rgba(0, 0, 0, 1);
+          color: white;
+        }
 body {
   // background: white;
   opacity: 1;
-  // background: url(./assets/bg4.jpg) center top;
+  background: url(./assets/bg10.jpg) center top;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;

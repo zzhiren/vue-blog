@@ -3,15 +3,11 @@
     div.content
       div.left-side
         div.nav-list
-          router-link.nav-item(tag="div" to="/Blog" v-bind:class="{active:state==3}" v-on:click.native="itemActive(3)") BLOG
-          router-link.nav-item(tag="div" to="/" v-bind:class="{active:state==4}" v-on:click.native="itemActive(4)") MUSIC
-          router-link.nav-item(tag="div" to="/" v-bind:class="{active:state==5}" v-on:click.native="itemActive(5)") RESUM
-          router-link.nav-item(tag="div" to="/" v-bind:class="{active:state==6}" v-on:click.native="itemActive(6)") GITHUB
-          router-link.nav-item(tag="div" to="/" v-bind:class="{active:state==7}" v-on:click.native="itemActive(7)") EMAIL
-          router-link.nav-item(tag="div" to="/" v-bind:class="{active:state==8}" v-on:click.native="itemActive(8)") 简书
-          router-link.nav-item(tag="div" to="/" v-bind:class="{active:state==9}" v-on:click.native="itemActive(9)") 掘金
-          router-link.nav-item(tag="div" to="/" v-bind:class="{active:state==10}" v-on:click.native="itemActive(10)") 掘金
-          router-link.nav-item(tag="div" to="/" v-bind:class="{active:state==11}" v-on:click.native="itemActive(11)") SOF
+          router-link.nav-item(tag="div" to="/blog"  v-on:click.native="itemActive(3)") 博客
+          router-link.nav-item(tag="div" to="/music" v-on:click.native="itemActive(4)") 音乐
+          router-link.nav-item(tag="div" to="/resume" v-on:click.native="itemActive(5)") 简历
+          //- router-link.nav-item(tag="div" to="/" v-on:click.native="itemActive(6)") GitHub
+          router-link.nav-item(tag="div" to="/collection" v-on:click.native="itemActive(7)") 收藏
           
       div.main-content
         router-view 
@@ -68,10 +64,7 @@ $margin-top: 79px;
             color: $font-color;
           }
         }
-        .active{
-          background: rgba(0, 0, 0, 1);
-          color: white;
-        }
+        
       }
     }
     .main-content{

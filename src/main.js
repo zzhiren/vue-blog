@@ -7,6 +7,7 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 
 Vue.config.productionTip = false
 Vue.use(VueAwesomeSwiper)
+Vue.prototype.$axios = axios
 
 /* eslint-disable no-new */
 new Vue({

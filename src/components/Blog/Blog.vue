@@ -1,137 +1,32 @@
 <template lang="pug">
   div#blog
     swiper.swiper(:options="swiperOption" ref="mySwiper")
-        swiper-slide.swiper-slide(v-for="(item, index) in data" v-bind:key="item.id")
-          img#swiper-img(v-bind:src="item.img" alt="" v-on:click="toActiveDetils(item.id)")
+        swiper-slide.swiper-slide(v-for="(item, index) in blogs.slice(0,4)" v-bind:key="item._id")
+          img#swiper-img(v-bind:src="item.firstPic" alt="" v-on:click="toActiveDetils(item._id)")
           div.title()  {{ item.title}}
     //- div(class="swiper-pagination" slot="pagination")
     div
-      div.blog-list
+      div.blog-list(v-for="(item,index) in blogs" v-bind:key="item._id")
           div.item-thumb
-            img#img(src="../../assets/bg4.jpg")
+            img#img(v-bind:src="item.firstPic")
           div.item-body
-              h4.title 欢喜勇猛，向死而生
-              p.preface 天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？
+              h4.title(v-html="item.title")
+              p.preface(v-html="item.preface")
               div.meta 
                 span
                   i.fcc-time.icon-font
-                  span.meta-span 2017/11/11
+                  span.meta-span {{item.creationTime}}
                   i.fcc-eye.icon-font
-                  span.meta-span 256
-                  i.fcc-male.icon-font 
-                  span.meta-span 10
+                  span.meta-span {{item.eyes}}
+                  i.fcc-male.icon-font
+                  span.meta-span {{item.comment.length}}
                   i.fcc-heart.icon-font
-                  span.meta-span 121
+                  span.meta-span {{item.love}}
                   i.fcc-attach.icon-font
-                  span.meta-span code
-      div.blog-list
-          div.item-thumb
-            img#img(src="../../assets/bg4.jpg")
-          div.item-body
-              h4.title 欢喜勇猛，向死而生
-              p.preface 天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？
-              div.meta 
-                i.fcc-time.icon-font
-                span.meta-span 2017/11/11
-                i.fcc-eye.icon-font
-                span.meta-span 256
-                i.fcc-male.icon-font 
-                span.meta-span 10
-                i.fcc-heart.icon-font
-                span.meta-span 121
-                i.fcc-attach.icon-font
-                span.meta-span code
-      div.blog-list
-          div.item-thumb
-            img#img(src="../../assets/bg4.jpg")
-          div.item-body
-              h4.title 欢喜勇猛，向死而生
-              p.preface 天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？
-              div.meta 
-                i.fcc-time.icon-font
-                span.meta-span 2017/11/11
-                i.fcc-eye.icon-font
-                span.meta-span 256
-                i.fcc-male.icon-font 
-                span.meta-span 10
-                i.fcc-heart.icon-font
-                span.meta-span 121
-                i.fcc-attach.icon-font
-                span.meta-span code
-      div.blog-list
-          div.item-thumb
-            img#img(src="../../assets/bg4.jpg")
-          div.item-body
-              h4.title 欢喜勇猛，向死而生
-              p.preface 天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？
-              div.meta 
-                i.fcc-time.icon-font
-                span.meta-span 2017/11/11
-                i.fcc-eye.icon-font
-                span.meta-span 256
-                i.fcc-male.icon-font 
-                span.meta-span 10
-                i.fcc-heart.icon-font
-                span.meta-span 121
-                i.fcc-attach.icon-font
-                span.meta-span code
-      div.blog-list
-          div.item-thumb
-            img#img(src="../../assets/bg4.jpg")
-          div.item-body
-              h4.title 欢喜勇猛，向死而生
-              p.preface 天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？
-              div.meta 
-                i.fcc-time.icon-font
-                span.meta-span 2017/11/11
-                i.fcc-eye.icon-font
-                span.meta-span 256
-                i.fcc-male.icon-font 
-                span.meta-span 10
-                i.fcc-heart.icon-font
-                span.meta-span 121
-                i.fcc-attach.icon-font
-                span.meta-span code
-      div.blog-list
-          div.item-thumb
-            img#img(src="../../assets/bg4.jpg")
-          div.item-body
-              h4.title 欢喜勇猛，向死而生
-              p.preface 天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？
-              div.meta 
-                i.fcc-time.icon-font
-                span.meta-span 2017/11/11
-                i.fcc-eye.icon-font
-                span.meta-span 256
-                i.fcc-male.icon-font 
-                span.meta-span 10
-                i.fcc-heart.icon-font
-                span.meta-span 121
-                i.fcc-attach.icon-font
-                span.meta-span code
-      div.blog-list
-          div.item-thumb
-            img#img(src="../../assets/bg4.jpg")
-          div.item-body
-              h4.title 欢喜勇猛，向死而生
-              p.preface 天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？天空在心，路在脚底，你，梦想去向哪里？去那座写了你名字的山，去那片等了你很久的海，还是去你向往的无边无际，海阔天空？
-              div.meta 
-                i.fcc-time.icon-font
-                span.meta-span 2017/11/11
-                i.fcc-eye.icon-font
-                span.meta-span 256
-                i.fcc-male.icon-font 
-                span.meta-span 10
-                i.fcc-heart.icon-font
-                span.meta-span 121
-                i.fcc-attach.icon-font
-                span.meta-span code
+                  span.meta-span {{item.tag[0]}}
 </template>
 <script>
-import img1 from "../../assets/alone.jpg";
-import img2 from "../../assets/1.jpeg";
-import img3 from "../../assets/2.jpeg";
-import img4 from "../../assets/3.jpg";
+import axios from 'axios';
 export default {
   data() {
     return {
@@ -149,25 +44,24 @@ export default {
         loop: true,
         autoplayDisableOnInteraction: false
       },
-      data: [
-        {
-          title: "天堂地狱",
-          img: img1
-        },
-        {
-          title: "说好的幸福呢",
-          img: img2
-        },
-        {
-          title: "哈哈哈哈",
-          img: img4
-        },
-        {
-          title: "放逐之刃",
-          img: img3
-        }
-      ]
+      blogs: []
     };
+  },
+  mounted(){
+    this._initData()
+  },
+  methods:{
+    _initData(){
+      var date = new Date()
+      var timer = date.getTime().toString()
+      this.$axios({
+        method: 'get',
+        url: '/getbloglist?t=' + timer,
+      }).then(res=>{
+        this.blogs = res.data.data
+        console.log(this.blogs)
+      })
+    }
   }
 };
 </script>
@@ -234,7 +128,8 @@ export default {
       overflow: hidden;
       #img {
         transition: transform 0.25s linear;
-        width: 220px;
+        // 
+        height: 100%;
         &:hover {
           cursor: pointer;
         }

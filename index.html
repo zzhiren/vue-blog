@@ -18,7 +18,7 @@
   <div id="app"></div>
   <div id="bg"></div>
 
-  <script type="text/javascript" src="static/lib/ThreeWebGL.js"></script>
+  <!-- <script type="text/javascript" src="static/lib/ThreeWebGL.js"></script>
   <script type="text/javascript" src="static/lib/ThreeExtras.js"></script>
   <script type="text/javascript" src="static/lib/Detector.js"></script>
   <script type="text/javascript" src="static/lib/RequestAnimationFrame.js"></script>
@@ -28,8 +28,8 @@
               vUv = uv;
               gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
             }
-      </script>
-  <script id="fs" type="x-shader/x-fragment">
+      </script> -->
+  <!-- <script id="fs" type="x-shader/x-fragment">
         uniform sampler2D map;
         uniform vec3 fogColor;
         uniform float fogNear;
@@ -42,9 +42,9 @@
           gl_FragColor.w *= pow( gl_FragCoord.z, 20.0 );
           gl_FragColor = mix( gl_FragColor, vec4( fogColor, gl_FragColor.w ), fogFactor );
         }
-      </script>
+      </script> -->
   <!-- built files will be auto injected -->
-  <script type="text/javascript">
+  <!-- <script type="text/javascript">
   window.onload=function(){
     if (!Detector.webgl) Detector.addGetWebGLMessage();
     // Bg gradient
@@ -133,7 +133,7 @@
       camera.target.position.z = camera.position.z - 1000;
       renderer.render(scene, camera);
     }}
-  </script>
+  </script> -->
 
   <!-- built files will be auto injected -->
 </body>
