@@ -3,7 +3,8 @@ import App from './App'
 import router from './router'
 import axios from 'axios'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
-// import 'components/common/scss/base.scss'
+import iView from 'iview'
+import './components/common/css/iview.css';
 
 Vue.config.productionTip = false
 Vue.use(VueAwesomeSwiper)

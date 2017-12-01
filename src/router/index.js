@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home/Home'
 import Blog from '@/components/Blog/Blog'
+import BlogList from '@/components/Blog/BlogList'
+import BlogDetils from '@/components/Blog/BlogDetils'
 import Music from '@/components/Music/Music'
 import Resume from '@/components/Resume/Resume'
 import Collection from '@/components/Collection/Collection'
@@ -15,12 +17,30 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home,
-      redirect:"",
+      redirect:"/blog/bloglist",
       children: [
         {
           path: 'blog',
           name: 'Blog',
-          component: Blog
+          redirect: '/blog/bloglist',
+          component: Blog,
+          children:[
+            {
+              path: 'bloglist',
+              name: 'BlogList',
+              component: BlogList,
+            },
+            {
+              path: 'blogdetils/:id',
+              name: 'BlogDetils',
+              component: BlogDetils,
+            },
+            {
+              path: 'bloglist',
+              name: 'BlogList',
+              component: BlogList,
+            },
+          ]
         },
         {
           path: 'music',
