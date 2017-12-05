@@ -33,7 +33,7 @@ $margin-top: 79px;
 .home{
   width: 100%;
   // height: 100%;
-  // background: rgba(0, 0, 0, 0.4);
+  // background-color: rgba(0, 0, 0, 0.2);
   .content{
     width: $width;
     display: flex;
@@ -54,7 +54,7 @@ $margin-top: 79px;
           font-family: "微软雅黑";
           font-size: 14px;
           line-height: 42px;
-          color: white;
+          color: rgba(0,0,0,.6);
           font-style: normal;
           font-weight: bold;
           padding-left: 20px;

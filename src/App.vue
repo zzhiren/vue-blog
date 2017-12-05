@@ -1,13 +1,13 @@
 <template lang='pug'>
 div#app
-  div#bg.bg
+  div.bg
   top-header
   router-view
 </template>
 
 <script>
 import TopHeader from "./components/common/vue/TopHeader";
-import FCCIcon from './assets/FCC-fontIcon/css/fccHangzhou.css';
+// import FCCIcon from './assets/FCC-fontIcon/css/fccHangzhou.css';
 export default {
   name: "app",
   components: {
@@ -22,14 +22,14 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.active{
-          background: rgba(0, 0, 0, 1);
-          color: white;
-        }
+.active {
+  background: rgba(0, 0, 0, 1);
+  color: white!important;
+}
 body {
   // background: white;
   opacity: 1;
-  background: url(./assets/bg10.jpg) center top;
+  background: url(./assets/bg12.jpg) center top;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -68,6 +68,7 @@ h4,
 p {
   padding: 0;
   margin: 0;
+  // margin-bottom: 7px!important;
 }
 h4 {
   font-size: 14px;

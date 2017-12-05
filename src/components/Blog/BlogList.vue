@@ -14,19 +14,19 @@
               p.preface(v-html="item.preface")
               div.meta 
                 span
-                  i.fcc-time.icon-font
+                  Icon.icon-font(type="ios-clock")
                   span.meta-span {{item.creationTime}}
-                  i.fcc-eye.icon-font
+                  Icon.icon-font(type="eye")
                   span.meta-span {{item.eyes}}
-                  i.fcc-male.icon-font
+                  Icon.icon-font(type="chatbox-working")
                   span.meta-span {{item.comment.length}}
-                  i.fcc-heart.icon-font
+                  Icon.icon-font(type="heart")
                   span.meta-span {{item.love}}
-                  i.fcc-attach.icon-font
+                  Icon.icon-font(type="ios-pricetags")
                   span.meta-span {{item.tag[0]}}
 </template>
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
   data() {
     return {
@@ -47,23 +47,23 @@ export default {
       blogs: []
     };
   },
-  mounted(){
-    this._initData()
+  mounted() {
+    this._initData();
   },
-  methods:{
-    _initData(){
-      var date = new Date()
-      var timer = date.getTime().toString()
+  methods: {
+    _initData() {
+      var date = new Date();
+      var timer = date.getTime().toString();
       this.$axios({
-        method: 'get',
-        url: '/getbloglist?t=' + timer,
-      }).then(res=>{
-        this.blogs = res.data.data
-        console.log(this.blogs)
-      })
+        method: "get",
+        url: "/getbloglist?t=" + timer
+      }).then(res => {
+        this.blogs = res.data.data;
+        console.log(this.blogs);
+      });
     },
-    _toBlogDetils(id){
-      this.$router.push({name: 'BlogDetils', params:{id}})
+    _toBlogDetils(id) {
+      this.$router.push({ name: "BlogDetils", params: { id } });
     }
   }
 };
@@ -78,12 +78,14 @@ export default {
     height: 210px;
     position: relative;
     z-index: 1;
-    #swiper-img {
-      width: 595px;
-      transition: transform 0.5s linear;
-      &:hover {
-        cursor: pointer;
-        transform: rotate(2deg) scale(1.1);
+    .swiper-slide {
+      #swiper-img {
+        width: 595px;
+        transition: transform 0.5s linear;
+        &:hover {
+          cursor: pointer;
+          transform: rotate(2deg) scale(1.1);
+        }
       }
     }
     .title {
@@ -105,7 +107,7 @@ export default {
     width: 100%;
     height: 133px;
     margin-top: $margin-all;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.8);
     // background: rgba(28, 28, 28, .9);
     padding: 7px 7px 7px 7px;
     box-sizing: border-box;
@@ -114,7 +116,8 @@ export default {
     -webkit-transition: $hover-bg;
     transition: $hover-bg;
     &:hover {
-      background: rgba(28, 28, 28, 0.95);
+      background: rgba(28, 28, 28, 0.75);
+      // background: rgba(0, 0, 0, 0.9);
       cursor: pointer;
     }
     &:hover #img {
@@ -132,7 +135,7 @@ export default {
       overflow: hidden;
       #img {
         transition: transform 0.25s linear;
-        // 
+        //
         height: 100%;
         &:hover {
           cursor: pointer;
@@ -178,6 +181,7 @@ export default {
         .icon-font {
           font-size: $iconfont-size;
           margin-right: 4px;
+          color: white !important;
         }
         .meta-span {
           color: white;
