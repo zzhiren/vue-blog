@@ -1,10 +1,9 @@
 <template lang="pug">
   div#blog-list
     swiper.swiper(:options="swiperOption" ref="mySwiper")
-        swiper-slide.swiper-slide(v-for="(item, index) in blogs.slice(0,4)" v-bind:key="item._id" @click.native="_toBlogDetils(item._id)")
-          img#swiper-img(v-bind:src="item.firstPic" alt="" )
+        swiper-slide.swiper-slide(v-for="(item, index) in blogs.slice(0,4)" )
+          img.swiper-img(v-bind:src="item.firstPic" alt="" v-bind:key="item._id" @click="_toBlogDetils(item._id)")
           div.title()  {{ item.title}}
-    //- div(class="swiper-pagination" slot="pagination")
     div
       div.blog-item(v-for="(item,index) in blogs" v-bind:key="item._id" @click="_toBlogDetils(item._id)")
           div.item-thumb
@@ -31,18 +30,14 @@ export default {
   data() {
     return {
       swiperOption: {
-        notNextTick: true,
-        autoplay: 4000,
+        autoplay: 3000,
         grabCursor: true,
         setWrapperSize: true,
-        pagination: ".swiper-pagination",
-        paginationClickable: true,
-        prevButton: ".swiper-button-prev",
-        nextButton: ".swiper-button-next",
+        paginationClickable: false,
         mousewheelControl: false,
         observeParents: true,
-        loop: true,
-        autoplayDisableOnInteraction: false
+        autoplayDisableOnInteraction: false,
+        // loop: true
       },
       blogs: []
     };
@@ -50,6 +45,11 @@ export default {
   mounted() {
     this._initData();
   },
+  computed: {
+   swiper() {
+     return this.$refs.mySwiper.swiper
+   }
+ },
   methods: {
     _initData() {
       var date = new Date();
@@ -64,7 +64,7 @@ export default {
     },
     _toBlogDetils(id) {
       this.$router.push({ name: "BlogDetils", params: { id } });
-    }
+    },
   }
 };
 </script>
@@ -79,7 +79,7 @@ export default {
     position: relative;
     z-index: 1;
     .swiper-slide {
-      #swiper-img {
+      .swiper-img {
         width: 595px;
         transition: transform 0.5s linear;
         &:hover {

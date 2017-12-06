@@ -2,12 +2,10 @@
   div.blog-detils
     h3.title(v-html="data.title")
     p(v-html="compiledMarkdown")
-
 </template>
 <script>
 import axios from "axios";
 import Marked from "marked";
-// import "../common/css/markdown.css";
 
 export default {
   data() {
@@ -47,7 +45,6 @@ export default {
     "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   color: white;
   width: 100%;
-  // height: 1000px;
   background-color: rgba(0, 0, 0, 0.8);
   padding-top: 30px;
   padding-left: 20px;

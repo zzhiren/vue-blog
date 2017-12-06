@@ -58,6 +58,13 @@ module.exports = {
           pathRewrite: {
             '^/getblogdetils': '/getblogdetils'
           }
+      },
+      '/searchblog':{
+          target:'http://127.0.0.1:3000',
+          changeOrigin: true,
+          pathRewrite: {
+            '^/searchblog': '/searchblog'
+          }
       }
     },
   }

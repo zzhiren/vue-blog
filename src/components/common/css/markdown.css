@@ -1,6 +1,7 @@
 h1,h2,h3,h4,h5{
   font-family: Monaco, Consolas, Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
   color: #E8E8E8!important;
+  margin-bottom: 20px!important;
 }
 blockquote{
   border-left: 2px solid #b82525;
@@ -30,4 +31,15 @@ pre{
   box-sizing: border-box;
   font-family: Monaco, Consolas, Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
   font-size: 14px!important;
+}
+
+img{
+  width: 100%!important;
+  opacity: 0.9;
+  box-sizing: border-box;
+  transition: opacity 0.25s linear;
+}
+
+img:hover{
+  opacity: 1;
 }
