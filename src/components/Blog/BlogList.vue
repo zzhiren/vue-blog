@@ -1,8 +1,8 @@
 <template lang="pug">
   div#blog-list
     swiper.swiper(:options="swiperOption" ref="mySwiper")
-        swiper-slide.swiper-slide(v-for="(item, index) in blogs.slice(0,4)" v-bind:key="item._id")
-          img#swiper-img(v-bind:src="item.firstPic" alt="" v-on:click="toActiveDetils(item._id)")
+        swiper-slide.swiper-slide(v-for="(item, index) in blogs.slice(0,4)" v-bind:key="item._id" @click.native="_toBlogDetils(item._id)")
+          img#swiper-img(v-bind:src="item.firstPic" alt="" )
           div.title()  {{ item.title}}
     //- div(class="swiper-pagination" slot="pagination")
     div

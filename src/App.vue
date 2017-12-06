@@ -1,30 +1,35 @@
 <template lang='pug'>
 div#app
-  div.bg
+  //- div.bg
   top-header
   router-view
+  //- Footer
 </template>
 
 <script>
 import TopHeader from "./components/common/vue/TopHeader";
+import Footer from "./components/common/vue/Footer";
 // import FCCIcon from './assets/FCC-fontIcon/css/fccHangzhou.css';
 export default {
   name: "app",
   components: {
-    TopHeader
+    TopHeader,
+    Footer
   }
 };
 </script>
 
 <style lang="scss">
+@import 'src/components/common/scss/base.scss';
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 .active {
-  background: rgba(0, 0, 0, 1);
-  color: white!important;
+  background: rgba(0, 0, 0, .8);
+  color: $font-color-blue!important;
 }
 body {
   // background: white;

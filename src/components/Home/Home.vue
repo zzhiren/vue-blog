@@ -3,15 +3,22 @@
     div.content
       div.left-side
         div.nav-list
-          router-link.nav-item(tag="div" to="/blog"  v-on:click.native="itemActive(3)") 博客
-          router-link.nav-item(tag="div" to="/music" v-on:click.native="itemActive(4)") 音乐
-          router-link.nav-item(tag="div" to="/resume" v-on:click.native="itemActive(5)") 简历
+          router-link.nav-item(tag="div" to="/blog"  v-on:click.native="itemActive(3)") 
+            Icon.icon-font(type="home") 
+            span BLOG
+          router-link.nav-item(tag="div" to="/resume" v-on:click.native="itemActive(5)") 
+            Icon.icon-font(type="android-person") 
+            span ABOUT
+          router-link.nav-item(tag="div" to="/music" v-on:click.native="itemActive(4)") 
+            Icon.icon-font(type="headphone") 
+            span MUSIC
           //- router-link.nav-item(tag="div" to="/" v-on:click.native="itemActive(6)") GitHub
-          router-link.nav-item(tag="div" to="/collection" v-on:click.native="itemActive(7)") 收藏
-          
+          router-link.nav-item(tag="div" to="/collection" v-on:click.native="itemActive(7)") 
+            Icon.icon-font(type="star") 
+            span COLLECTION
       div.main-content
         router-view 
-      div.right-side
+      //- div.right-side
 </template>
 <script>
 export default {
@@ -52,16 +59,23 @@ $margin-top: 79px;
           height: 42px;
           margin-bottom: 7px;
           font-family: "微软雅黑";
-          font-size: 14px;
+          font-size: 13px;
           line-height: 42px;
-          color: rgba(0,0,0,.6);
+          color: rgba(0,0,0,.5);
           font-style: normal;
           font-weight: bold;
-          padding-left: 20px;
+          padding-left: 15px;
           box-sizing: border-box;
           &:hover{
             cursor: pointer;
-            color: $font-color;
+            color: $font-color-blue;
+          }
+          .icon-font{
+            font-size: 16px;
+            margin-right: 8px;
+          }
+          span{
+            letter-spacing: 1px;
           }
         }
         
@@ -69,7 +83,7 @@ $margin-top: 79px;
     }
     .main-content{
       margin-top: $margin-top;
-      width: 595px;
+      width: 875px;
       margin-left: 175px;
       margin-right: $margin-all;
       // height: 1000px;
