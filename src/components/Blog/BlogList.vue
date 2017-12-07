@@ -113,7 +113,6 @@ export default {
     box-sizing: border-box;
     display: flex;
     -webkit-transition: $hover-bg;
-    -webkit-transition: $hover-bg;
     transition: $hover-bg;
     &:hover {
       background: rgba(28, 28, 28, 0.75);
