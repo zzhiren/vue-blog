@@ -5,7 +5,7 @@ import Blog from '@/components/Blog/Blog'
 import BlogList from '@/components/Blog/BlogList'
 import BlogDetils from '@/components/Blog/BlogDetils'
 import Music from '@/components/Music/Music'
-import Resume from '@/components/Resume/Resume'
+import About from '@/components/About/About'
 import Collection from '@/components/Collection/Collection'
 
 Vue.use(Router)
@@ -48,9 +48,9 @@ export default new Router({
           component: Music
         },
         {
-          path: 'resume',
-          name: 'Resume',
-          component: Resume
+          path: 'about',
+          name: 'About',
+          component: About
         },
         {
           path: 'collection',

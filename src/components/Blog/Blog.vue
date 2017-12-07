@@ -18,13 +18,9 @@
           ul.ul
             li.li(v-for="(item,index) in npmList" v-bind:key="index")
               span.index
-              a.a 
+              a.a(v-bind:title="'author:' + item.package.publisher.username + '  version:'+item.package.version" v-bind:href="item.package.links.npm" target="_blank")
                 span.package-name {{item.package.name}} 
                 //- span.package-author ->{{item.package.publisher.username}}
-
-
-          
-
 </template>
 <script>
 import axios from "axios";
@@ -64,16 +60,19 @@ export default {
       });
     },
     _searchBlog() {
-      this.$axios({
-        method: "get",
-        url: "/searchnpm",
-        params: {
-          text: this.text,
-          from: this.from
-        }
-      }).then(res => {
-        this.npmList = res.data.objects;
-      });
+      if (this.text == " ") {
+        this.text = "vue";
+        this.$axios({
+          method: "get",
+          url: "/searchnpm",
+          params: {
+            text: this.text,
+            from: this.from
+          }
+        }).then(res => {
+          this.npmList = res.data.objects;
+        });
+      }
     }
   }
 };
@@ -154,11 +153,11 @@ $margin-top: 79px;
           "Microsoft YaHei", "\\5FAE软雅黑", sans-serif;
         font-weight: bold;
         .npm-div {
-          width: 60px;
+          width: 50px;
           .npm {
             // flex:
             // width: 60px;
-            margin-top: 10px;
+            margin-top: 12px;
           }
         }
         .span {
@@ -171,7 +170,6 @@ $margin-top: 79px;
         }
       }
       .list {
-        
         .ul {
           list-style: none;
           padding: 6px 0;
@@ -210,11 +208,11 @@ $margin-top: 79px;
                 text-decoration: underline;
                 margin-left: 10px;
               }
-              .package-name{
+              .package-name {
                 font-size: 14px;
                 color: rgba(255, 255, 255, 1) !important;
               }
-              .package-author{
+              .package-author {
                 font-size: 12px;
               }
             }

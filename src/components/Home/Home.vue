@@ -6,7 +6,7 @@
           router-link.nav-item(tag="div" to="/blog"  v-on:click.native="itemActive(3)") 
             Icon.icon-font(type="home") 
             span BLOG
-          router-link.nav-item(tag="div" to="/resume" v-on:click.native="itemActive(5)") 
+          router-link.nav-item(tag="div" to="/about" v-on:click.native="itemActive(5)") 
             Icon.icon-font(type="android-person") 
             span ABOUT
           router-link.nav-item(tag="div" to="/music" v-on:click.native="itemActive(4)") 

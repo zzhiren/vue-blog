@@ -1,7 +1,7 @@
 <template lang="pug">
   div#blog-list
     swiper.swiper(:options="swiperOption" ref="mySwiper")
-        swiper-slide.swiper-slide(v-for="(item, index) in blogs.slice(0,4)" )
+        swiper-slide.swiper-slide(v-for="(item, index) in blogs.slice(0,4)" v-bind:key="index")
           img.swiper-img(v-bind:src="item.firstPic" alt="" v-bind:key="item._id" @click="_toBlogDetils(item._id)")
           div.title()  {{ item.title}}
     div

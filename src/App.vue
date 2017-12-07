@@ -34,7 +34,17 @@ export default {
 body {
   // background: white;
   opacity: 1;
-  background: url(./assets/bg12.jpg) center top;
+  // background: url(./assets/bg1.jpg) center top;
+  // background: url(./assets/bg2.jpg) center top;
+  // background: url(./assets/bg3.jpg) center top;
+  // background: url(./assets/bg4.jpg) center top;
+  // background: url(./assets/bg5.jpg) center top;
+  // background: url(./assets/bg6.jpg) center top;
+  // background: url(./assets/bg7.jpeg) center top;
+  // background: url(./assets/bg9.jpg) center top;
+  // background: url(./assets/bg10.jpg) center top;
+  background: url(./assets/bg11.jpg) center top;
+  // background: url(./assets/bg12.jpg) center top;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
