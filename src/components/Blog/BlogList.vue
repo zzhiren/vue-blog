@@ -108,6 +108,7 @@ export default {
     height: 133px;
     margin-top: $margin-all;
     background: rgba(0, 0, 0, 0.8);
+    // background: rgba(0, 0, 0, 0.8);
     // background: rgba(28, 28, 28, .9);
     padding: 7px 7px 7px 7px;
     box-sizing: border-box;

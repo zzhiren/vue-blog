@@ -58,7 +58,7 @@ $margin-top: 79px;
           width: 161px;
           height: 42px;
           margin-bottom: 7px;
-          font-family: "微软雅黑";
+          font-family: 'Aldrich', sans-serif;
           font-size: 13px;
           line-height: 42px;
           color: rgba(0,0,0,.5);

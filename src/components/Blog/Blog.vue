@@ -60,8 +60,18 @@ export default {
       });
     },
     _searchBlog() {
-      if (this.text == " ") {
-        this.text = "vue";
+      if (this.text == "") {
+        this.$axios({
+          method: "get",
+          url: "/searchnpm",
+          params: {
+            text: 'vue',
+            from: this.from
+          }
+        }).then(res => {
+          this.npmList = res.data.objects;
+        });
+      } else {
         this.$axios({
           method: "get",
           url: "/searchnpm",
