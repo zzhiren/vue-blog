@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import 'src/components/common/scss/base.scss';
+@import "src/components/common/scss/base.scss";
 
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
@@ -28,8 +28,15 @@ export default {
   -moz-osx-font-smoothing: grayscale;
 }
 .active {
-  background: rgba(0, 0, 0, .8);
-  color: $font-color-blue!important;
+  background: rgba(0, 0, 0, 0.8);
+  color: $font-color-blue !important;
+}
+.anchorBL {
+  display: none;
+}
+.amap-logo,
+.amap-copyright {
+  display: none!important;
 }
 body {
   // background: white;
