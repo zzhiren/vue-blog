@@ -15,7 +15,7 @@
       div.desc
         p
           Icon.icon.blue(type="android-person")
-          span.icon-span.opacity I'am Zzhiren, a Web Deb NewBie!
+          span.icon-span.opacity I'am Zzhiren, a Web Dev NewBie!
         p
           Icon.icon.red(type="music-note")
           span.icon-span.opacity Jay, Pop Music
@@ -26,8 +26,11 @@
           Icon.icon.green(type="coffee")
           span.icon-span
             a(title="GitHub" href="https://github.com/Zzhiren" target="_blank")
-              Icon.icon.black(type="social-github")
+              Icon.icon.white(type="social-github")
           span.icon-span 
+            a(title="FreeCodeCamp" href="https://www.freecodecamp.cn/zzhiren" target="_blank")
+              img(src="./../../assets/free-code-camp.svg" width="18")
+          span.icon-span.margin-left
             a(title="新浪微博" href="https://weibo.com/u/5657883808?refer_flag=1001030101_&is_all=1" target="_blank")
               img(src="./../../assets/weibo.svg" width="18")
           span.icon-span.margin-left
@@ -53,17 +56,17 @@
               
         p
           span.lol 
-            span.small 大区:战争学院/均衡教派  
-            span ID:
-            span.small 杀戮纸人
+            span#lol.small 大区:战争学院/均衡教派  
+            span id:
+            span#lol.small 杀戮纸人
     div.location
-      div#bmap
+      div#amap
 </template>
 <script>
 export default {
   data() {
     return {
-      location: "杭州"
+      address: "杭州"
     };
   },
   mounted() {
@@ -71,25 +74,39 @@ export default {
   },
   methods: {
     _initBMap() {
-      // var map = new BMap.Map("bmap");
-      // // var point = new BMap.Point(116.404, 39.915); // 创建点坐标
-      // // map.centerAndZoom(point, 15);
-      // var myGeo = new BMap.Geocoder();
-      // // 将地址解析结果显示在地图上，并调整地图视野
-      // myGeo.getPoint('杭州', point => {
-      //   if (point) {
-      //     map.centerAndZoom(point, 5);
-      //     map.addOverlay(new BMap.Marker(point));
-      //   }
-      // });
-
-      var map = new AMap.Map("bmap", {
+      var map = new AMap.Map("amap", {
         resizeEnable: true,
-        zoom: 6,
-        // center: '杭州',
-        cityName: '杭州',
-        mapStyle:'amap://styles/c1cd5869dbce66ec0246989c849c6686'
+        zoom: 7,
+        viewMode:'3D',
+        pitch:50,
+        mapStyle: "amap://styles/01d45b40400bd8d7c856228b979675c7"
       });
+      AMap.plugin("AMap.Geocoder", () => {
+        var geocoder = new AMap.Geocoder({
+          city: "010" //城市，默认：“全国”
+        });
+        var marker = new AMap.Marker({
+          map: map,
+          bubble: true,
+          animation: "AMAP_ANIMATION_BOUNCE",
+        });
+        geocoder.getLocation(this.address, function(status, result) {
+          if (status == "complete" && result.geocodes.length) {
+            marker.setPosition(result.geocodes[0].location);
+            map.setCenter(marker.getPosition());
+            // document.getElementById("message").innerHTML = "";
+          } else {
+            // document.getElementById("message").innerHTML = "获取位置失败";
+          }
+        });
+      });
+      // marker = new AMap.Marker({
+      //   // position: [116.39,39.9],
+      //   // cityName: ['杭州','宣城'],
+      //   animation: "AMAP_ANIMATION_BOUNCE",
+      //   // title: provinces[i].name,
+      //   map: map
+      // });
     }
   }
 };
@@ -163,7 +180,7 @@ export default {
           margin-top: 30px;
           font-size: 14px;
           color: white;
-          font-family: "Aldrich", sans-serif;
+          font-family: "Kite One", sans-serif;
         }
         .yueyue {
           border: 1px solid #0088f5;
@@ -182,7 +199,7 @@ export default {
   .desc {
     flex: 1;
     margin-left: 14px;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, .9);
     // background: rgba(255, 255, 255, 0.9);
     padding: 28px 42px;
     box-sizing: border-box;
@@ -201,22 +218,22 @@ export default {
         opacity: 1;
         letter-spacing: 1px;
         margin-right: -10px;
-        font-family: "Aldrich", sans-serif;
+        font-family: "Kite One", sans-serif;
       }
       .pubg {
         font-size: 14px;
         color: white;
         letter-spacing: 1px;
-        margin-right: -10px;
+        // margin-right: -8px;
         opacity: 0.8;
-        font-family: "Aldrich", sans-serif;
+        font-family: "Kite One", sans-serif;
         &::before {
           content: url(../../assets/pubg.svg);
           vertical-align: middle;
           display: inline-block;
           // margin-top: 2px;
           line-height: 10px;
-          margin-right: 25px;
+          margin-right: 23px;
         }
       }
       .lol {
@@ -224,21 +241,19 @@ export default {
         font-size: 14px;
         color: white;
         letter-spacing: 1px;
-        margin-right: -10px;
-        font-family: "Aldrich", sans-serif;
+        // margin-right: -8px;
+        font-family: "Kite One",'QXyingbikai', sans-serif;
         &::before {
           content: url(../../assets/lol.svg);
           vertical-align: middle;
           display: inline-block;
           // margin-top: 2px;
           line-height: 10px;
-          margin-right: 25px;
+          margin-right: 23px;
         }
         .small {
-          font-size: 12px;
-          font-family: DINRegular, -apple-system, BlinkMacSystemFont,
-            PingFang SC, Helvetica Neue, Hiragino Sans GB, Segoe UI,
-            Microsoft YaHei, \\5fae\8f6f\96c5\9ed1, sans-serif;
+          font-size: 15px;
+          // font-family: 'QXyingbikai',sans-serif;
         }
       }
       .margin-left {
@@ -250,13 +265,14 @@ export default {
 .location {
   width: 100%;
   height: 250px;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, .9);
   margin-top: 14px;
   padding: 7px;
   box-sizing: border-box;
-  #bmap {
+  #amap {
     width: 100%;
     height: 100%;
+    background: rgba(0, 0, 0, 0.9)!important;
   }
 }
 </style>

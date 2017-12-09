@@ -56,12 +56,12 @@ $margin-top: 79px;
         // background: rgba(0, 0, 0, 0.4);
         .nav-item{
           width: 161px;
-          height: 42px;
+          height: 40px;
           margin-bottom: 7px;
-          font-family: 'Aldrich', sans-serif;
+          font-family: 'Asap', sans-serif;
           font-size: 13px;
-          line-height: 42px;
-          color: rgba(0,0,0,.5);
+          line-height: 40px;
+          color: rgba(0,0,0,.7);
           font-style: normal;
           font-weight: bold;
           padding-left: 15px;
@@ -95,7 +95,6 @@ $margin-top: 79px;
       margin-top: $margin-top;
       width: 266px;
       height: 100px;
-      background: blue;
     }
   }
 }
