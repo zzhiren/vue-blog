@@ -40,12 +40,13 @@ export default {
 };
 </script>
 <style lang="scss">
+$white-bg: rgba(255,255,255,.9);
 .blog-detils {
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-  color: white;
+  color: black;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: $white-bg;
   padding-top: 30px;
   padding-left: 20px;
   padding-right: 20px;
@@ -65,23 +66,24 @@ export default {
   h5 {
     font-family: Monaco, Consolas, Helvetica, "PingFang SC", "Hiragino Sans GB",
       "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-    color: #e8e8e8 !important;
+    color: black !important;
+    opacity: .9;
   }
   blockquote {
-    border-left: 2px solid #b82525;
+    border-left: 2px solid #3d96e9;
   }
   p {
     color: #abb2bf;
     margin-bottom: 10px !important;
   }
   blockquote > p {
-    color: #3d96e9;
+    color: #42b983;
     /* color: #bc78cd; */
     padding-left: 8px !important;
     font-size: 14px;
     margin-top: 7px !important;
     // margin-bottom: 7px !important;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.1);
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
     height: 28px;
@@ -91,13 +93,17 @@ export default {
   }
   pre {
     // background: #21252b;
-    background: rgba(0, 0, 0, 1);
-    border-radius: 4px;
+    background: rgba(0, 0, 0, .1);
+    border-radius: 2px;
     padding: 7px 7px;
     box-sizing: border-box;
     font-family: Monaco, Consolas, Helvetica, "PingFang SC", "Hiragino Sans GB",
       "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
     font-size: 14px !important;
+    code{
+      color: black!important;
+      opacity: .8;
+    }
   }
   img{
     width: 100%;

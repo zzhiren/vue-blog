@@ -1,6 +1,21 @@
 <template lang='pug'>
 div#app
-  //- div.bg
+  vue-particles(
+        color="#dedede"
+        :particleOpacity="0.7"
+        :particlesNumber="80"
+        shapeType="circle"
+        :particleSize="8"
+        linesColor="#dedede"
+        :linesWidth="1"
+        :lineLinked="true"
+        :lineOpacity="0.4"
+        :linesDistance="100"
+        :moveSpeed="2"
+        :hoverEffect="false"
+        hoverMode="grab"
+        :clickEffect="true"
+        clickMode="push")
   top-header
   router-view
   //- Footer
@@ -26,9 +41,34 @@ export default {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 }
+#particles-js {
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  // background: rgba(255,255,255,0);
+}
+.v-note-op {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.v-note-panel {
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+.v-note-wrapper {
+  height: 100% !important;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
 .active {
-  background: rgba(0, 0, 0, 0.8);
+  background-color: rgba(255,255,255,0.8);
   color: $font-color-blue !important;
 }
 .anchorBL {
@@ -36,7 +76,7 @@ export default {
 }
 .amap-logo,
 .amap-copyright {
-  display: none!important;
+  display: none !important;
 }
 body {
   // background: white;
@@ -50,15 +90,21 @@ body {
   // background: url(./assets/bg7.jpeg) center top;
   // background: url(./assets/bg9.jpg) center top;
   // background: url(./assets/bg10.jpg) center top;
-  background: url(./assets/bg11.jpg) center top;
+  // background: url(./assets/bg11.jpg) center top;
   // background: url(./assets/bg12.jpg) center top;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  // filter: blur(0.8px);
+  // background: url(./assets/bgwhite.png) center top;
+  // background: url(./assets/bgblack.png) center top;
+  // background: url(./assets/codeblack.png) center top;
+  // background-color: red;
+  // background: url(./assets/codewhite.png) center top;
+  background: url(./assets/codewhitelight.png) center top;
+
+  background-repeat: repeat-x;
+  // background-size: cover;
+  // background-repeat: no-repeat;
+  // background-attachment: fixed;
+  // background-position: center;
   // margin: -30px;
-  background-size: cover;
   position: absolute;
   height: 100%;
   width: 100%;
@@ -67,18 +113,18 @@ body {
   &::-webkit-scrollbar {
     width: 5px;
     height: 16px;
-    background-color: black;
+    background-color: white;
     opacity: 1;
   }
   &::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
     border-radius: 10px;
     // background-color: #f5f5f5;
   }
   &::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(54, 54, 54, 0.3);
-    background-color: #555;
+    -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
+    background-color: rgba(150, 150, 150, 0.8);
   }
 }
 

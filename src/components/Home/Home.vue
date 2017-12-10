@@ -3,17 +3,20 @@
     div.content
       div.left-side
         div.nav-list
-          router-link.nav-item(tag="div" to="/blog"  v-on:click.native="itemActive(3)") 
+          router-link.nav-item(tag="div" to="/blog" ) 
             Icon.icon-font(type="home") 
             span BLOG
-          router-link.nav-item(tag="div" to="/about" v-on:click.native="itemActive(5)") 
+          router-link.nav-item(tag="div" to="/about") 
             Icon.icon-font(type="android-person") 
             span ABOUT
-          router-link.nav-item(tag="div" to="/music" v-on:click.native="itemActive(4)") 
+          router-link.nav-item(tag="div" to="/music") 
             Icon.icon-font(type="headphone") 
             span MUSIC
+          router-link.nav-item(tag="div" to="/project") 
+            Icon.icon-font(type="ios-folder") 
+            span PROJECT
           //- router-link.nav-item(tag="div" to="/" v-on:click.native="itemActive(6)") GitHub
-          router-link.nav-item(tag="div" to="/collection" v-on:click.native="itemActive(7)") 
+          router-link.nav-item(tag="div" to="/collection") 
             Icon.icon-font(type="star") 
             span COLLECTION
       div.main-content
@@ -29,7 +32,8 @@ export default {
   },
   methods: {
     itemActive(state) {
-      this.state = state;
+      // this.state = state;
+
     }
   }
 }
@@ -52,8 +56,6 @@ $margin-top: 79px;
       height: 100px;
       .nav-list{
         width: 161px;
-        // background: rgba(0, 0, 0, 0.2);
-        // background: rgba(0, 0, 0, 0.4);
         .nav-item{
           width: 161px;
           height: 40px;

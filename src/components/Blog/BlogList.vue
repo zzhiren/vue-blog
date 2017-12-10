@@ -91,9 +91,9 @@ export default {
     .title {
       height: 28px;
       position: absolute;
-      background: rgba(0, 0, 0, 0.5);
+      background-color: rgba(255,255,255,0.4);
       border-radius: 1px;
-      color: white;
+      color: black;
       right: 21px;
       top: 16px;
       line-height: 28px;
@@ -107,7 +107,7 @@ export default {
     width: 100%;
     height: 133px;
     margin-top: $margin-all;
-    background: rgba(0, 0, 0, 0.8);
+    background-color: rgba(255,255,255,0.8);
     // background: rgba(0, 0, 0, 0.8);
     // background: rgba(28, 28, 28, .9);
     padding: 7px 7px 7px 7px;
@@ -116,7 +116,7 @@ export default {
     -webkit-transition: $hover-bg;
     transition: $hover-bg;
     &:hover {
-      background: rgba(28, 28, 28, 0.75);
+      background-color: rgba(255,255,255,0.4);
       // background: rgba(0, 0, 0, 0.9);
       cursor: pointer;
     }
@@ -150,7 +150,7 @@ export default {
         letter-spacing: 1px;
         margin-top: 2.8px;
         margin-bottom: 7px;
-        color: white;
+        color: black;
         opacity: 0.9;
         -webkit-transition: $hover-bg;
         -webkit-transition: $hover-bg;
@@ -181,10 +181,11 @@ export default {
         .icon-font {
           font-size: $iconfont-size;
           margin-right: 4px;
-          color: white !important;
+          color: black !important;
+          opacity: .7;
         }
         .meta-span {
-          color: white;
+          color: black;
           letter-spacing: 1px;
           margin-right: 25px;
           font-family: DINRegular, -apple-system, BlinkMacSystemFont,

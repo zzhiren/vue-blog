@@ -6,8 +6,7 @@
         div.yue-ma
           div.head-pic
             img.pic(src="./../../assets/me960x960.jpg")
-          div.wechat
-            img(src="./../../assets/wechatcode.png")
+          img.wechat(src="./../../assets/wechatcode.png")
           div.simple-desc
             p.name ZZHIREN
             p.p A Web Dev NewBie
@@ -26,7 +25,7 @@
           Icon.icon.green(type="coffee")
           span.icon-span
             a(title="GitHub" href="https://github.com/Zzhiren" target="_blank")
-              Icon.icon.white(type="social-github")
+              Icon.icon.black(type="social-github")
           span.icon-span 
             a(title="FreeCodeCamp" href="https://www.freecodecamp.cn/zzhiren" target="_blank")
               img(src="./../../assets/free-code-camp.svg" width="18")
@@ -49,7 +48,7 @@
             a(title="邮箱" href="mailto:506151409@qq.com")
               img(src="./../../assets/email.svg" width="18")
         p
-          Icon.icon.white(type="code")
+          Icon.icon.black(type="code")
           span.icon-span To improve is to change; to be perfect is to change often！
         p
           span.pubg Steam: Zzhiren / PUBG: Zzhiren
@@ -61,6 +60,10 @@
             span#lol.small 杀戮纸人
     div.location
       div#amap
+    div.projects
+      div.content
+        p.title GET MORE PROJECT
+        p.know-more 了解更多关于我的项目
 </template>
 <script>
 export default {
@@ -77,9 +80,9 @@ export default {
       var map = new AMap.Map("amap", {
         resizeEnable: true,
         zoom: 7,
-        viewMode:'3D',
-        pitch:50,
-        mapStyle: "amap://styles/01d45b40400bd8d7c856228b979675c7"
+        viewMode: "3D",
+        pitch: 50,
+        mapStyle: "amap://styles/c5af7e2e0f47bc64d417ba428b59dfb6"
       });
       AMap.plugin("AMap.Geocoder", () => {
         var geocoder = new AMap.Geocoder({
@@ -88,32 +91,23 @@ export default {
         var marker = new AMap.Marker({
           map: map,
           bubble: true,
-          animation: "AMAP_ANIMATION_BOUNCE",
+          animation: "AMAP_ANIMATION_BOUNCE"
         });
         geocoder.getLocation(this.address, function(status, result) {
           if (status == "complete" && result.geocodes.length) {
             marker.setPosition(result.geocodes[0].location);
             map.setCenter(marker.getPosition());
-            // document.getElementById("message").innerHTML = "";
           } else {
-            // document.getElementById("message").innerHTML = "获取位置失败";
           }
         });
       });
-      // marker = new AMap.Marker({
-      //   // position: [116.39,39.9],
-      //   // cityName: ['杭州','宣城'],
-      //   animation: "AMAP_ANIMATION_BOUNCE",
-      //   // title: provinces[i].name,
-      //   map: map
-      // });
     }
   }
 };
 </script>
 <style lang="scss" scoped>
 @import "src/components/common/scss/base.scss";
-
+$white-bg: rgba(255,255,255,.9);
 .about {
   width: 875px;
   display: flex;
@@ -129,20 +123,24 @@ export default {
     .yue-ma {
       z-index: 1;
       flex: 1;
-      background: rgba(0, 0, 0, 0.85);
+      background: $white-bg;
       // padding: 7px 7px 0 7px;
       box-sizing: border-box;
       position: relative;
-      // transition: background 0.5s linear;
+      transition: background 0.5s linear;
+      z-index: 555;
       &:hover .wechat {
-        opacity: 0.85;
+        opacity: .85;
+      }
+      &:hover .simple-desc{
+        opacity: .2;
       }
 
       .head-pic {
         width: 90px;
         height: 90px;
         border-radius: 96px;
-        border: 3px solid rgba(0, 0, 0, 0.5);
+        border: 3px solid rgba(200, 200, 200, 0.5);
         margin-top: - 55px;
         margin-left: 68px;
         z-index: 2;
@@ -154,17 +152,14 @@ export default {
       .wechat {
         transition: opacity 0.5s linear;
         width: 100%;
-        opacity: 0;
         z-index: 3;
         padding: 20px 7px 0 7px;
         box-sizing: border-box;
-        background: white;
+        background: $white-bg;
         height: 100%;
         position: absolute;
         top: 0;
-        img {
-          width: 100%;
-        }
+        opacity: 0;
       }
       .simple-desc {
         margin-top: 40px;
@@ -174,12 +169,12 @@ export default {
           font-size: 20px;
           font-family: "Graduate", cursive;
           font-weight: bold;
-          color: white;
+          color: black;
         }
         .p {
           margin-top: 30px;
           font-size: 14px;
-          color: white;
+          color: black;
           font-family: "Kite One", sans-serif;
         }
         .yueyue {
@@ -199,7 +194,7 @@ export default {
   .desc {
     flex: 1;
     margin-left: 14px;
-    background: rgba(0, 0, 0, .9);
+    background: $white-bg;
     // background: rgba(255, 255, 255, 0.9);
     padding: 28px 42px;
     box-sizing: border-box;
@@ -214,7 +209,7 @@ export default {
       }
       .icon-span {
         font-size: 14px;
-        color: white;
+        color: black;
         opacity: 1;
         letter-spacing: 1px;
         margin-right: -10px;
@@ -222,7 +217,7 @@ export default {
       }
       .pubg {
         font-size: 14px;
-        color: white;
+        color: black;
         letter-spacing: 1px;
         // margin-right: -8px;
         opacity: 0.8;
@@ -239,10 +234,10 @@ export default {
       .lol {
         opacity: 0.8;
         font-size: 14px;
-        color: white;
+        color: black;
         letter-spacing: 1px;
         // margin-right: -8px;
-        font-family: "Kite One",'QXyingbikai', sans-serif;
+        font-family: "Kite One", "QXyingbikai", sans-serif;
         &::before {
           content: url(../../assets/lol.svg);
           vertical-align: middle;
@@ -265,14 +260,55 @@ export default {
 .location {
   width: 100%;
   height: 250px;
-  background: rgba(0, 0, 0, .9);
+  background: $white-bg;
   margin-top: 14px;
   padding: 7px;
   box-sizing: border-box;
   #amap {
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.9)!important;
+    background: $white-bg !important;
+  }
+}
+.projects {
+  width: 100%;
+  height: 225px;
+  background: $white-bg;
+  margin-top: 14px;
+  padding: 7px;
+  box-sizing: border-box;
+  text-align: center;
+  .content {
+    width: 100%;
+    height: 100%;
+    padding-top: 55px;
+    box-sizing: border-box;
+    transition: background 0.25s linear;
+    &:hover {
+      background: rgba(200, 200, 200, .3);
+    }
+    &:hover .title {
+      opacity: 1;
+    }
+    &:hover .know-more {
+      opacity: 1;
+    }
+    .title {
+      // line-height: 200px;
+      font-family: "Asap", sans-serif;
+      font-size: 42px;
+      color: black;
+      opacity: 0.4;
+      transition: opacity 0.25s linear;
+    }
+    .know-more {
+      margin-top: 18px;
+      font-size: 15px;
+      letter-spacing: 1px;
+      color: black;
+      opacity: 0.4;
+      transition: opacity 0.25s linear;
+    }
   }
 }
 </style>

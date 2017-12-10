@@ -7,6 +7,7 @@ import BlogDetils from '@/components/Blog/BlogDetils'
 import Music from '@/components/Music/Music'
 import About from '@/components/About/About'
 import Collection from '@/components/Collection/Collection'
+import Project from '@/components/Project/Project'
 
 Vue.use(Router)
 
@@ -56,6 +57,11 @@ export default new Router({
           path: 'collection',
           name: 'Collection',
           component: Collection
+        },
+        {
+          path: 'project',
+          name: 'Project',
+          component: Project
         },
       ]
     }

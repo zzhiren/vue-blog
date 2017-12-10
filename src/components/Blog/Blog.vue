@@ -104,13 +104,14 @@ $margin-top: 79px;
       display: flex;
       padding: 7px;
       box-sizing: border-box;
-      background: rgba(0, 0, 0, 0.8);
+      background-color: rgba(255,255,255,0.8);
       .input {
         background-color: hsla(0, 0%, 77%, 0.4);
         height: 28px;
         padding: 4px;
         box-sizing: border-box;
         flex: 1;
+        outline-color: rgba(255, 255, 255,0);
         border: 0 !important;
         transition: background-color 0.25s linear;
         caret-color: red;
@@ -119,9 +120,6 @@ $margin-top: 79px;
         }
         &:hover {
           background-color: hsla(0, 0%, 57%, 0.4);
-        }
-        &:focus {
-          outline-color: rgba(0, 0, 0, 0.8);
         }
       }
       .button {
@@ -146,11 +144,11 @@ $margin-top: 79px;
       // height: 100px;
       margin-top: 56px;
       box-sizing: border-box;
-      background: rgba(0, 0, 0, 0.8);
+      background-color: rgba(255,255,255,0.8);
       .title {
         height: 42px;
-        border-bottom: 1px dashed rgba(17, 17, 17, 0.3);
-        color: white;
+        border-bottom: 1px dashed rgba(200, 200, 200, 0.2);
+        color: black;
         display: flex;
         line-height: 42px;
         font-size: 15px;
@@ -204,7 +202,7 @@ $margin-top: 79px;
               display: inline-block;
               text-align: center;
               margin-right: 6px;
-              color: white;
+              color: black;
               font-size: 12px;
               &::before {
                 content: counter(hot-article-list);
@@ -220,7 +218,7 @@ $margin-top: 79px;
               }
               .package-name {
                 font-size: 14px;
-                color: rgba(255, 255, 255, 1) !important;
+                color: rgba(0, 0, 0, 1) !important;
               }
               .package-author {
                 font-size: 12px;

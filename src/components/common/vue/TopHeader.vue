@@ -16,7 +16,7 @@ $height: 63px;
     width: 100%;
     position: fixed;
     height: $height;
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(255,255,255,1);
     z-index: 999;
     .content{
         width: $width;
@@ -28,7 +28,7 @@ $height: 63px;
             color: white;
         }
         .motto{
-            color: gray;
+            // color: gray;
             font-size: 16px;
             margin-left: 40px;
         }
