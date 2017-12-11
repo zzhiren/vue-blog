@@ -40,13 +40,14 @@ export default {
 };
 </script>
 <style lang="scss">
-$white-bg: rgba(255,255,255,.9);
+@import 'src/components/common/scss/base.scss';
+
 .blog-detils {
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   color: black;
   width: 100%;
-  background-color: $white-bg;
+  background-color: $background-white;
   padding-top: 30px;
   padding-left: 20px;
   padding-right: 20px;

@@ -107,7 +107,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "src/components/common/scss/base.scss";
-$white-bg: rgba(255,255,255,.9);
 .about {
   width: 875px;
   display: flex;
@@ -123,14 +122,14 @@ $white-bg: rgba(255,255,255,.9);
     .yue-ma {
       z-index: 1;
       flex: 1;
-      background: $white-bg;
+      background: $background-white;
       // padding: 7px 7px 0 7px;
       box-sizing: border-box;
       position: relative;
       transition: background 0.5s linear;
       z-index: 555;
       &:hover .wechat {
-        opacity: .85;
+        opacity: .6;
       }
       &:hover .simple-desc{
         opacity: .2;
@@ -153,9 +152,9 @@ $white-bg: rgba(255,255,255,.9);
         transition: opacity 0.5s linear;
         width: 100%;
         z-index: 3;
-        padding: 20px 7px 0 7px;
+        // padding: 20px 7px 0 7px;
         box-sizing: border-box;
-        background: $white-bg;
+        background: $background-white;
         height: 100%;
         position: absolute;
         top: 0;
@@ -194,7 +193,7 @@ $white-bg: rgba(255,255,255,.9);
   .desc {
     flex: 1;
     margin-left: 14px;
-    background: $white-bg;
+    background: $background-white;
     // background: rgba(255, 255, 255, 0.9);
     padding: 28px 42px;
     box-sizing: border-box;
@@ -260,20 +259,20 @@ $white-bg: rgba(255,255,255,.9);
 .location {
   width: 100%;
   height: 250px;
-  background: $white-bg;
+  background: $background-white;
   margin-top: 14px;
   padding: 7px;
   box-sizing: border-box;
   #amap {
     width: 100%;
     height: 100%;
-    background: $white-bg !important;
+    background: $background-white !important;
   }
 }
 .projects {
   width: 100%;
   height: 225px;
-  background: $white-bg;
+  background: $background-white;
   margin-top: 14px;
   padding: 7px;
   box-sizing: border-box;

@@ -59,11 +59,11 @@ $margin-top: 79px;
         .nav-item{
           width: 161px;
           height: 40px;
-          margin-bottom: 7px;
+          margin-bottom: 8px;
           font-family: 'Asap', sans-serif;
           font-size: 13px;
           line-height: 40px;
-          color: rgba(0,0,0,.7);
+          color: #777;
           font-style: normal;
           font-weight: bold;
           padding-left: 15px;
@@ -73,8 +73,8 @@ $margin-top: 79px;
             color: $font-color-blue;
           }
           .icon-font{
-            font-size: 16px;
-            margin-right: 8px;
+            font-size: 17px;
+            margin-right: 13px;
           }
           span{
             letter-spacing: 1px;

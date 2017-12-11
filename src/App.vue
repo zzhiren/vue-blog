@@ -2,14 +2,14 @@
 div#app
   vue-particles(
         color="#dedede"
-        :particleOpacity="0.7"
-        :particlesNumber="80"
+        :particleOpacity="0.8"
+        :particlesNumber="50"
         shapeType="circle"
-        :particleSize="8"
+        :particleSize="12"
         linesColor="#dedede"
-        :linesWidth="1"
+        :linesWidth="2"
         :lineLinked="true"
-        :lineOpacity="0.4"
+        :lineOpacity="0.7"
         :linesDistance="100"
         :moveSpeed="2"
         :hoverEffect="false"
@@ -102,7 +102,7 @@ body {
   background-repeat: repeat-x;
   // background-size: cover;
   // background-repeat: no-repeat;
-  // background-attachment: fixed;
+  background-attachment: fixed;
   // background-position: center;
   // margin: -30px;
   position: absolute;

@@ -107,7 +107,7 @@ export default {
     width: 100%;
     height: 133px;
     margin-top: $margin-all;
-    background-color: rgba(255,255,255,0.8);
+    background-color: $background-white;
     // background: rgba(0, 0, 0, 0.8);
     // background: rgba(28, 28, 28, .9);
     padding: 7px 7px 7px 7px;

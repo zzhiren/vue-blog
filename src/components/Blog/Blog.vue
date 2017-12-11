@@ -65,7 +65,7 @@ export default {
           method: "get",
           url: "/searchnpm",
           params: {
-            text: 'vue',
+            text: "vue",
             from: this.from
           }
         }).then(res => {
@@ -88,7 +88,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "src/components/common/scss/base.scss";
 $margin-top: 79px;
+
 .blog {
   display: flex;
   .content {
@@ -104,19 +106,19 @@ $margin-top: 79px;
       display: flex;
       padding: 7px;
       box-sizing: border-box;
-      background-color: rgba(255,255,255,0.8);
+      background-color: $background-white;
       .input {
         background-color: hsla(0, 0%, 77%, 0.4);
         height: 28px;
         padding: 4px;
         box-sizing: border-box;
         flex: 1;
-        outline-color: rgba(255, 255, 255,0);
+        outline-color: rgba(255, 255, 255, 0);
         border: 0 !important;
         transition: background-color 0.25s linear;
         caret-color: red;
         &::placeholder {
-          color: rgba(0, 0, 0, 0.7);
+          color: #777;
         }
         &:hover {
           background-color: hsla(0, 0%, 57%, 0.4);
@@ -133,7 +135,7 @@ $margin-top: 79px;
         .icon-search {
           font-size: 16px;
           line-height: 28px;
-          color: black;
+          color: #777;
         }
       }
     }
@@ -144,11 +146,11 @@ $margin-top: 79px;
       // height: 100px;
       margin-top: 56px;
       box-sizing: border-box;
-      background-color: rgba(255,255,255,0.8);
+      background-color: $background-white;
       .title {
         height: 42px;
         border-bottom: 1px dashed rgba(200, 200, 200, 0.2);
-        color: black;
+        color: #777;
         display: flex;
         line-height: 42px;
         font-size: 15px;
@@ -189,36 +191,41 @@ $margin-top: 79px;
             line-height: 18px;
             padding: 0 11px;
             margin-bottom: 10px;
-            color: #333;
+            color: #555;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
             .index {
               counter-increment: hot-article-list;
-              background-color: hsla(0, 0%, 57%, 0.4);
+              background-color: hsla(0, 0%, 77%, 0.4);
               width: 18px;
               height: 18px;
               line-height: 18px;
               display: inline-block;
               text-align: center;
               margin-right: 6px;
-              color: black;
+              color: #555;
               font-size: 12px;
               &::before {
                 content: counter(hot-article-list);
+                text-decoration-line: inherit;
+                text-decoration-style: inherit;
+                text-decoration-color: inherit;
+                color: #777;
               }
             }
             .a {
-              color: rgba(255, 255, 255, 0.5) !important;
+              color: #555!important;
               font-size: 13px;
               transition: margin-left 0.5s linear;
               &:hover {
                 text-decoration: underline;
                 margin-left: 10px;
+                color: black!important;
               }
               .package-name {
                 font-size: 14px;
-                color: rgba(0, 0, 0, 1) !important;
+                // color: #555!important;
               }
               .package-author {
                 font-size: 12px;
