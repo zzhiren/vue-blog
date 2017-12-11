@@ -40,13 +40,13 @@ export default {
 };
 </script>
 <style lang="scss">
-@import 'src/components/common/scss/base.scss';
+@import "src/components/common/scss/base.scss";
 
 .blog-detils {
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   color: black;
-  width: 100%;
+  width: 595px;
   background-color: $background-white;
   padding-top: 30px;
   padding-left: 20px;
@@ -58,7 +58,6 @@ export default {
     font-size: 18px;
     letter-spacing: 1px;
     margin-bottom: 20px;
-
   }
   h1,
   h2,
@@ -68,7 +67,7 @@ export default {
     font-family: Monaco, Consolas, Helvetica, "PingFang SC", "Hiragino Sans GB",
       "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
     color: black !important;
-    opacity: .9;
+    opacity: 0.9;
   }
   blockquote {
     border-left: 2px solid #3d96e9;
@@ -94,19 +93,25 @@ export default {
   }
   pre {
     // background: #21252b;
-    background: rgba(0, 0, 0, .1);
+    background: rgba(0, 0, 0, 0.1);
     border-radius: 2px;
     padding: 7px 7px;
     box-sizing: border-box;
     font-family: Monaco, Consolas, Helvetica, "PingFang SC", "Hiragino Sans GB",
       "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
     font-size: 14px !important;
-    code{
-      color: black!important;
-      opacity: .8;
+    overflow: hidden;
+    width: inherit;
+    overflow-x: auto;
+
+    code {
+      width: 100%;
+      color: black !important;
+      opacity: 0.8;
+      overflow-y: hidden;
     }
   }
-  img{
+  img {
     width: 100%;
     opacity: 0.9;
     margin-bottom: 10px;
