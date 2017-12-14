@@ -56,10 +56,9 @@ export default {
       var timer = date.getTime().toString();
       this.$axios({
         method: "get",
-        url: "/getbloglist?t=" + timer
+        url: "/getallblogs?t=" + timer,
       }).then(res => {
         this.blogs = res.data.data;
-        console.log(this.blogs);
       });
     },
     _toBlogDetils(id) {
