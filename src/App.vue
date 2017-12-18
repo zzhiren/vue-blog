@@ -3,7 +3,7 @@ div#app
   vue-particles(
         color="#dedede"
         :particleOpacity="0.8"
-        :particlesNumber="50"
+        :particlesNumber="60"
         shapeType="circle"
         :particleSize="12"
         linesColor="#dedede"
@@ -14,8 +14,8 @@ div#app
         :moveSpeed="2"
         :hoverEffect="false"
         hoverMode="grab"
-        :clickEffect="true"
-        clickMode="push")
+        :clickEffect="false"
+        clickMode="remove")
   top-header
   router-view
   //- Footer
