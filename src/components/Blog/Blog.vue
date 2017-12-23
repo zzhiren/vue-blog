@@ -5,7 +5,7 @@
     div.right-side
       div.search
         input.input(v-model="text" placeholder="Searching...")
-        span.button(@click="_searchBlog()")
+        span.button(@click="_searchNPM()")
           Icon.icon-search(type="android-search")
       div.popularity()
         div.title 
@@ -59,7 +59,7 @@ export default {
         this.npmList = res.data.objects;
       });
     },
-    _searchBlog() {
+    _searchNPM() {
       if (this.text == "") {
         this.$axios({
           method: "get",
