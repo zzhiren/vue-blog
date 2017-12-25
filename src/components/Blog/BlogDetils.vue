@@ -70,11 +70,14 @@ export default {
     opacity: 0.9;
   }
   blockquote {
-    border-left: 2px solid #3d96e9;
+    p {
+      border-left: 2px solid #3d96e9;
+    }
   }
   p {
     color: #abb2bf;
     margin-bottom: 10px !important;
+    // border-left: 2px solid #3d96e9;
   }
   blockquote > p {
     color: #42b983;
@@ -103,25 +106,25 @@ export default {
     overflow: hidden;
     width: inherit;
     overflow-x: auto;
-&::-webkit-scrollbar {
-    width: 5px;
-    height: 7px;
-    background-color: white;
-    opacity: 1;
-  }
-  &::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px white;
-    border-radius: 10px;
-    background-color: white;
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
-    background-color: rgba(150, 150, 150, 0.8);
-    &:hover{
-      background-color: #0088f5;
+    &::-webkit-scrollbar {
+      width: 5px;
+      height: 7px;
+      background-color: white;
+      opacity: 1;
     }
-  }
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px white;
+      border-radius: 10px;
+      background-color: white;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
+      background-color: rgba(150, 150, 150, 0.8);
+      &:hover {
+        background-color: #0088f5;
+      }
+    }
     code {
       width: 100%;
       color: black !important;
