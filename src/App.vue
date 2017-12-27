@@ -124,7 +124,7 @@ body {
   &::-webkit-scrollbar-thumb {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
-    background-color: rgba(150, 150, 150, 0.8);
+    background-color: rgba(150, 150, 150, 0.5);
     &:hover{
       background-color: #0088f5;
     }

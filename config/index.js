@@ -45,11 +45,11 @@ module.exports = {
             '^/login': '/login'
           }
       },
-      '/getallblogs':{
+      '/getpostedblogs':{
           target:'http://127.0.0.1:3000',
           changeOrigin: true,
           pathRewrite: {
-            '^/getallblogs': '/getallblogs'
+            '^/getpostedblogs': '/getpostedblogs'
           }
       },
       '/getblogdetils':{

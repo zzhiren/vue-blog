@@ -23,6 +23,7 @@
                   span.meta-span {{item.love}}
                   Icon.icon-font(type="ios-pricetags")
                   span.meta-span {{item.tag[0]}}
+      div.more(@click="_initData()") 或许有更多
 </template>
 <script>
 import axios from "axios";
@@ -36,34 +37,42 @@ export default {
         paginationClickable: false,
         mousewheelControl: false,
         observeParents: true,
-        autoplayDisableOnInteraction: false,
+        autoplayDisableOnInteraction: false
         // loop: true
       },
-      blogs: []
+      blogs: [],
+      page: 1
     };
   },
   mounted() {
     this._initData();
   },
   computed: {
-   swiper() {
-     return this.$refs.mySwiper.swiper
-   }
- },
+    swiper() {
+      return this.$refs.mySwiper.swiper;
+    }
+  },
   methods: {
     _initData() {
       var date = new Date();
       var timer = date.getTime().toString();
       this.$axios({
         method: "get",
-        url: "/getallblogs?t=" + timer,
+        url: "/getpostedblogs",
+        params: {
+          t: timer,
+          page: this.page
+        }
       }).then(res => {
-        this.blogs = res.data.data;
+        if (res.data.status == "已发布") {
+          this.blogs.push(...res.data.data);
+          this.page++;
+        }
       });
     },
     _toBlogDetils(id) {
       this.$router.push({ name: "BlogDetils", params: { id } });
-    },
+    }
   }
 };
 </script>
@@ -90,14 +99,14 @@ export default {
     .title {
       height: 28px;
       position: absolute;
-      background-color: rgba(255,255,255,0.4);
+      background-color: rgba(255, 255, 255, 0.4);
       border-radius: 1px;
       color: black;
       right: 21px;
       top: 16px;
       line-height: 28px;
-      padding-left: 6px;
-      padding-right: 6px;
+      padding-left: 10px;
+      padding-right: 10px;
       box-sizing: border-box;
       font-family: DINRegular;
     }
@@ -115,7 +124,7 @@ export default {
     -webkit-transition: $hover-bg;
     transition: $hover-bg;
     &:hover {
-      background-color: rgba(255,255,255,0.4);
+      background-color: rgba(0, 0, 0, 0.1);
       // background: rgba(0, 0, 0, 0.9);
       cursor: pointer;
     }
@@ -181,7 +190,7 @@ export default {
           font-size: $iconfont-size;
           margin-right: 4px;
           color: black !important;
-          opacity: .7;
+          opacity: 0.7;
         }
         .meta-span {
           color: black;
@@ -194,6 +203,20 @@ export default {
           font-size: $blog-list-meta-font-size;
         }
       }
+    }
+  }
+  .more {
+    width: 100%;
+    height: 42px;
+    background: $background-white;
+    margin-top: 14px;
+    text-align: center;
+    line-height: 42px;
+    transition: background-color 0.25s linear;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+      // background: rgba(0, 0, 0, 0.9);
+      cursor: pointer;
     }
   }
 }
