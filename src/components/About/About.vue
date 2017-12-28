@@ -3,6 +3,12 @@
     div.about
       div.me
         div.bg-wall
+          div.bg
+            img.bg-a(src="../../assets/bg-a.jpg")
+          div.bg
+            img.bg-b(src="../../assets/bg-b.jpg")
+          div.sun
+            img(src="../../assets/sun.png")
         div.yue-ma
           div.head-pic
             img.pic(src="./../../assets/me960x960.jpg")
@@ -51,13 +57,21 @@
           Icon.icon.black(type="code")
           span.icon-span To improve is to change; to be perfect is to change often！
         p
-          span.pubg Steam: Zzhiren / PUBG: Zzhiren
-              
+          span.birthday Birthday: 
+            span.number 1993/07/13(农历)
+            span#font.shengxiao 生肖:
+            span#font.xingzuo 星座:
         p
-          span.lol 
-            span#lol.small 大区:战争学院/均衡教派  
-            span id:
-            span#lol.small 杀戮纸人
+          span.food
+            span.chicken Chicken
+            span.fish , Fish
+            //- span.chicken Chicken
+              
+        //- p
+        //-   span.lol 
+        //-     span#lol.small 大区:战争学院/均衡教派  
+        //-     span id:
+        //-     span#lol.small 杀戮纸人
     div.location
       div#amap
     div.projects
@@ -116,8 +130,143 @@ export default {
     display: flex;
     flex-direction: column;
     .bg-wall {
-      height: 100px;
-      background: black;
+      height: 105px;
+      // background: black;
+      position: relative;
+      overflow: hidden;
+      .sun {
+        position: absolute;
+        top: 0;
+        right: 12px;
+        width: 60px;
+        height: 66.9px;
+        animation: sun 3s linear infinite;
+        animation-direction: alternate;
+        img {
+          width: 60px;
+          height: 66.9px;
+        }
+        @keyframes sun {
+          from {
+            opacity: 1;
+          }
+          to {
+            opacity: 0.2;
+          }
+        }
+      }
+      .bg {
+        width: 225px;
+        height: 105px;
+        overflow: hidden;
+        position: absolute;
+        .bg-a {
+          width: 315px;
+          height: 210px;
+          opacity: 1;
+          // -webkit-animation: bg-a 25s linear infinite;
+          // animation: bg-a 25s linear infinite;
+          // animation-direction: alternate;
+          // animation-timing-function: 20s;
+          // animation-play-state: initial;
+          // display: block;
+
+          animation-name: bg-a;
+          animation-duration: 20s;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+          animation-direction: alternate;
+          animation-fill-mode: initial;
+          animation-play-state: initial;
+        }
+        .bg-b {
+          width: 630px;
+          height: 210px;
+          opacity: 0.5;
+          // -webkit-animation: bg-b 35s linear infinite;
+          // animation: bg-b 35s linear infinite;
+          // animation-direction: alternate;
+          // animation-timing-function: 20s;
+          // animation-play-state: initial;
+          // display: block;
+
+          animation-name: bg-b;
+          animation-duration: 30s;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+          animation-direction: alternate;
+          animation-fill-mode: initial;
+        }
+
+        @keyframes bg-a {
+          // from {
+          //   margin-top: 0;
+          //   margin-left: 0;
+          // }
+          // to {
+          //   margin-top: -108px;
+          //   margin-left: -90px;
+          // }
+          0% {
+            margin-top: 0;
+            margin-left: 0;
+          }
+          15% {
+            margin-top: 0;
+            margin-left: -30px;
+          }
+          35% {
+            margin-top: 0;
+            margin-left: -60px;
+          }
+          51% {
+            margin-top: -18px;
+            margin-left: -90px;
+          }
+          67% {
+            margin-top: -36px;
+            margin-left: -60px;
+          }
+          85% {
+            margin-top: -72px;
+            margin-left: -30px;
+          }
+          100% {
+            margin-top: -105px;
+            margin-left: 0;
+          }
+        }
+        @keyframes bg-b {
+          // from {
+          //   margin-top: 0;
+          //   margin-left: 0;
+          // }
+          // to {
+          //   margin-top: -105px;
+          //   margin-left: -405px;
+          // }
+          0% {
+            margin-top: 0;
+            margin-left: 0;
+          }
+          25% {
+            margin-top: -105px;
+            margin-left: -202.5px;
+          }
+          50% {
+            margin-top: 0;
+            margin-left: -202.5px;
+          }
+          75% {
+            margin-top: -105px;
+            margin-left: -303.75px;
+          }
+          100% {
+            margin-top: -105px;
+            margin-left: -405px;
+          }
+        }
+      }
     }
     .yue-ma {
       z-index: 1;
@@ -129,18 +278,18 @@ export default {
       transition: background 0.5s linear;
       z-index: 555;
       &:hover .wechat {
-        opacity: .6;
+        opacity: 0.6;
       }
-      &:hover .simple-desc{
-        opacity: .2;
+      &:hover .simple-desc {
+        opacity: 0.2;
       }
 
       .head-pic {
         width: 90px;
         height: 90px;
         border-radius: 96px;
-        border: 3px solid rgba(200, 200, 200, 0.5);
-        margin-top: - 55px;
+        border: 3px solid rgba(255, 255, 255, 0.5);
+        margin-top: - 50px;
         margin-left: 68px;
         z-index: 2;
         overflow: hidden;
@@ -214,7 +363,7 @@ export default {
         margin-right: -10px;
         font-family: "Kite One", sans-serif;
       }
-      .pubg {
+      .food {
         font-size: 14px;
         color: black;
         letter-spacing: 1px;
@@ -222,32 +371,92 @@ export default {
         opacity: 0.8;
         font-family: "Kite One", sans-serif;
         &::before {
-          content: url(../../assets/pubg.svg);
+          content: url(../../assets/food.svg);
           vertical-align: middle;
           display: inline-block;
-          // margin-top: 2px;
+          margin-top: -10px;
           line-height: 10px;
-          margin-right: 23px;
+          margin-right: 24px;
+          margin-left: -1px;
+        }
+        .chicken {
+          // margin-right: 14px;
+          &::after {
+            content: url(../../assets/chicken.svg);
+            vertical-align: middle;
+            display: inline-block;
+            margin-top: -5px;
+            line-height: 10px;
+            margin-left: 2px;
+          }
+        }
+        .fish {
+          // margin-right: 14px;
+          &::after {
+            content: url(../../assets/fish.svg);
+            vertical-align: middle;
+            display: inline-block;
+            margin-top: -5px;
+            line-height: 10px;
+            margin-left: 2px;
+          }
         }
       }
-      .lol {
-        opacity: 0.8;
+      .birthday {
         font-size: 14px;
         color: black;
         letter-spacing: 1px;
         // margin-right: -8px;
-        font-family: "Kite One", "QXyingbikai", sans-serif;
+        opacity: 0.8;
+        font-family: "Kite One", sans-serif;
+        .number {
+          font-size: 12px;
+        }
         &::before {
-          content: url(../../assets/lol.svg);
+          content: url(../../assets/birthday.svg);
           vertical-align: middle;
           display: inline-block;
-          // margin-top: 2px;
+          margin-top: -8px;
           line-height: 10px;
-          margin-right: 23px;
+          margin-right: 24px;
+          margin-left: -1px;
         }
-        .small {
-          font-size: 15px;
-          // font-family: 'QXyingbikai',sans-serif;
+        // &::after {
+        //   content: url(../../assets/xiaohuanji.svg);
+        //   vertical-align: middle;
+        //   display: inline-block;
+        //   margin-top: -6px;
+        //   line-height: 10px;
+        //   margin-left: 10px;
+        // }
+        .shengxiao {
+          margin-left: 10px;
+          margin-right: 10px;
+          &::after {
+            content: url(../../assets/xiaohuangji.svg);
+            vertical-align: middle;
+            display: inline-block;
+            margin-top: -6px;
+            line-height: 10px;
+            margin-left: 1px;
+          }&::after {
+            content: url(../../assets/xiaohuangji.svg);
+            vertical-align: middle;
+            display: inline-block;
+            margin-top: -6px;
+            line-height: 10px;
+            margin-left: 1px;
+          }
+        }
+        .xingzuo {
+          &::after {
+            content: url(../../assets/xingzuo.svg);
+            vertical-align: middle;
+            display: inline-block;
+            margin-top: 1px;
+            line-height: 10px;
+            margin-left: 1px;
+          }
         }
       }
       .margin-left {
@@ -284,7 +493,7 @@ export default {
     box-sizing: border-box;
     transition: background 0.25s linear;
     &:hover {
-      background: rgba(200, 200, 200, .3);
+      background: rgba(200, 200, 200, 0.3);
     }
     &:hover .title {
       opacity: 1;

@@ -20,7 +20,9 @@
             Icon.icon-font(type="star") 
             span COLLECTION
       div.main-content
-        router-view 
+        transition(name="slide-fade" appear mode="out-in")
+          keep-alive(include ="bloglist")
+            router-view 
       //- div.right-side
 </template>
 <script>
@@ -41,6 +43,24 @@ export default {
 <style lang="scss" scoped>
 @import 'src/components/common/scss/base.scss';
 $margin-top: 79px;
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
+  opacity: 0
+}
+
+.slide-fade-enter-active {
+  transition: all .5s ease;
+}
+.slide-fade-leave-active {
+  transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active for below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}
 .home{
   width: 100%;
   // height: 100%;

@@ -8,11 +8,13 @@ import Music from '@/components/Music/Music'
 import About from '@/components/About/About'
 import Collection from '@/components/Collection/Collection'
 import Project from '@/components/Project/Project'
+import iView from 'iview';
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   linkActiveClass: 'active',
+  // mode: 'history',
   routes: [
     {
       path: '/',
@@ -66,4 +68,15 @@ export default new Router({
       ]
     }
   ]
-})
+});
+
+router.beforeEach((to, from, next) => {
+  iView.LoadingBar.start();
+  next();
+});
+
+router.afterEach(route => {
+  iView.LoadingBar.finish();
+});
+
+export default router;

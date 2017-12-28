@@ -23,7 +23,9 @@
                   span.meta-span {{item.love}}
                   Icon.icon-font(type="ios-pricetags")
                   span.meta-span {{item.tag[0]}}
-      div.more(@click="_initData()") 或许有更多
+      div.more(@click="_initData(state)") 
+        span(v-show="state === 0") 或许有更多
+        span(v-show="state === 1") 我也是有底线的
 </template>
 <script>
 import axios from "axios";
@@ -41,7 +43,8 @@ export default {
         // loop: true
       },
       blogs: [],
-      page: 1
+      page: 1,
+      state: 0
     };
   },
   mounted() {
@@ -53,22 +56,30 @@ export default {
     }
   },
   methods: {
+    _more(){
+      if (state === 0) {
+        this._initData()
+      }
+    },
     _initData() {
       var date = new Date();
-      var timer = date.getTime().toString();
-      this.$axios({
-        method: "get",
-        url: "/getpostedblogs",
-        params: {
-          t: timer,
-          page: this.page
-        }
-      }).then(res => {
-        if (res.data.status == "已发布") {
-          this.blogs.push(...res.data.data);
-          this.page++;
-        }
-      });
+        var timer = date.getTime().toString();
+        this.$axios({
+          method: "get",
+          url: "/getpostedblogs",
+          params: {
+            t: timer,
+            page: this.page
+          }
+        }).then(res => {
+          if (res.data.status == "已发布") {
+            this.blogs.push(...res.data.data);
+            this.page++;
+            if(res.data.data.length < 10){
+              this.state = 1
+            }
+          }
+        });
     },
     _toBlogDetils(id) {
       this.$router.push({ name: "BlogDetils", params: { id } });
@@ -212,6 +223,7 @@ export default {
     margin-top: 14px;
     text-align: center;
     line-height: 42px;
+    letter-spacing: 1px;
     transition: background-color 0.25s linear;
     &:hover {
       background-color: rgba(0, 0, 0, 0.1);

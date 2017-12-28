@@ -41,7 +41,6 @@ export default {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
 }
 #particles-js {
   background-size: cover;
@@ -51,7 +50,11 @@ export default {
   width: 100%;
   height: 100%;
   z-index: -1;
-  // background: rgba(255,255,255,0);
+  pointer-events: none;
+  background: rgba(255,255,255,0);
+  .particles-js-canvas-el{
+    pointer-events: none;
+  }
 }
 .v-note-op {
   border-top-left-radius: 3px;
@@ -68,7 +71,7 @@ export default {
 }
 
 .active {
-  background-color: rgba(255,255,255,0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   color: $font-color-blue !important;
 }
 .anchorBL {
@@ -120,12 +123,13 @@ body {
     -webkit-box-shadow: inset 0 0 6px white;
     border-radius: 10px;
     background-color: white;
+    display: block;
   }
   &::-webkit-scrollbar-thumb {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
     background-color: rgba(150, 150, 150, 0.5);
-    &:hover{
+    &:hover {
       background-color: #0088f5;
     }
   }

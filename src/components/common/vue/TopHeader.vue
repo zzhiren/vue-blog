@@ -1,37 +1,49 @@
 <template lang="pug">
   div.topheader
     div.content
-        span.my-name </> ZZHIREN
-        span.motto my name is zzhiren
+        div.my-name ZZHIREN
+        div.motto To improve is to change; to be perfect is to change often！
 </template>
 <script>
-export default {
-  
-}
+export default {};
 </script>
 <style lang="scss" scoped>
-@import 'src/components/common/scss/base.scss';
+@import "src/components/common/scss/base.scss";
 $height: 63px;
-.topheader{
-    width: 100%;
-    position: fixed;
+.topheader {
+  width: 100%;
+  position: fixed;
+  height: $height;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 999;
+  .content {
+    width: $width;
     height: $height;
-    background-color: rgba(255,255,255,1);
-    z-index: 999;
-    .content{
-        width: $width;
-        height: $height;
-        margin: $margin-auto;
-        .my-name{
-            line-height: $height;
-            font-size: 22px;
-            color: white;
-        }
-        .motto{
-            // color: gray;
-            font-size: 16px;
-            margin-left: 40px;
-        }
+    margin: $margin-auto;
+    color: #0088f5;
+    .my-name {
+      line-height: $height;
+      font-size: 28px;
+      font-family: "Asap";
+      float: left;
+      &::before {
+        content: url(../../../assets/code.svg);
+        vertical-align: middle;
+        display: inline-block;
+        margin-top: -8px;
+        line-height: 10px;
+        margin-right: 8px;
+        margin-left: 4px;
+      }
     }
+    .motto {
+      font-size: 14px;
+      margin-left: 40px;
+      letter-spacing: 0.5px;
+      opacity: .9;
+      line-height: $height;
+      float: left;
+    }
+  }
 }
 </style>
