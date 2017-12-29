@@ -20,13 +20,13 @@
       div.desc
         p
           Icon.icon.blue(type="android-person")
-          span.icon-span.opacity I'am Zzhiren, a Web Dev NewBie!
+          span.icon-span I'am Zzhiren, a Web Dev NewBie!
         p
           Icon.icon.red(type="music-note")
-          span.icon-span.opacity Jay, Pop Music
+          span.icon-span Jay, Pop Music
         p
           Icon.icon.pink(type="heart")
-          span.icon-span.opacity Code, Game, Movie
+          span.icon-span Code, Game, Movie
         p
           Icon.icon.green(type="coffee")
           span.icon-span
@@ -65,13 +65,6 @@
           span.food
             span.chicken Chicken
             span.fish , Fish
-            //- span.chicken Chicken
-              
-        //- p
-        //-   span.lol 
-        //-     span#lol.small 大区:战争学院/均衡教派  
-        //-     span id:
-        //-     span#lol.small 杀戮纸人
     div.location
       div#amap
     div.projects
@@ -151,7 +144,7 @@ export default {
             opacity: 1;
           }
           to {
-            opacity: 0.2;
+            opacity: 0.3;
           }
         }
       }
@@ -164,32 +157,17 @@ export default {
           width: 315px;
           height: 210px;
           opacity: 1;
-          // -webkit-animation: bg-a 25s linear infinite;
-          // animation: bg-a 25s linear infinite;
-          // animation-direction: alternate;
-          // animation-timing-function: 20s;
-          // animation-play-state: initial;
-          // display: block;
-
           animation-name: bg-a;
           animation-duration: 20s;
           animation-timing-function: linear;
           animation-iteration-count: infinite;
           animation-direction: alternate;
           animation-fill-mode: initial;
-          animation-play-state: initial;
         }
         .bg-b {
           width: 630px;
           height: 210px;
           opacity: 0.5;
-          // -webkit-animation: bg-b 35s linear infinite;
-          // animation: bg-b 35s linear infinite;
-          // animation-direction: alternate;
-          // animation-timing-function: 20s;
-          // animation-play-state: initial;
-          // display: block;
-
           animation-name: bg-b;
           animation-duration: 30s;
           animation-timing-function: linear;
@@ -199,14 +177,6 @@ export default {
         }
 
         @keyframes bg-a {
-          // from {
-          //   margin-top: 0;
-          //   margin-left: 0;
-          // }
-          // to {
-          //   margin-top: -108px;
-          //   margin-left: -90px;
-          // }
           0% {
             margin-top: 0;
             margin-left: 0;
@@ -237,14 +207,6 @@ export default {
           }
         }
         @keyframes bg-b {
-          // from {
-          //   margin-top: 0;
-          //   margin-left: 0;
-          // }
-          // to {
-          //   margin-top: -105px;
-          //   margin-left: -405px;
-          // }
           0% {
             margin-top: 0;
             margin-left: 0;
@@ -272,13 +234,12 @@ export default {
       z-index: 1;
       flex: 1;
       background: $background-white;
-      // padding: 7px 7px 0 7px;
       box-sizing: border-box;
       position: relative;
       transition: background 0.5s linear;
       z-index: 555;
       &:hover .wechat {
-        opacity: 0.6;
+        opacity: 0.7;
       }
       &:hover .simple-desc {
         opacity: 0.2;
@@ -301,7 +262,6 @@ export default {
         transition: opacity 0.5s linear;
         width: 100%;
         z-index: 3;
-        // padding: 20px 7px 0 7px;
         box-sizing: border-box;
         background: $background-white;
         height: 100%;
@@ -334,7 +294,7 @@ export default {
           margin-top: 35px;
           display: inline-block;
           width: 100px;
-          opacity: 0.8;
+          opacity: 0.9;
         }
       }
     }
@@ -343,7 +303,6 @@ export default {
     flex: 1;
     margin-left: 14px;
     background: $background-white;
-    // background: rgba(255, 255, 255, 0.9);
     padding: 28px 42px;
     box-sizing: border-box;
     height: 400px;
@@ -351,14 +310,11 @@ export default {
       margin-bottom: 30px;
       .icon {
         font-size: 18px;
-        // color: white;
         margin-right: 25px;
-        opacity: 0.8;
       }
       .icon-span {
         font-size: 14px;
         color: black;
-        opacity: 1;
         letter-spacing: 1px;
         margin-right: -10px;
         font-family: "Kite One", sans-serif;
@@ -367,8 +323,6 @@ export default {
         font-size: 14px;
         color: black;
         letter-spacing: 1px;
-        // margin-right: -8px;
-        opacity: 0.8;
         font-family: "Kite One", sans-serif;
         &::before {
           content: url(../../assets/food.svg);
@@ -406,8 +360,6 @@ export default {
         font-size: 14px;
         color: black;
         letter-spacing: 1px;
-        // margin-right: -8px;
-        opacity: 0.8;
         font-family: "Kite One", sans-serif;
         .number {
           font-size: 12px;
@@ -421,14 +373,6 @@ export default {
           margin-right: 24px;
           margin-left: -1px;
         }
-        // &::after {
-        //   content: url(../../assets/xiaohuanji.svg);
-        //   vertical-align: middle;
-        //   display: inline-block;
-        //   margin-top: -6px;
-        //   line-height: 10px;
-        //   margin-left: 10px;
-        // }
         .shengxiao {
           margin-left: 10px;
           margin-right: 10px;
@@ -502,7 +446,6 @@ export default {
       opacity: 1;
     }
     .title {
-      // line-height: 200px;
       font-family: "Asap", sans-serif;
       font-size: 42px;
       color: black;
