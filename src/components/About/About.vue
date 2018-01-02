@@ -319,7 +319,7 @@ export default {
         margin-right: -10px;
         font-family: "Kite One", sans-serif;
       }
-      .food {
+      .food{
         font-size: 14px;
         color: black;
         letter-spacing: 1px;

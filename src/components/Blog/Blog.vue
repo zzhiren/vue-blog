@@ -4,24 +4,32 @@
       transition(name="fade" appear mode="out-in")
         router-view 
     div.right-side
-      div.search
-        input.input(v-model="text" placeholder="Searching...")
-        span.button(@click="_searchNPM()")
-          Icon.icon-search(type="android-search")
-      div.popularity()
-        div.title 
-          div.npm-div
-            svg.npm(viewBox="0 0 18 7" data-reactid="9")
-              path(fill="#CB3837" d="M0,0v6h5v1h4v-1h9v-6" data-reactid="10")
-              path(fill="#FFF" d="M1,1v4h2v-3h1v3h1v-4h1v5h2v-4h1v2h-1v1h2v-4h1v4h2v-3h1v3h1v-3h1v3h1v-4" data-reactid="11")
-          span.span Build amazing things!
-        div.list
-          ul.ul
-            li.li(v-for="(item,index) in npmList" v-bind:key="index")
-              span.index
-              a.a(v-bind:title="'author:' + item.package.publisher.username + '  version:'+item.package.version" v-bind:href="item.package.links.npm" target="_blank")
-                span.package-name {{item.package.name}} 
-                //- span.package-author ->{{item.package.publisher.username}}
+      div.right-content
+        div.search
+          input.input(v-model="text" placeholder="Searching...")
+          span.button(@click="_searchNPM()")
+            Icon.icon-search(type="android-search")
+        div.popularity
+          div.title 
+            div.npm-div
+              svg.npm(viewBox="0 0 18 7" data-reactid="9")
+                path(fill="#CB3837" d="M0,0v6h5v1h4v-1h9v-6" data-reactid="10")
+                path(fill="#FFF" d="M1,1v4h2v-3h1v3h1v-4h1v5h2v-4h1v2h-1v1h2v-4h1v4h2v-3h1v3h1v-3h1v3h1v-4" data-reactid="11")
+            span.span Build amazing things!
+          div.list
+            ul.ul
+              li.li(v-for="(item,index) in npmList" v-bind:key="index")
+                span.index
+                a.a(v-bind:title="'author:' + item.package.publisher.username + '  version:'+item.package.version" v-bind:href="item.package.links.npm" target="_blank")
+                  span.package-name {{item.package.name}} 
+        div.tags
+          ul.items
+            li.item(v-for="(item,index) in tags") 
+              Icon.icon(v-if="item.icon != ''" v-bind:type="item.icon")
+              //- img.vue(v-if="item.svg != ''" src="./../../assets/vue.svg" width="13")
+              span(v-if="item.name !='Vue'") {{item.name}}
+              span.vue(v-if="item.name == 'Vue'")
+              span(v-if="item.name == 'Vue'") {{item.name}}
 </template>
 <script>
 import axios from "axios";
@@ -29,10 +37,109 @@ import axios from "axios";
 export default {
   data() {
     return {
+      xxx: "ios-monitor",
       text: "",
       value: "Vue",
       from: 0,
-      npmList: []
+      npmList: [],
+      tags: [
+        {
+          'name':'计算机',
+          'icon': 'android-laptop',
+          'svg':''
+        },
+        {
+          'name':'网络',
+          'icon': 'planet',
+          'svg':''
+
+        },
+        {
+          'name':'互联网',
+          'icon': 'ios-world-outline',
+          'svg':''
+        },
+        {
+          'name':'算法',
+          'icon': 'ios-calculator-outline',
+          'svg':''
+        },
+        {
+          'name':'工作',
+          'icon': 'document-text',
+          'svg':''
+        },
+        {
+          'name':'生活',
+          'icon': 'coffee',
+          'svg':''
+        },
+        {
+          'name':'思考',
+          'icon': 'android-bulb',
+          'svg':''
+        },
+        {
+          'name':'Web开发',
+          'icon': 'earth',
+          'svg':''
+        },
+        {
+          'name':'Vue',
+          'icon': '',
+          'svg' : './../../assets/vue.svg'
+        },
+        {
+          'name':'Nodejs',
+          'icon': 'social-nodejs',
+          'svg':''
+        },
+        {
+          'name':'JavaScript',
+          'icon': 'social-javascript',
+          'svg':''
+        },
+        {
+          'name':'Git',
+          'icon': 'merge',
+          'svg':''
+        },
+        {
+          'name':'GitHub',
+          'icon': 'social-github',
+          'svg':''
+        },
+        {
+          'name':'Chrome',
+          'icon': 'social-chrome',
+          'svg':''
+        },
+        {
+          'name':'Http',
+          'icon': 'arrow-swap',
+          'svg':''
+        },
+        {
+          'name':'HTML',
+          'icon': 'social-html5',
+          'svg':''
+        },
+        {
+          'name':'CSS',
+          'icon': 'social-css3',
+          'svg':''
+        },
+        {
+          'name':'Linux',
+          'icon': 'social-tux',
+          'svg':''
+        },
+        {
+          'name':'Python',
+          'icon': 'social-python',
+          'svg':''
+        }
+      ]
     };
   },
   computed: {
@@ -92,21 +199,23 @@ export default {
 @import "src/components/common/scss/base.scss";
 $margin-top: 79px;
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
-  opacity: 0
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 
 .slide-fade-enter-active {
-  transition: all .5s ease;
+  transition: all 0.5s ease;
 }
 .slide-fade-leave-active {
-  transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
 }
-.slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active for below version 2.1.8 */ {
+.slide-fade-enter,
+.slide-fade-leave-to {
   transform: translateX(10px);
   opacity: 0;
 }
@@ -116,13 +225,14 @@ $margin-top: 79px;
   .content {
     flex: 1;
   }
+  .right-content {
+    position: fixed;
+  }
   .right-side {
     margin-left: 14px;
     width: 266px;
     .search {
-      position: fixed;
       width: 266px;
-      // height: 100px;
       display: flex;
       padding: 7px;
       box-sizing: border-box;
@@ -160,11 +270,8 @@ $margin-top: 79px;
       }
     }
     .popularity {
-      position: fixed;
       width: 266px;
-      // padding: 7px;
-      // height: 100px;
-      margin-top: 56px;
+      margin-top: 14px;
       box-sizing: border-box;
       background-color: $background-white;
       .title {
@@ -185,8 +292,6 @@ $margin-top: 79px;
         .npm-div {
           width: 50px;
           .npm {
-            // flex:
-            // width: 60px;
             margin-top: 12px;
           }
         }
@@ -204,6 +309,7 @@ $margin-top: 79px;
           list-style: none;
           padding: 6px 0;
           margin-bottom: 0;
+          height: 292px;
           counter-reset: hot-article-list;
           .li {
             display: block;
@@ -235,21 +341,59 @@ $margin-top: 79px;
               }
             }
             .a {
-              color: #555!important;
+              color: #555 !important;
               font-size: 13px;
               transition: margin-left 0.5s linear;
               &:hover {
                 text-decoration: underline;
                 margin-left: 10px;
-                color: black!important;
+                color: black !important;
               }
               .package-name {
                 font-size: 14px;
-                // color: #555!important;
               }
               .package-author {
                 font-size: 12px;
               }
+            }
+          }
+        }
+      }
+    }
+    .tags {
+      background-color: $background-white;
+      width: 100%;
+      height: 358.6px;
+      margin-top: 14px;
+      padding: 10.66px;
+      .items {
+        width: 226px;
+        .item {
+          color: #555;
+          height: 28px;
+          background-color: hsla(0, 0%, 77%, 0.4);
+          float: left;
+          padding-left: 8px;
+          padding-right: 8px;
+          margin-right: 10.66px;
+          margin-bottom: 10.66px;
+          font-size: 14px;
+          line-height: 28px;
+          transition: background-color 0.5s linear;
+          &:hover{
+            background-color: hsla(0, 0%, 77%, 1);
+            cursor: pointer;
+          }
+          .icon{
+            margin-right: 5px;
+          }
+          .vue{
+            margin-right: 5px;
+            &::before{
+              content: url(../../assets/tagvue.svg);
+              display: inline-block;
+              vertical-align: middle;
+              margin-top: 4px;
             }
           }
         }
