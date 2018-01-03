@@ -21,7 +21,28 @@
     div.project-item  1212
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      projects:[]
+    };
+  },
+  mounted() {
+    this._initData()
+  },
+  methods: {
+    _initData() {
+      let date = new Date();
+      let timer = date.getTime().toString();
+      this.$axios({
+        method: "get",
+        url: "/getgithubproject?t="+timer
+      }).then(res=>{
+        this.projects = res.data.data
+      })
+    }
+  }
+};
 </script>
 <style lang="scss" scoped>
 @import "src/components/common/scss/base.scss";
@@ -69,27 +90,27 @@ export default {};
       height: 56px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.26);
     }
-    .item-github{
+    .item-github {
       text-align: center;
       display: flex;
       margin-top: 12px;
       font-size: 14px;
-      .meta{
+      .meta {
         flex: 1;
         // font-size: 12px;
-        .star{
+        .star {
           font-size: 17px;
           margin-right: 2px;
         }
-        .fork{
+        .fork {
           font-size: 15px;
           margin-right: 2px;
         }
-        .issue{
+        .issue {
           font-size: 16px;
           margin-right: 2px;
         }
-        .num{
+        .num {
           font-size: 12px;
         }
       }
