@@ -1,24 +1,21 @@
 <template lang="pug">
   div.project
-    a.project-item
+    a.project-item(target="_blank" v-for="(item,index) in projects" v-bind:key="index" v-bind:href="item.projectUrl")
       p.item-icon
-        img(src="./../../assets/vue.svg" width="64")
-      p.item-title vue-blog
-      p.item-dsc  😜My blog font end by @vue!
+        img(v-if="item.projectIcon == 'Vue'" src="./../../assets/vue.svg" width="64")
+        Icon.icon(v-if="item.projectIcon" v-bind:type="item.projectIcon")
+      p.item-title(v-html="item.projectName")
+      p.item-dsc {{item.projectDsc}}
       p.item-github
         span.meta
           Icon.star(type="android-star")  
-          span.num 11
+          span.num {{item.star}}
         span.meta
           Icon.fork(type="fork-repo") 
-          span.num 11
+          span.num {{item.fork}}
         span.meta
           Icon.issue(type="ios-information-outline") 
-          span.num 11
-    div.project-item  1212
-    div.project-item  1212
-    div.project-item  1212
-    div.project-item  1212
+          span.num {{item.issue}}
 </template>
 <script>
 export default {
@@ -75,6 +72,9 @@ export default {
       text-align: center;
       margin-top: 18px;
       margin-bottom: 18px;
+      .icon{
+        font-size: 69px;
+      }
     }
     .item-title {
       font-family: "Asap";
