@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/components/Home/Home'
 import Blog from '@/components/Blog/Blog'
 import BlogList from '@/components/Blog/BlogList'
+import BlogListByTag from '@/components/Blog/BlogListByTag'
 import BlogDetils from '@/components/Blog/BlogDetils'
 import Music from '@/components/Music/Music'
 import About from '@/components/About/About'
@@ -32,6 +33,11 @@ const router = new Router({
               path: 'bloglist',
               name: 'BlogList',
               component: BlogList,
+            },
+            {
+              path: 'bloglistbytag/:tagName',
+              name: 'BlogListByTag',
+              component: BlogListByTag,
             },
             {
               path: 'blogdetils/:id',

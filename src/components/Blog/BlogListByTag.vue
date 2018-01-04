@@ -1,0 +1,420 @@
+<template lang="pug">
+  div#blog-list
+    div.header
+      p.logo
+        Icon.icon(v-bind:class="[animationClass]" v-if="this.tagName != 'x'" v-bind:type="tagIcon")
+        img.icon.vue(v-bind:class="[animationClass]" v-if="this.tagName == 'vue'" src="../../assets/vue.svg" width="90")
+      span.title(v-bind:class="[animationClass]" v-if="this.tagName != 'x'") {{tagDsc}}
+    div.content
+      div.blog-item(v-for="(item,index) in blogs" v-bind:key="item._id" @click="_toBlogDetils(item._id)")
+          div.item-thumb
+            img#img(v-bind:src="item.firstPic")
+          div.item-body
+              h4.title(v-html="item.title")
+              p.preface(v-html="item.preface")
+              div.meta 
+                span
+                  Icon.icon-font(type="ios-clock")
+                  span.meta-span {{item.creationTime}}
+                  Icon.icon-font(type="eye")
+                  span.meta-span {{item.eyes}}
+                  Icon.icon-font(type="chatbox-working")
+                  span.meta-span {{item.comment.length}}
+                  Icon.icon-font(type="heart")
+                  span.meta-span {{item.love}}
+                  Icon.icon-font(type="ios-pricetags")
+                  span.meta-span {{item.tag[0]}}
+      div.more(@click="_initData(state)") 
+        span(v-show="state === 0") 或许有更多
+        span(v-show="state === 1") 我也是有底线的
+</template>
+<script>
+import axios from "axios";
+// this.$route.params.id
+export default {
+  data() {
+    return {
+      animationClass: "",
+      blogs: [],
+      page: 1,
+      state: 0,
+      tagIcon: "",
+      tagName: "",
+      tagDsc: ""
+    };
+  },
+  mounted() {
+    this._initData();
+  },
+  computed: {
+    swiper() {
+      return this.$refs.mySwiper.swiper;
+    }
+  },
+  watch: {
+    // 如果路由有变化，会再次执行该方法
+    $route: "_initData"
+  },
+  methods: {
+    _more() {
+      if (state === 0) {
+        this._initData();
+      }
+    },
+    _initData() {
+      this.tagName = "x";
+      this.tagIcon = this.$route.params.tagIcon;
+      this.animationClass = this.$route.params.animationClass;
+      setTimeout(() => {
+        this.tagName = this.$route.params.tagName;
+        this.tagDsc = this.$route.params.tagDsc;
+      }, 1);
+      console.log(this.icon);
+      var date = new Date();
+      var timer = date.getTime().toString();
+      this.$axios({
+        method: "get",
+        url: "/getpostedblogs",
+        params: {
+          t: timer,
+          page: this.page
+        }
+      }).then(res => {
+        if (res.data.status == "已发布") {
+          this.blogs.push(...res.data.data);
+          this.page++;
+          if (res.data.data.length < 10) {
+            this.state = 1;
+          }
+        }
+      });
+    },
+    _toBlogDetils(id) {
+      this.$router.push({ name: "BlogDetils", params: { id } });
+    }
+  }
+};
+</script>
+<style lang="scss" scoped>
+@import "src/components/common/scss/base.scss";
+
+#blog-list {
+  width: 100%;
+  height: 100%;
+  @-webkit-keyframes bounceInLeft {
+    from,
+    60%,
+    75%,
+    90%,
+    to {
+      -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    0% {
+      opacity: 0;
+      -webkit-transform: translate3d(-3000px, 0, 0);
+      transform: translate3d(-3000px, 0, 0);
+    }
+    60% {
+      opacity: 1;
+      -webkit-transform: translate3d(25px, 0, 0);
+      transform: translate3d(25px, 0, 0);
+    }
+    75% {
+      -webkit-transform: translate3d(-10px, 0, 0);
+      transform: translate3d(-10px, 0, 0);
+    }
+    90% {
+      -webkit-transform: translate3d(5px, 0, 0);
+      transform: translate3d(5px, 0, 0);
+    }
+    to {
+      -webkit-transform: none;
+      transform: none;
+    }
+  }
+  @-webkit-keyframes rollIn {
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);
+      transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg);
+    }
+    to {
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
+    }
+  }
+  @-webkit-keyframes rollOut {
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 120deg);
+      transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 120deg);
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @-webkit-keyframes hinge {
+    0% {
+      -webkit-transform-origin: top left;
+      transform-origin: top left;
+      -webkit-animation-timing-function: ease-in-out;
+      animation-timing-function: ease-in-out;
+    }
+    20%,
+    60% {
+      -webkit-transform: rotate3d(0, 0, 1, 80deg);
+      transform: rotate3d(0, 0, 1, 80deg);
+      -webkit-transform-origin: top left;
+      transform-origin: top left;
+      -webkit-animation-timing-function: ease-in-out;
+      animation-timing-function: ease-in-out;
+    }
+    40%,
+    80% {
+      -webkit-transform: rotate3d(0, 0, 1, 60deg);
+      transform: rotate3d(0, 0, 1, 60deg);
+      -webkit-transform-origin: top left;
+      transform-origin: top left;
+      -webkit-animation-timing-function: ease-in-out;
+      animation-timing-function: ease-in-out;
+      opacity: 1;
+    }
+    to {
+      -webkit-transform: translate3d(0, 700px, 0);
+      transform: translate3d(0, 700px, 0);
+      opacity: 0;
+    }
+  }
+  @-webkit-keyframes zoomInRight {
+    from {
+      opacity: 0;
+      -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(1000px, 0, 0);
+      transform: scale3d(0.1, 0.1, 0.1) translate3d(1000px, 0, 0);
+      -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+      animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+    60% {
+      opacity: 1;
+      -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(-10px, 0, 0);
+      transform: scale3d(0.475, 0.475, 0.475) translate3d(-10px, 0, 0);
+      -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+      animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+    }
+  }
+  @-webkit-keyframes zoomInLeft {
+    from {
+      opacity: 0;
+      -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(-1000px, 0, 0);
+      transform: scale3d(0.1, 0.1, 0.1) translate3d(-1000px, 0, 0);
+      -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+      animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+    60% {
+      opacity: 1;
+      -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(10px, 0, 0);
+      transform: scale3d(0.475, 0.475, 0.475) translate3d(10px, 0, 0);
+      -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+      animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+    }
+  }
+  @-webkit-keyframes flip {
+    from {
+      -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -360deg);
+      transform: perspective(400px) rotate3d(0, 1, 0, -360deg);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
+    40% {
+      -webkit-transform: perspective(400px) translate3d(0, 0, 150px)
+        rotate3d(0, 1, 0, -190deg);
+      transform: perspective(400px) translate3d(0, 0, 150px)
+        rotate3d(0, 1, 0, -190deg);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
+    50% {
+      -webkit-transform: perspective(400px) translate3d(0, 0, 150px)
+        rotate3d(0, 1, 0, -170deg);
+      transform: perspective(400px) translate3d(0, 0, 150px)
+        rotate3d(0, 1, 0, -170deg);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+    80% {
+      -webkit-transform: perspective(400px) scale3d(0.95, 0.95, 0.95);
+      transform: perspective(400px) scale3d(0.95, 0.95, 0.95);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+    to {
+      -webkit-transform: perspective(400px);
+      transform: perspective(400px);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+  }
+  .bounceInLeft {
+    animation: bounceInLeft 1s linear infinite;
+  }
+  .rollIn {
+    animation: rollIn 0.8s linear infinite;
+  }
+  .rollOut {
+    animation: rollOut 0.8s linear infinite;
+  }
+  .hinge {
+    animation: hinge 3s linear infinite;
+  }
+  .zoomInRight {
+    animation: zoomInRight 1s linear infinite;
+  }
+  .zoomInLeft {
+    animation: zoomInLeft 1.5s linear infinite;
+  }
+  .flip {
+    animation: flip 1.5s linear infinite;
+  }
+  .header {
+    width: 595px;
+    height: 184px;
+    background: $background-white;
+    padding: 14px;
+    text-align: center;
+    .logo {
+      height: 117px;
+      margin-bottom: 16.8px;
+      .icon {
+        font-size: 100px;
+        line-height: 117px;
+        // animation: zoomInLeft 3s linear infinite;
+        // animation-direction: alternate;
+        animation-iteration-count: 1;
+      }
+      .vue {
+        margin-top: 15px;
+      }
+    }
+    .title {
+      // animation: zoomInLeft 3s linear infinite;
+      // animation-direction: alternate;
+      animation-iteration-count: 1;
+      display: inline-block;
+      color: #555;
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+  .blog-item {
+    width: 100%;
+    height: 133px;
+    margin-top: $margin-all;
+    background-color: $background-white;
+    // background: rgba(0, 0, 0, 0.8);
+    // background: rgba(28, 28, 28, .9);
+    padding: 7px 7px 7px 7px;
+    box-sizing: border-box;
+    display: flex;
+    -webkit-transition: $hover-bg;
+    transition: $hover-bg;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+      // background: rgba(0, 0, 0, 0.9);
+      cursor: pointer;
+    }
+    &:hover #img {
+      transform: translateX(-10px);
+    }
+    &:hover .title {
+      text-decoration: underline;
+      transform: translateX(10px);
+      opacity: 1 !important;
+      // color: #42b983!important;
+    }
+    .item-thumb {
+      width: 168px;
+      height: 119px;
+      overflow: hidden;
+      #img {
+        transition: transform 0.25s linear;
+        //
+        height: 100%;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+    .item-body {
+      flex: 1;
+      height: 119px;
+      margin-left: $margin-all;
+      .title {
+        letter-spacing: 1px;
+        margin-top: 2.8px;
+        margin-bottom: 7px;
+        color: black;
+        opacity: 0.9;
+        -webkit-transition: $hover-bg;
+        -webkit-transition: $hover-bg;
+        transition: $hover-bg;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      .preface {
+        color: gray;
+        font-size: 13px;
+        height: 63px;
+        line-height: 22px;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        display: -webkit-box;
+      }
+      .meta {
+        height: 25px;
+        font-size: $iconfont-size;
+        line-height: 30px;
+        color: $blog-list-meta-font-color;
+        opacity: $blog-list-meta-font-opacity;
+        &:hover {
+          cursor: pointer;
+        }
+        .icon-font {
+          font-size: $iconfont-size;
+          margin-right: 4px;
+          color: black !important;
+          opacity: 0.7;
+        }
+        .meta-span {
+          color: black;
+          letter-spacing: 1px;
+          margin-right: 25px;
+          font-family: DINRegular, -apple-system, BlinkMacSystemFont,
+            "PingFang SC", "Helvetica Neue", "Hiragino Sans GB", "Segoe UI",
+            "Microsoft YaHei", "\\5FAE软雅黑", sans-serif;
+          font-weight: 100;
+          font-size: $blog-list-meta-font-size;
+        }
+      }
+    }
+  }
+  .more {
+    width: 100%;
+    height: 42px;
+    background: $background-white;
+    margin-top: 14px;
+    text-align: center;
+    line-height: 42px;
+    letter-spacing: 1px;
+    transition: background-color 0.25s linear;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+      // background: rgba(0, 0, 0, 0.9);
+      cursor: pointer;
+    }
+  }
+}
+</style>

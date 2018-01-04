@@ -71,7 +71,7 @@ export default {
 }
 
 .active {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: $background-white;
   color: $font-color-blue !important;
 }
 .anchorBL {

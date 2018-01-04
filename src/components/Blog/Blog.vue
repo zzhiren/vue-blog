@@ -24,12 +24,12 @@
                   span.package-name {{item.package.name}} 
         div.tags
           ul.items
-            li.item(v-for="(item,index) in tags") 
+            li.item(v-for="(item,index) in tags" @click="_toBlogListByTag(item.name,item.icon,item.dsc)") 
               Icon.icon(v-if="item.icon != ''" v-bind:type="item.icon")
               //- img.vue(v-if="item.svg != ''" src="./../../assets/vue.svg" width="13")
-              span(v-if="item.name !='Vue'") {{item.name}}
-              span.vue(v-if="item.name == 'Vue'")
-              span(v-if="item.name == 'Vue'") {{item.name}}
+              span(v-if="item.name !='vue'") {{item.aliasName}}
+              span.vue(v-if="item.name == 'vue'")
+              span(v-if="item.name == 'vue'") {{item.aliasName}}
 </template>
 <script>
 import axios from "axios";
@@ -37,107 +37,144 @@ import axios from "axios";
 export default {
   data() {
     return {
-      xxx: "ios-monitor",
       text: "",
       value: "Vue",
       from: 0,
       npmList: [],
+      animationClass: "",
       tags: [
         {
-          'name':'计算机',
-          'icon': 'android-laptop',
-          'svg':''
+          name: "computer",
+          aliasName: "计算机",
+          icon: "android-laptop",
+          dsc: "计算机 - 计算机的世界",
+          svg: ""
         },
         {
-          'name':'网络',
-          'icon': 'planet',
-          'svg':''
-
+          name: "network",
+          aliasName: "网络",
+          icon: "planet",
+          dsc: "网络 - TCP/IP、HTTP、HTTPS、HTTP2",
+          svg: ""
         },
         {
-          'name':'互联网',
-          'icon': 'ios-world-outline',
-          'svg':''
+          name: "internet",
+          aliasName: "互联网",
+          icon: "ios-world-outline",
+          dsc: "互联网 - 互联网+ 时代",
+          svg: ""
         },
         {
-          'name':'算法',
-          'icon': 'ios-calculator-outline',
-          'svg':''
+          name: "algorithm",
+          aliasName: "算法",
+          icon: "ios-calculator-outline",
+          dsc: "算法 - 核心动力",
+          svg: ""
         },
         {
-          'name':'工作',
-          'icon': 'document-text',
-          'svg':''
+          name: "work",
+          aliasName: "工作",
+          icon: "document-text",
+          dsc: "工作 - 我爱工作，工作是我快乐😭",
+          svg: ""
         },
         {
-          'name':'生活',
-          'icon': 'coffee',
-          'svg':''
+          name: "life",
+          aliasName: "生活",
+          icon: "coffee",
+          dsc: "生活 - 生、活单字无意，意在「生活」",
+          svg: ""
         },
         {
-          'name':'思考',
-          'icon': 'android-bulb',
-          'svg':''
+          name: "think",
+          aliasName: "思考",
+          icon: "android-bulb",
+          dsc: "思考 - 不要停止思考的脚步",
+          svg: ""
         },
         {
-          'name':'Web开发',
-          'icon': 'earth',
-          'svg':''
+          name: "WebDev",
+          aliasName: "Web开发",
+          icon: "earth",
+          dsc: "Web开发 - World Wide Web",
+          svg: ""
         },
         {
-          'name':'Vue',
-          'icon': '',
-          'svg' : './../../assets/vue.svg'
+          name: "vue",
+          aliasName: "Vue",
+          icon: "",
+          dsc: "Vue - LZ天下第一",
+          svg: "./../../assets/vue.svg"
         },
         {
-          'name':'Nodejs',
-          'icon': 'social-nodejs',
-          'svg':''
+          name: "Nodejs",
+          aliasName: "Nodejs",
+          icon: "social-nodejs",
+          dsc: "Nodejs - 感觉很Cool，但还不够~",
+          svg: ""
         },
         {
-          'name':'JavaScript',
-          'icon': 'social-javascript',
-          'svg':''
+          name: "JavaScript",
+          aliasName: "JavaScript",
+          icon: "social-javascript",
+          dsc: "Javascript - 强大的工业语言",
+          svg: ""
         },
         {
-          'name':'Git',
-          'icon': 'merge',
-          'svg':''
+          name: "Git",
+          aliasName: "Git",
+          icon: "merge",
+          dsc: "Git- Git学习之路",
+          svg: ""
         },
         {
-          'name':'GitHub',
-          'icon': 'social-github',
-          'svg':''
+          name: "GitHub",
+          aliasName: "GitHub",
+          icon: "social-github",
+          dsc: "GitHub- 又名GayHub(●ˇ∀ˇ●)",
+          svg: ""
         },
         {
-          'name':'Chrome',
-          'icon': 'social-chrome',
-          'svg':''
+          name: "Chrome",
+          aliasName: "Chrome",
+          icon: "social-chrome",
+          dsc: "Chrome - 世界上最好用的PC浏览器，没有之一",
+          svg: ""
         },
         {
-          'name':'Http',
-          'icon': 'arrow-swap',
-          'svg':''
+          name: "Http",
+          aliasName: "Http",
+          icon: "arrow-swap",
+          dsc: "Http - Http、Https、HTTP2",
+          svg: ""
         },
         {
-          'name':'HTML',
-          'icon': 'social-html5',
-          'svg':''
+          name: "HTML",
+          aliasName: "HTML",
+          icon: "social-html5",
+          dsc: "HTML- HTML5、Pug、Xml...",
+          svg: ""
         },
         {
-          'name':'CSS',
-          'icon': 'social-css3',
-          'svg':''
+          name: "CSS",
+          aliasName: "CSS",
+          icon: "social-css3",
+          dsc: "Css - Css3、Sass、Less、Stylus、PostCss...",
+          svg: ""
         },
         {
-          'name':'Linux',
-          'icon': 'social-tux',
-          'svg':''
+          name: "Linux",
+          aliasName: "Linux",
+          icon: "social-tux",
+          dsc: "Linux - So Cool！",
+          svg: ""
         },
         {
-          'name':'Python',
-          'icon': 'social-python',
-          'svg':''
+          name: "Python",
+          aliasName: "Python",
+          icon: "social-python",
+          dsc: "Python - 嘶~嘶~斯内克😜",
+          svg: ""
         }
       ]
     };
@@ -191,6 +228,44 @@ export default {
           this.npmList = res.data.objects;
         });
       }
+    },
+    _toBlogListByTag(name, icon, dsc) {
+      let tagName = name;
+      let tagIcon = icon;
+      let tagDsc = dsc;
+      let n = parseInt(Math.random() * 7);
+      if (n == 0) {
+        this.animationClass = "bounceInLeft";
+        this._router(tagName, tagIcon, tagDsc, this.animationClass);
+      } else if (n == 1) {
+        this.animationClass = "rollIn";
+        this._router(tagName, tagIcon, tagDsc, this.animationClass);
+      } else if (n == 2) {
+        this.animationClass = "rollOut";
+        this._router(tagName, tagIcon, tagDsc, this.animationClass);
+      } else if (n == 3) {
+        this.animationClass = "hinge";
+        this._router(tagName, tagIcon, tagDsc, this.animationClass);
+      } else if (n == 4) {
+        this.animationClass = "zoomInRight";
+        this._router(tagName, tagIcon, tagDsc, this.animationClass);
+      } else if (n == 5) {
+        this.animationClass = "zoomInLeft";
+        this._router(tagName, tagIcon, tagDsc, this.animationClass);
+      } else if (n == 6) {
+        this.animationClass = "flip";
+        this._router(tagName, tagIcon, tagDsc, this.animationClass);
+      }
+    },
+    _router(name, icon, dsc, animation) {
+      let tagName = name;
+      let tagIcon = icon;
+      let tagDsc = dsc;
+      let animationClass = animation;
+      this.$router.push({
+        name: "BlogListByTag",
+        params: { tagName, tagIcon, tagDsc, animationClass }
+      });
     }
   }
 };
@@ -380,16 +455,16 @@ $margin-top: 79px;
           font-size: 14px;
           line-height: 28px;
           transition: background-color 0.5s linear;
-          &:hover{
+          &:hover {
             background-color: hsla(0, 0%, 77%, 1);
             cursor: pointer;
           }
-          .icon{
+          .icon {
             margin-right: 5px;
           }
-          .vue{
+          .vue {
             margin-right: 5px;
-            &::before{
+            &::before {
               content: url(../../assets/tagvue.svg);
               display: inline-block;
               vertical-align: middle;
