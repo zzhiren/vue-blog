@@ -13,7 +13,7 @@
             Icon.icon-font(type="headphone") 
             span MUSIC
           router-link.nav-item(tag="div" to="/project") 
-            Icon.icon-font(type="ios-folder") 
+            Icon.icon-font(type="folder") 
             span PROJECT
           //- router-link.nav-item(tag="div" to="/" v-on:click.native="itemActive(6)") GitHub
           router-link.nav-item(tag="div" to="/collection") 
@@ -35,7 +35,6 @@ export default {
   methods: {
     itemActive(state) {
       // this.state = state;
-
     }
   }
 }
@@ -49,7 +48,6 @@ $margin-top: 79px;
 .fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
   opacity: 0
 }
-
 .slide-fade-enter-active {
   transition: all .5s ease;
 }
@@ -83,7 +81,7 @@ $margin-top: 79px;
           font-family: 'Asap', sans-serif;
           font-size: 13px;
           line-height: 40px;
-          color: #777;
+          color: #777777;
           font-style: normal;
           font-weight: bold;
           padding-left: 15px;
@@ -93,7 +91,7 @@ $margin-top: 79px;
             color: $font-color-blue;
           }
           .icon-font{
-            font-size: 17px;
+            font-size: 15px;
             margin-right: 13px;
           }
           span{
@@ -121,4 +119,3 @@ $margin-top: 79px;
   }
 }
 </style>
-
