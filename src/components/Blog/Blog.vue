@@ -233,7 +233,7 @@ export default {
       let tagName = name;
       let tagIcon = icon;
       let tagDsc = dsc;
-      let n = parseInt(Math.random() * 7);
+      let n = parseInt(Math.random() * 9);
       if (n == 0) {
         this.animationClass = "bounceInLeft";
         this._router(tagName, tagIcon, tagDsc, this.animationClass);
@@ -252,8 +252,17 @@ export default {
       } else if (n == 5) {
         this.animationClass = "zoomInLeft";
         this._router(tagName, tagIcon, tagDsc, this.animationClass);
-      } else if (n == 6) {
+      } 
+      else if (n == 6) {
         this.animationClass = "flip";
+        this._router(tagName, tagIcon, tagDsc, this.animationClass);
+      }
+      else if (n == 7) {
+        this.animationClass = "jackInTheBox";
+        this._router(tagName, tagIcon, tagDsc, this.animationClass);
+      }
+      else if (n == 8) {
+        this.animationClass = "rubberBand";
         this._router(tagName, tagIcon, tagDsc, this.animationClass);
       }
     },

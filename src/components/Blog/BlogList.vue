@@ -98,6 +98,7 @@ export default {
     height: 210px;
     position: relative;
     z-index: 1;
+    background-color: $background-white;
     .swiper-slide {
       .swiper-img {
         width: 595px;

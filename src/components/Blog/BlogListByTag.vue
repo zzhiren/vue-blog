@@ -74,7 +74,7 @@ export default {
       var timer = date.getTime().toString();
       this.$axios({
         method: "get",
-        url: "/getpostedblogs",
+        url: "/getpostedblogsbytag",
         params: {
           t: timer,
           page: this.page
@@ -101,6 +101,55 @@ export default {
 #blog-list {
   width: 100%;
   height: 100%;
+  @keyframes jackInTheBox {
+    from {
+      opacity: 0;
+      transform: scale(0.1) rotate(30deg);
+      transform-origin: center bottom;
+    }
+
+    50% {
+      transform: rotate(-10deg);
+    }
+
+    70% {
+      transform: rotate(3deg);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  @keyframes rubberBand {
+    from {
+      transform: scale3d(1, 1, 1);
+    }
+
+    30% {
+      transform: scale3d(1.25, 0.75, 1);
+    }
+
+    40% {
+      transform: scale3d(0.75, 1.25, 1);
+    }
+
+    50% {
+      transform: scale3d(1.15, 0.85, 1);
+    }
+
+    65% {
+      transform: scale3d(0.95, 1.05, 1);
+    }
+
+    75% {
+      transform: scale3d(1.05, 0.95, 1);
+    }
+
+    to {
+      transform: scale3d(1, 1, 1);
+    }
+  }
   @-webkit-keyframes bounceInLeft {
     from,
     60%,
