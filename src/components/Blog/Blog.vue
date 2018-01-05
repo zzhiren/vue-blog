@@ -24,7 +24,7 @@
                   span.package-name {{item.package.name}} 
         div.tags
           ul.items
-            li.item(v-for="(item,index) in tags" @click="_toBlogListByTag(item.name,item.icon,item.dsc)") 
+            li.item(v-for="(item,index) in tags" @click="_toBlogListByTag(item.name,item.aliasName,item.icon,item.dsc)") 
               Icon.icon(v-if="item.icon != ''" v-bind:type="item.icon")
               //- img.vue(v-if="item.svg != ''" src="./../../assets/vue.svg" width="13")
               span(v-if="item.name !='vue'") {{item.aliasName}}
@@ -229,51 +229,104 @@ export default {
         });
       }
     },
-    _toBlogListByTag(name, icon, dsc) {
+    _toBlogListByTag(name, aliasName, icon, dsc) {
+      let tagAliasName = aliasName;
       let tagName = name;
       let tagIcon = icon;
       let tagDsc = dsc;
       let n = parseInt(Math.random() * 9);
       if (n == 0) {
         this.animationClass = "bounceInLeft";
-        this._router(tagName, tagIcon, tagDsc, this.animationClass);
+        this._router(
+          tagName,
+          tagAliasName,
+          tagIcon,
+          tagDsc,
+          this.animationClass
+        );
       } else if (n == 1) {
         this.animationClass = "rollIn";
-        this._router(tagName, tagIcon, tagDsc, this.animationClass);
+        this._router(
+          tagName,
+          tagAliasName,
+          tagIcon,
+          tagDsc,
+          this.animationClass
+        );
       } else if (n == 2) {
         this.animationClass = "rollOut";
-        this._router(tagName, tagIcon, tagDsc, this.animationClass);
+        this._router(
+          tagName,
+          tagAliasName,
+          tagIcon,
+          tagDsc,
+          this.animationClass
+        );
       } else if (n == 3) {
         this.animationClass = "hinge";
-        this._router(tagName, tagIcon, tagDsc, this.animationClass);
+        this._router(
+          tagName,
+          tagAliasName,
+          tagIcon,
+          tagDsc,
+          this.animationClass
+        );
       } else if (n == 4) {
         this.animationClass = "zoomInRight";
-        this._router(tagName, tagIcon, tagDsc, this.animationClass);
+        this._router(
+          tagName,
+          tagAliasName,
+          tagIcon,
+          tagDsc,
+          this.animationClass
+        );
       } else if (n == 5) {
         this.animationClass = "zoomInLeft";
-        this._router(tagName, tagIcon, tagDsc, this.animationClass);
-      } 
-      else if (n == 6) {
+        this._router(
+          tagName,
+          tagAliasName,
+          tagIcon,
+          tagDsc,
+          this.animationClass
+        );
+      } else if (n == 6) {
         this.animationClass = "flip";
-        this._router(tagName, tagIcon, tagDsc, this.animationClass);
-      }
-      else if (n == 7) {
+        this._router(
+          tagName,
+          tagAliasName,
+          tagIcon,
+          tagDsc,
+          this.animationClass
+        );
+      } else if (n == 7) {
         this.animationClass = "jackInTheBox";
-        this._router(tagName, tagIcon, tagDsc, this.animationClass);
-      }
-      else if (n == 8) {
+        this._router(
+          tagName,
+          tagAliasName,
+          tagIcon,
+          tagDsc,
+          this.animationClass
+        );
+      } else if (n == 8) {
         this.animationClass = "rubberBand";
-        this._router(tagName, tagIcon, tagDsc, this.animationClass);
+        this._router(
+          tagName,
+          tagAliasName,
+          tagIcon,
+          tagDsc,
+          this.animationClass
+        );
       }
     },
-    _router(name, icon, dsc, animation) {
+    _router(name,aliasName, icon, dsc, animation) {
+      let tagAliasName = aliasName;
       let tagName = name;
       let tagIcon = icon;
       let tagDsc = dsc;
       let animationClass = animation;
       this.$router.push({
         name: "BlogListByTag",
-        params: { tagName, tagIcon, tagDsc, animationClass }
+        params: { tagName, tagAliasName,tagIcon, tagDsc, animationClass }
       });
     }
   }

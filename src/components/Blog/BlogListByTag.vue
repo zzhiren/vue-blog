@@ -24,7 +24,7 @@
                   span.meta-span {{item.love}}
                   Icon.icon-font(type="ios-pricetags")
                   span.meta-span {{item.tag[0]}}
-      div.more(@click="_initData(state)") 
+      div.more(@click="_more(state)") 
         span(v-show="state === 0") 或许有更多
         span(v-show="state === 1") 我也是有底线的
 </template>
@@ -56,20 +56,39 @@ export default {
     $route: "_initData"
   },
   methods: {
-    _more() {
+    _more(state) {
       if (state === 0) {
-        this._initData();
+        this.page++;
+        var date = new Date();
+        var timer = date.getTime().toString();
+        this.$axios({
+          method: "get",
+          url: "/getpostedblogsbytag",
+          params: {
+            t: timer,
+            page: this.page,
+            tag: this.$route.params.tagAliasName
+          }
+        }).then(res => {
+          if (res.data.status == "已发布") {
+            this.blogs.push(...res.data.data);
+            if (res.data.data.length < 10) {
+              this.state = 1;
+            }
+          }
+        });
       }
     },
     _initData() {
+      this.state = 0;
       this.tagName = "x";
       this.tagIcon = this.$route.params.tagIcon;
       this.animationClass = this.$route.params.animationClass;
+      let tag = this.$route.params.tagAliasName;
       setTimeout(() => {
         this.tagName = this.$route.params.tagName;
         this.tagDsc = this.$route.params.tagDsc;
       }, 1);
-      console.log(this.icon);
       var date = new Date();
       var timer = date.getTime().toString();
       this.$axios({
@@ -77,14 +96,16 @@ export default {
         url: "/getpostedblogsbytag",
         params: {
           t: timer,
-          page: this.page
+          page: 1,
+          tag: tag
         }
       }).then(res => {
         if (res.data.status == "已发布") {
-          this.blogs.push(...res.data.data);
-          this.page++;
-          if (res.data.data.length < 10) {
+          this.blogs = res.data.data.slice(0,10);
+          if (res.data.data.length < 11) {
             this.state = 1;
+          } else {
+            // this.page++;
           }
         }
       });
@@ -304,6 +325,13 @@ export default {
       -webkit-animation-timing-function: ease-in;
       animation-timing-function: ease-in;
     }
+  }
+
+  .jackInTheBox {
+    animation: bounceInLeft 1s linear infinite;
+  }
+  .rubberBand {
+    animation: bounceInLeft 1s linear infinite;
   }
   .bounceInLeft {
     animation: bounceInLeft 1s linear infinite;
