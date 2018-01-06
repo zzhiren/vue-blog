@@ -23,14 +23,18 @@
         transition(name="slide-fade" appear mode="out-in")
           keep-alive(include ="bloglist")
             router-view 
-      //- div.right-side
+    //- Footer
 </template>
 <script>
+import Footer from '../common/vue/Footer'
 export default {
   data() {
     return {
       state: 2
     }
+  },
+  components:{
+    Footer,
   },
   methods: {
     itemActive(state) {

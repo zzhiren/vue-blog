@@ -1,5 +1,5 @@
 <template lang="pug">
-  div.project
+  div.project(ref="project")
     a.project-item(target="_blank" v-for="(item,index) in projects" v-bind:key="index" v-bind:href="item.projectUrl")
       p.item-icon
         img(v-if="item.projectIcon == 'Vue'" src="./../../assets/vue.svg" width="64")
@@ -29,6 +29,7 @@ export default {
   },
   methods: {
     _initData() {
+      this.$refs.project.style.height = innerHeight - 76 - 63 - 14 - 16 + 'px';
       let date = new Date();
       let timer = date.getTime().toString();
       this.$axios({

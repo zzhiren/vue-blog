@@ -17,13 +17,15 @@ div#app
         :clickEffect="false"
         clickMode="remove")
   top-header
-  router-view
-  //- Footer
+  div.content
+    router-view
+  Footer
 </template>
 
 <script>
 import TopHeader from "./components/common/vue/TopHeader";
 import Footer from "./components/common/vue/Footer";
+
 // import FCCIcon from './assets/FCC-fontIcon/css/fccHangzhou.css';
 export default {
   name: "app",
@@ -36,7 +38,9 @@ export default {
 
 <style lang="scss">
 @import "src/components/common/scss/base.scss";
-
+.content{
+  height: 100%;
+}
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

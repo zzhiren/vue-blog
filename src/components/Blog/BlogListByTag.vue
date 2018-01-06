@@ -6,27 +6,30 @@
         img.icon.vue(v-bind:class="[animationClass]" v-if="this.tagName == 'vue'" src="../../assets/vue.svg" width="90")
       span.title(v-bind:class="[animationClass]" v-if="this.tagName != 'x'") {{tagDsc}}
     div.content
-      div.blog-item(v-for="(item,index) in blogs" v-bind:key="item._id" @click="_toBlogDetils(item._id)")
-          div.item-thumb
-            img#img(v-bind:src="item.firstPic")
-          div.item-body
-              h4.title(v-html="item.title")
-              p.preface(v-html="item.preface")
-              div.meta 
-                span
-                  Icon.icon-font(type="ios-clock")
-                  span.meta-span {{item.creationTime}}
-                  Icon.icon-font(type="eye")
-                  span.meta-span {{item.eyes}}
-                  Icon.icon-font(type="chatbox-working")
-                  span.meta-span {{item.comment.length}}
-                  Icon.icon-font(type="heart")
-                  span.meta-span {{item.love}}
-                  Icon.icon-font(type="ios-pricetags")
-                  span.meta-span {{item.tag[0]}}
-      div.more(@click="_more(state)") 
+      transition-group(name="fade" mode="out-in" tag="p")
+        div.blog-item(v-for="(item,index) in blogs" v-bind:key="item._id" @click="_toBlogDetils(item._id)")
+            div.item-thumb
+              img#img(v-bind:src="item.firstPic")
+            div.item-body
+                h4.title(v-html="item.title")
+                p.preface(v-html="item.preface")
+                div.meta 
+                  span
+                    Icon.icon-font(type="ios-clock")
+                    span.meta-span {{item.creationTime}}
+                    Icon.icon-font(type="eye")
+                    span.meta-span {{item.eyes}}
+                    Icon.icon-font(type="chatbox-working")
+                    span.meta-span {{item.comment.length}}
+                    Icon.icon-font(type="heart")
+                    span.meta-span {{item.love}}
+                    Icon.icon-font(type="ios-pricetags")
+                    span.meta-span {{item.tag[0]}}
+      div.more(v-if="blogs.length > 0" @click="_more(state)") 
         span(v-show="state === 0") 或许有更多
         span(v-show="state === 1") 我也是有底线的
+      div.empty(v-if="blogs.length < 1") No Result Article.
+      
 </template>
 <script>
 import axios from "axios";
@@ -37,7 +40,7 @@ export default {
       animationClass: "",
       blogs: [],
       page: 1,
-      state: 0,
+      state: 1,
       tagIcon: "",
       tagName: "",
       tagDsc: ""
@@ -80,7 +83,7 @@ export default {
       }
     },
     _initData() {
-      this.state = 0;
+      // this.state = 0;
       this.tagName = "x";
       this.tagIcon = this.$route.params.tagIcon;
       this.animationClass = this.$route.params.animationClass;
@@ -97,15 +100,24 @@ export default {
         params: {
           t: timer,
           page: 1,
-          tag: tag
+          tag: this.$route.params.tagAliasName
         }
       }).then(res => {
         if (res.data.status == "已发布") {
-          this.blogs = res.data.data.slice(0,10);
+          this.blogs = [];
+          // if (res.data.data.slice(0, 10).length < 1) {
+          //   this.$refs.empty.style.display = "block";
+          // } else {
+          //   this.$refs.empty.style.display = "none";
+          // }
+          setTimeout(() => {
+            this.blogs = res.data.data.slice(0, 10);
+          }, 500);
+
           if (res.data.data.length < 11) {
             this.state = 1;
           } else {
-            // this.page++;
+            this.state = 0;
           }
         }
       });
@@ -118,7 +130,27 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "src/components/common/scss/base.scss";
+// @import "src/components/common/scss/animate.scss";
 
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 10s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+.slide-fade-enter-active {
+  transition: all 3s ease;
+}
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
+}
 #blog-list {
   width: 100%;
   height: 100%;
@@ -328,10 +360,10 @@ export default {
   }
 
   .jackInTheBox {
-    animation: bounceInLeft 1s linear infinite;
+    animation: jackInTheBox 1s linear infinite;
   }
   .rubberBand {
-    animation: bounceInLeft 1s linear infinite;
+    animation: rubberBand 1s linear infinite;
   }
   .bounceInLeft {
     animation: bounceInLeft 1s linear infinite;
@@ -477,6 +509,32 @@ export default {
         }
       }
     }
+  }
+  .content {
+    position: relative;
+  }
+  @-webkit-keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .empty {
+    position: absolute;
+    width: 595px;
+    height: 70px;
+    background: $background-white;
+    line-height: 70px;
+    text-align: center;
+    margin-top: 14px;
+    font-size: 14px;
+    font-family: "Avenir", Helvetica, Arial, sans-serif;
+    color: #555;
+    // display: none;
+    animation: fadeIn 0.5s linear ;
   }
   .more {
     width: 100%;

@@ -2,7 +2,8 @@
   div.blog
     div.content
       transition(name="fade" appear mode="out-in")
-        router-view 
+        keep-alive(include ="bloglist")
+          router-view 
     div.right-side
       div.right-content
         div.search
@@ -22,7 +23,7 @@
                 span.index
                 a.a(v-bind:title="'author:' + item.package.publisher.username + '  version:'+item.package.version" v-bind:href="item.package.links.npm" target="_blank")
                   span.package-name {{item.package.name}} 
-        div.tags
+        div.tags(ref="tag")
           ul.items
             li.item(v-for="(item,index) in tags" @click="_toBlogListByTag(item.name,item.aliasName,item.icon,item.dsc)") 
               Icon.icon(v-if="item.icon != ''" v-bind:type="item.icon")
@@ -33,7 +34,6 @@
 </template>
 <script>
 import axios from "axios";
-
 export default {
   data() {
     return {
@@ -179,6 +179,7 @@ export default {
       ]
     };
   },
+  
   computed: {
     _value() {
       if (this.text == "") {
@@ -190,9 +191,26 @@ export default {
   },
   mounted() {
     this._initNpmData();
+    this._addEventListener()
   },
   methods: {
+    _addEventListener(){
+      document.addEventListener('scroll',this._setTagPosition)
+    },
+    _setTagPosition(){
+      console.log(this.$refs.tag.offsetTop - document.documentElement.scrollTop)
+      let h = this.$refs.tag.offsetTop - document.documentElement.scrollTop;
+      // let h = 0;
+      if(h == 78){
+        this.$refs.tag.style.position = 'fixed';
+        console.log('xxxxxxxxxxxxxxxxxx')
+      }else{
+        this.$refs.tag.style.position = 'relative';
+      }
+    },
     _initNpmData() {
+      console.log('---------------')
+      
       this.$axios({
         method: "get",
         url: "/searchnpm",
@@ -346,10 +364,10 @@ $margin-top: 79px;
 }
 
 .slide-fade-enter-active {
-  transition: all 0.5s ease;
+  transition: all 0.1s ease;
 }
 .slide-fade-leave-active {
-  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
 }
 .slide-fade-enter,
 .slide-fade-leave-to {
@@ -363,7 +381,7 @@ $margin-top: 79px;
     flex: 1;
   }
   .right-content {
-    position: fixed;
+    // position: fixed;
   }
   .right-side {
     margin-left: 14px;
@@ -498,6 +516,7 @@ $margin-top: 79px;
       }
     }
     .tags {
+      // position: fixed;
       background-color: $background-white;
       width: 100%;
       height: 358.6px;

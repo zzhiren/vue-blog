@@ -4,7 +4,7 @@
         swiper-slide.swiper-slide(v-for="(item, index) in blogs.slice(0,4)" v-bind:key="index")
           img.swiper-img(v-bind:src="item.firstPic" alt="" v-bind:key="item._id" @click="_toBlogDetils(item._id)")
           div.title()  {{ item.title}}
-    div
+    div.blog
       div.blog-item(v-for="(item,index) in blogs" v-bind:key="item._id" @click="_toBlogDetils(item._id)")
           div.item-thumb
             img#img(v-bind:src="item.firstPic")
@@ -26,9 +26,12 @@
       div.more(@click="_initData(state)") 
         span(v-show="state === 0") 或许有更多
         span(v-show="state === 1") 我也是有底线的
+
 </template>
 <script>
 import axios from "axios";
+import Footer from '../common/vue/Footer'
+
 export default {
   data() {
     return {
@@ -47,39 +50,40 @@ export default {
       state: 0
     };
   },
+  components:{
+    Footer,
+  },
   mounted() {
     this._initData();
   },
   computed: {
-    swiper() {
-      return this.$refs.mySwiper.swiper;
-    }
+    // 
   },
   methods: {
-    _more(){
+    _more() {
       if (state === 0) {
-        this._initData()
+        this._initData();
       }
     },
     _initData() {
       var date = new Date();
-        var timer = date.getTime().toString();
-        this.$axios({
-          method: "get",
-          url: "/getpostedblogs",
-          params: {
-            t: timer,
-            page: this.page
+      var timer = date.getTime().toString();
+      this.$axios({
+        method: "get",
+        url: "/getpostedblogs",
+        params: {
+          t: timer,
+          page: this.page
+        }
+      }).then(res => {
+        if (res.data.status == "已发布") {
+          this.blogs.push(...res.data.data);
+          this.page++;
+          if (res.data.data.length < 10) {
+            this.state = 1;
           }
-        }).then(res => {
-          if (res.data.status == "已发布") {
-            this.blogs.push(...res.data.data);
-            this.page++;
-            if(res.data.data.length < 10){
-              this.state = 1
-            }
-          }
-        });
+        }
+      });
     },
     _toBlogDetils(id) {
       this.$router.push({ name: "BlogDetils", params: { id } });
