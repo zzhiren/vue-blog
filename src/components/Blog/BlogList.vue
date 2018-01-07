@@ -30,9 +30,10 @@
 </template>
 <script>
 import axios from "axios";
-import Footer from '../common/vue/Footer'
+import Footer from "../common/vue/Footer";
 
 export default {
+  name: "BlogList",
   data() {
     return {
       swiperOption: {
@@ -50,14 +51,11 @@ export default {
       state: 0
     };
   },
-  components:{
-    Footer,
+  components: {
+    Footer
   },
   mounted() {
     this._initData();
-  },
-  computed: {
-    // 
   },
   methods: {
     _more() {
@@ -77,9 +75,9 @@ export default {
         }
       }).then(res => {
         if (res.data.status == "已发布") {
-          this.blogs.push(...res.data.data);
+          this.blogs.push(...res.data.data.slice(0, 10));
           this.page++;
-          if (res.data.data.length < 10) {
+          if (res.data.data.length < 11) {
             this.state = 1;
           }
         }
@@ -95,8 +93,9 @@ export default {
 @import "src/components/common/scss/base.scss";
 
 #blog-list {
-  width: 100%;
+  width: 595px;
   height: 100%;
+  // min-height: calc(100vh - 14px - 63px);
   .swiper {
     width: 595px;
     height: 210px;
@@ -133,8 +132,6 @@ export default {
     height: 133px;
     margin-top: $margin-all;
     background-color: $background-white;
-    // background: rgba(0, 0, 0, 0.8);
-    // background: rgba(28, 28, 28, .9);
     padding: 7px 7px 7px 7px;
     box-sizing: border-box;
     display: flex;
@@ -142,7 +139,6 @@ export default {
     transition: $hover-bg;
     &:hover {
       background-color: rgba(0, 0, 0, 0.1);
-      // background: rgba(0, 0, 0, 0.9);
       cursor: pointer;
     }
     &:hover #img {
@@ -152,7 +148,6 @@ export default {
       text-decoration: underline;
       transform: translateX(10px);
       opacity: 1 !important;
-      // color: #42b983!important;
     }
     .item-thumb {
       width: 168px;
@@ -233,7 +228,6 @@ export default {
     transition: background-color 0.25s linear;
     &:hover {
       background-color: rgba(0, 0, 0, 0.1);
-      // background: rgba(0, 0, 0, 0.9);
       cursor: pointer;
     }
   }

@@ -26,13 +26,13 @@ Vue.use(Router)
 
 const router = new Router({
   linkActiveClass: 'active',
-  // mode: 'history',
+  mode: 'history',
   routes: [
     {
       path: '/',
       name: 'Home',
       component: Home,
-      redirect:"/blog/bloglist",
+      redirect:"/blog",
       children: [
         {
           path: 'blog',
@@ -45,20 +45,16 @@ const router = new Router({
               name: 'BlogList',
               component: BlogList,
             },
-            {
-              path: 'bloglistbytag/:tagName/:tagAliasName/:tagIcon/:tagDsc/:animationClass',
-              name: 'BlogListByTag',
-              component: BlogListByTag,
-            },
+            
             {
               path: 'blogdetils/:id',
               name: 'BlogDetils',
               component: BlogDetils,
             },
             {
-              path: 'bloglist',
-              name: 'BlogList',
-              component: BlogList,
+              path: 'bloglistbytag/:tagName/:tagAliasName/:tagIcon/:tagDsc/:animationClass',
+              name: 'BlogListByTag',
+              component: BlogListByTag,
             },
           ]
         },
@@ -94,6 +90,7 @@ router.beforeEach((to, from, next) => {
 
 router.afterEach(route => {
   iView.LoadingBar.finish();
+  window.scrollTo(0,0);
 });
 
 export default router;

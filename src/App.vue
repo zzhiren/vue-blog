@@ -18,7 +18,10 @@ div#app
         clickMode="remove")
   top-header
   div.content
-    router-view
+    transition(name="slide-fade" appear mode="out-in")
+      keep-alive(include ="Home")
+        router-view.home-router
+    
   Footer
 </template>
 
@@ -26,7 +29,6 @@ div#app
 import TopHeader from "./components/common/vue/TopHeader";
 import Footer from "./components/common/vue/Footer";
 
-// import FCCIcon from './assets/FCC-fontIcon/css/fccHangzhou.css';
 export default {
   name: "app",
   components: {
@@ -39,7 +41,9 @@ export default {
 <style lang="scss">
 @import "src/components/common/scss/base.scss";
 .content{
-  height: 100%;
+  .home-router{
+    min-height: calc(100vh - 14px - 63px);
+  }
 }
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
@@ -86,32 +90,10 @@ export default {
   display: none !important;
 }
 body {
-  // background: white;
   opacity: 1;
-  // background: url(./assets/bg1.jpg) center top;
-  // background: url(./assets/bg2.jpg) center top;
-  // background: url(./assets/bg3.jpg) center top;
-  // background: url(./assets/bg4.jpg) center top;
-  // background: url(./assets/bg5.jpg) center top;
-  // background: url(./assets/bg6.jpg) center top;
-  // background: url(./assets/bg7.jpeg) center top;
-  // background: url(./assets/bg9.jpg) center top;
-  // background: url(./assets/bg10.jpg) center top;
-  // background: url(./assets/bg11.jpg) center top;
-  // background: url(./assets/bg12.jpg) center top;
-  // background: url(./assets/bgwhite.png) center top;
-  // background: url(./assets/bgblack.png) center top;
-  // background: url(./assets/codeblack.png) center top;
-  // background-color: red;
-  // background: url(./assets/codewhite.png) center top;
   background: url(./assets/codewhitelight.png) center top;
-
   background-repeat: repeat-x;
-  // background-size: cover;
-  // background-repeat: no-repeat;
   background-attachment: fixed;
-  // background-position: center;
-  // margin: -30px;
   position: absolute;
   height: 100%;
   width: 100%;
@@ -132,7 +114,7 @@ body {
   &::-webkit-scrollbar-thumb {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
-    background-color: rgba(150, 150, 150, 0.5);
+    background-color: rgba(150, 150, 150, 0.3);
     &:hover {
       background-color: #0088f5;
     }

@@ -25,16 +25,16 @@
                     span.meta-span {{item.love}}
                     Icon.icon-font(type="ios-pricetags")
                     span.meta-span {{item.tag[0]}}
+      div.empty(v-if="result == 1") No Result Article.
       div.more(v-if="blogs.length > 0" @click="_more(state)") 
         span(v-show="state === 0") 或许有更多
         span(v-show="state === 1") 我也是有底线的
-      div.empty(v-if="blogs.length < 1") No Result Article.
       
 </template>
 <script>
 import axios from "axios";
-// this.$route.params.id
 export default {
+  name:'BlogListByTag',
   data() {
     return {
       animationClass: "",
@@ -43,20 +43,17 @@ export default {
       state: 1,
       tagIcon: "",
       tagName: "",
-      tagDsc: ""
+      tagDsc: "",
+      result: 0
     };
   },
   mounted() {
     this._initData();
   },
-  computed: {
-    swiper() {
-      return this.$refs.mySwiper.swiper;
-    }
-  },
-  watch: {
-    // 如果路由有变化，会再次执行该方法
-    $route: "_initData"
+  beforeRouteUpdate (to, from, next) {
+    next()
+    this.result = 0
+    this._initData();
   },
   methods: {
     _more(state) {
@@ -75,7 +72,7 @@ export default {
         }).then(res => {
           if (res.data.status == "已发布") {
             this.blogs.push(...res.data.data);
-            if (res.data.data.length < 10) {
+            if (res.data.data.length < 11) {
               this.state = 1;
             }
           }
@@ -83,7 +80,6 @@ export default {
       }
     },
     _initData() {
-      // this.state = 0;
       this.tagName = "x";
       this.tagIcon = this.$route.params.tagIcon;
       this.animationClass = this.$route.params.animationClass;
@@ -104,12 +100,10 @@ export default {
         }
       }).then(res => {
         if (res.data.status == "已发布") {
+          if(res.data.data.length == 0){
+            this.result = 1
+          }
           this.blogs = [];
-          // if (res.data.data.slice(0, 10).length < 1) {
-          //   this.$refs.empty.style.display = "block";
-          // } else {
-          //   this.$refs.empty.style.display = "none";
-          // }
           setTimeout(() => {
             this.blogs = res.data.data.slice(0, 10);
           }, 500);
@@ -130,30 +124,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "src/components/common/scss/base.scss";
-// @import "src/components/common/scss/animate.scss";
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 10s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-.slide-fade-enter-active {
-  transition: all 3s ease;
-}
-.slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-.slide-fade-enter,
-.slide-fade-leave-to {
-  transform: translateX(10px);
-  opacity: 0;
-}
-#blog-list {
-  width: 100%;
-  height: 100%;
   @keyframes jackInTheBox {
     from {
       opacity: 0;
@@ -386,6 +356,18 @@ export default {
   .flip {
     animation: flip 1.5s linear infinite;
   }
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+#blog-list {
+  width: 100%;
+  height: 100%;
+
   .header {
     width: 595px;
     height: 184px;
@@ -398,8 +380,6 @@ export default {
       .icon {
         font-size: 100px;
         line-height: 117px;
-        // animation: zoomInLeft 3s linear infinite;
-        // animation-direction: alternate;
         animation-iteration-count: 1;
       }
       .vue {
@@ -407,8 +387,6 @@ export default {
       }
     }
     .title {
-      // animation: zoomInLeft 3s linear infinite;
-      // animation-direction: alternate;
       animation-iteration-count: 1;
       display: inline-block;
       color: #555;
@@ -421,8 +399,6 @@ export default {
     height: 133px;
     margin-top: $margin-all;
     background-color: $background-white;
-    // background: rgba(0, 0, 0, 0.8);
-    // background: rgba(28, 28, 28, .9);
     padding: 7px 7px 7px 7px;
     box-sizing: border-box;
     display: flex;
@@ -430,7 +406,6 @@ export default {
     transition: $hover-bg;
     &:hover {
       background-color: rgba(0, 0, 0, 0.1);
-      // background: rgba(0, 0, 0, 0.9);
       cursor: pointer;
     }
     &:hover #img {
@@ -440,7 +415,6 @@ export default {
       text-decoration: underline;
       transform: translateX(10px);
       opacity: 1 !important;
-      // color: #42b983!important;
     }
     .item-thumb {
       width: 168px;
@@ -448,7 +422,6 @@ export default {
       overflow: hidden;
       #img {
         transition: transform 0.25s linear;
-        //
         height: 100%;
         &:hover {
           cursor: pointer;
@@ -533,7 +506,6 @@ export default {
     font-size: 14px;
     font-family: "Avenir", Helvetica, Arial, sans-serif;
     color: #555;
-    // display: none;
     animation: fadeIn 0.5s linear ;
   }
   .more {
@@ -547,7 +519,6 @@ export default {
     transition: background-color 0.25s linear;
     &:hover {
       background-color: rgba(0, 0, 0, 0.1);
-      // background: rgba(0, 0, 0, 0.9);
       cursor: pointer;
     }
   }

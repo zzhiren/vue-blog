@@ -68,6 +68,7 @@ export default {
       "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
     color: black !important;
     opacity: 0.9;
+    line-height: 40px;
   }
   blockquote {
     p {
@@ -84,7 +85,7 @@ export default {
     /* color: #bc78cd; */
     padding-left: 8px !important;
     font-size: 14px;
-    margin-top: 7px !important;
+    margin-top: 14px !important;
     // margin-bottom: 7px !important;
     background: rgba(0, 0, 0, 0.1);
     border-top-right-radius: 2px;

@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     _initData() {
-      this.$refs.project.style.height = innerHeight - 76 - 63 - 14 - 16 + 'px';
+      // this.$refs.project.style.height = innerHeight - 76 - 63 - 14 - 16 + 'px';
       let date = new Date();
       let timer = date.getTime().toString();
       this.$axios({

@@ -2,7 +2,7 @@
   div.blog
     div.content
       transition(name="fade" appear mode="out-in")
-        keep-alive(include ="bloglist")
+        keep-alive(include ="BlogList")
           router-view 
     div.right-side
       div.right-content
@@ -23,7 +23,7 @@
                 span.index
                 a.a(v-bind:title="'author:' + item.package.publisher.username + '  version:'+item.package.version" v-bind:href="item.package.links.npm" target="_blank")
                   span.package-name {{item.package.name}} 
-        div.tags(ref="tag")
+        div.tags(ref="tag" v-bind:class="{tagsfixed: fixedState}")
           ul.items
             li.item(v-for="(item,index) in tags" @click="_toBlogListByTag(item.name,item.aliasName,item.icon,item.dsc)") 
               Icon.icon(v-if="item.icon != ''" v-bind:type="item.icon")
@@ -35,6 +35,7 @@
 <script>
 import axios from "axios";
 export default {
+  name:'Blog',
   data() {
     return {
       text: "",
@@ -42,6 +43,7 @@ export default {
       from: 0,
       npmList: [],
       animationClass: "",
+      fixedState: false,
       tags: [
         {
           name: "computer",
@@ -198,19 +200,14 @@ export default {
       document.addEventListener('scroll',this._setTagPosition)
     },
     _setTagPosition(){
-      console.log(this.$refs.tag.offsetTop - document.documentElement.scrollTop)
-      let h = this.$refs.tag.offsetTop - document.documentElement.scrollTop;
-      // let h = 0;
-      if(h == 78){
-        this.$refs.tag.style.position = 'fixed';
-        console.log('xxxxxxxxxxxxxxxxxx')
+      let h = document.documentElement.scrollTop;
+      if(h >= 407){
+        this.fixedState = true;
       }else{
-        this.$refs.tag.style.position = 'relative';
+        this.fixedState = false;
       }
     },
     _initNpmData() {
-      console.log('---------------')
-      
       this.$axios({
         method: "get",
         url: "/searchnpm",
@@ -396,12 +393,13 @@ $margin-top: 79px;
         background-color: hsla(0, 0%, 77%, 0.4);
         height: 28px;
         padding: 4px;
+        padding-left: 8px;
         box-sizing: border-box;
         flex: 1;
         outline-color: rgba(255, 255, 255, 0);
         border: 0 !important;
         transition: background-color 0.25s linear;
-        caret-color: red;
+        caret-color: $font-color-blue;
         &::placeholder {
           color: #777;
         }
@@ -515,10 +513,14 @@ $margin-top: 79px;
         }
       }
     }
+    .tagsfixed{
+      position: fixed!important;
+      margin-top: -390px!important;
+    }
     .tags {
       // position: fixed;
       background-color: $background-white;
-      width: 100%;
+      width: 266px;
       height: 358.6px;
       margin-top: 14px;
       padding: 10.66px;

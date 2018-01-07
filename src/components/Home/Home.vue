@@ -21,13 +21,13 @@
             span COLLECTION
       div.main-content
         transition(name="slide-fade" appear mode="out-in")
-          keep-alive(include ="bloglist")
+          keep-alive(include ="BlogList")
             router-view 
-    //- Footer
 </template>
 <script>
 import Footer from '../common/vue/Footer'
 export default {
+  name: 'Home',
   data() {
     return {
       state: 2
@@ -37,19 +37,16 @@ export default {
     Footer,
   },
   methods: {
-    itemActive(state) {
-      // this.state = state;
-    }
   }
 }
 </script>
 <style lang="scss" scoped>
 @import 'src/components/common/scss/base.scss';
-$margin-top: 79px;
+$margin-top: 76.99px;
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
+.fade-enter, .fade-leave-to{
   opacity: 0
 }
 .slide-fade-enter-active {
@@ -58,15 +55,12 @@ $margin-top: 79px;
 .slide-fade-leave-active {
   transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
-.slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active for below version 2.1.8 */ {
+.slide-fade-enter, .slide-fade-leave-to{
   transform: translateX(10px);
   opacity: 0;
 }
 .home{
   width: 100%;
-  // height: 100%;
-  // background-color: rgba(0, 0, 0, 0.2);
   .content{
     width: $width;
     display: flex;
@@ -83,7 +77,7 @@ $margin-top: 79px;
           height: 40px;
           margin-bottom: 8px;
           font-family: 'Asap', sans-serif;
-          font-size: 13px;
+          font-size: 14px;
           line-height: 40px;
           color: #777777;
           font-style: normal;
