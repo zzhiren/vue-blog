@@ -91,7 +91,7 @@ export default {
 }
 body {
   opacity: 1;
-  background: url(./assets/codewhitelight.png) center top;
+  background: url(./assets/codewhite.png) left top;
   background-repeat: repeat-x;
   background-attachment: fixed;
   position: absolute;

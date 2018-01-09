@@ -24,9 +24,36 @@
                 a.a(v-bind:title="'author:' + item.package.publisher.username + '  version:'+item.package.version" v-bind:href="item.package.links.npm" target="_blank")
                   span.package-name {{item.package.name}}
             ul.ul(v-if="state == 0")
-              li.li(v-for="(item,index) in array" v-bind:key="index")
+              li.li
                 span.index
-                span.package-name.loading  1
+                span.package-name.loading.one  1
+              li.li
+                span.index
+                span.package-name.loading.two  1
+              li.li
+                span.index
+                span.package-name.loading.three  1
+              li.li
+                span.index
+                span.package-name.loading.one  1
+              li.li
+                span.index
+                span.package-name.loading.two  1
+              li.li
+                span.index
+                span.package-name.loading.three  1
+              li.li
+                span.index
+                span.package-name.loading.one  1
+              li.li
+                span.index
+                span.package-name.loading.two  1
+              li.li
+                span.index
+                span.package-name.loading.three  1
+              li.li
+                span.index
+                span.package-name.loading.one  1
         div.tags(ref="tag" v-bind:class="{tagsfixed: fixedState}")
           ul.items
             li.item(v-for="(item,index) in tags" @click="_toBlogListByTag(item.name,item.aliasName,item.icon,item.dsc)") 
@@ -223,7 +250,7 @@ export default {
         }
       }).then(res => {
         this.npmList = res.data.objects;
-        // this.state = 1;
+        this.state = 1;
       });
     },
     _searchNPM() {
@@ -378,24 +405,56 @@ $margin-top: 79px;
   transform: translateX(10px);
   opacity: 0;
 }
-.loading{
-  background: red;
+@keyframes one {
+  from {
+    width: 80px;
+  }
+  to {
+    width: 200px;
+  }
+}
+@keyframes two {
+  from {
+    width: 190px;
+  }
+  to {
+    width: 80px;
+  }
+}
+@keyframes three {
+  from {
+    width: 60px;
+  }
+  to {
+    width: 200px;
+  }
+}
+.one {
   animation-fill-mode: initial;
+  animation: one .6s infinite linear;
+  animation-direction: alternate;
+}
+.two {
+  animation-fill-mode: initial;
+  animation: two .5s infinite linear;
+  animation-direction: alternate;
+}
+.three {
+  animation-fill-mode: initial;
+  animation: three 1s infinite linear;
+  animation-direction: alternate;
+}
+.loading {
+  background: #e7e7e7;
+  opacity: .8;
   width: 20px;
-  height: 20px;
+  // height: 20px;
+  color: rgba(200, 200, 200, 0);
   display: inline-block;
   // margin: 0 auto;
-  animation: loading 0.5s infinite linear;
-  animation-direction:alternate;
+  border-radius: 3px;
 }
-@keyframes loading {
-  from{
-    width: 20;
-  }
-  to{
-    width: 180px;
-  }
-}
+
 .blog {
   display: flex;
   .content {

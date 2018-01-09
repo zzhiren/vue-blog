@@ -4,18 +4,18 @@
       p.item-icon
         img(v-if="item.projectIcon == 'Vue'" src="./../../assets/vue.svg" width="64")
         Icon.icon(v-if="item.projectIcon" v-bind:type="item.projectIcon")
-      p.item-title(v-html="item.projectName")
-      p.item-dsc {{item.projectDsc}}
+      p.item-title(v-html="item.name")
+      p.item-dsc {{item.description}}
       p.item-github
         span.meta
           Icon.star(type="android-star")  
-          span.num {{item.star}}
+          span.num {{item.stargazers_count}}
         span.meta
           Icon.fork(type="fork-repo") 
-          span.num {{item.fork}}
+          span.num {{item.forks_count}}
         span.meta
           Icon.issue(type="ios-information-outline") 
-          span.num {{item.issue}}
+          span.num {{item.open_issues}}
 </template>
 <script>
 export default {
