@@ -18,11 +18,15 @@
                 path(fill="#FFF" d="M1,1v4h2v-3h1v3h1v-4h1v5h2v-4h1v2h-1v1h2v-4h1v4h2v-3h1v3h1v-3h1v3h1v-4" data-reactid="11")
             span.span Build amazing things!
           div.list
-            ul.ul
+            ul.ul(v-if="npmList.length > 0")
               li.li(v-for="(item,index) in npmList" v-bind:key="index")
                 span.index
                 a.a(v-bind:title="'author:' + item.package.publisher.username + '  version:'+item.package.version" v-bind:href="item.package.links.npm" target="_blank")
-                  span.package-name {{item.package.name}} 
+                  span.package-name {{item.package.name}}
+            ul.ul(v-if="state == 0")
+              li.li(v-for="(item,index) in array" v-bind:key="index")
+                span.index
+                span.package-name.loading  1
         div.tags(ref="tag" v-bind:class="{tagsfixed: fixedState}")
           ul.items
             li.item(v-for="(item,index) in tags" @click="_toBlogListByTag(item.name,item.aliasName,item.icon,item.dsc)") 
@@ -35,13 +39,15 @@
 <script>
 import axios from "axios";
 export default {
-  name:'Blog',
+  name: "Blog",
   data() {
     return {
       text: "",
       value: "Vue",
       from: 0,
       npmList: [],
+      array: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      state: 0,
       animationClass: "",
       fixedState: false,
       tags: [
@@ -181,7 +187,7 @@ export default {
       ]
     };
   },
-  
+
   computed: {
     _value() {
       if (this.text == "") {
@@ -193,17 +199,17 @@ export default {
   },
   mounted() {
     this._initNpmData();
-    this._addEventListener()
+    this._addEventListener();
   },
   methods: {
-    _addEventListener(){
-      document.addEventListener('scroll',this._setTagPosition)
+    _addEventListener() {
+      document.addEventListener("scroll", this._setTagPosition);
     },
-    _setTagPosition(){
+    _setTagPosition() {
       let h = document.documentElement.scrollTop;
-      if(h >= 407){
+      if (h >= 407) {
         this.fixedState = true;
-      }else{
+      } else {
         this.fixedState = false;
       }
     },
@@ -217,6 +223,7 @@ export default {
         }
       }).then(res => {
         this.npmList = res.data.objects;
+        // this.state = 1;
       });
     },
     _searchNPM() {
@@ -333,7 +340,7 @@ export default {
         );
       }
     },
-    _router(name,aliasName, icon, dsc, animation) {
+    _router(name, aliasName, icon, dsc, animation) {
       let tagAliasName = aliasName;
       let tagName = name;
       let tagIcon = icon;
@@ -341,7 +348,7 @@ export default {
       let animationClass = animation;
       this.$router.push({
         name: "BlogListByTag",
-        params: { tagName, tagAliasName,tagIcon, tagDsc, animationClass }
+        params: { tagName, tagAliasName, tagIcon, tagDsc, animationClass }
       });
     }
   }
@@ -371,7 +378,24 @@ $margin-top: 79px;
   transform: translateX(10px);
   opacity: 0;
 }
-
+.loading{
+  background: red;
+  animation-fill-mode: initial;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  // margin: 0 auto;
+  animation: loading 0.5s infinite linear;
+  animation-direction:alternate;
+}
+@keyframes loading {
+  from{
+    width: 20;
+  }
+  to{
+    width: 180px;
+  }
+}
 .blog {
   display: flex;
   .content {
@@ -513,9 +537,9 @@ $margin-top: 79px;
         }
       }
     }
-    .tagsfixed{
-      position: fixed!important;
-      margin-top: -390px!important;
+    .tagsfixed {
+      position: fixed !important;
+      margin-top: -390px !important;
     }
     .tags {
       // position: fixed;

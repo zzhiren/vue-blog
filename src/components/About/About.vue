@@ -158,7 +158,7 @@ export default {
           height: 210px;
           opacity: 1;
           animation-name: bg-a;
-          animation-duration: 20s;
+          animation-duration: 30s;
           animation-timing-function: linear;
           animation-iteration-count: infinite;
           animation-direction: alternate;
@@ -169,7 +169,7 @@ export default {
           height: 210px;
           opacity: 0.5;
           animation-name: bg-b;
-          animation-duration: 30s;
+          animation-duration: 40s;
           animation-timing-function: linear;
           animation-iteration-count: infinite;
           animation-direction: alternate;
@@ -178,54 +178,75 @@ export default {
 
         @keyframes bg-a {
           0% {
-            margin-top: 0;
-            margin-left: 0;
+            // margin-top: 0;
+            transform: translateY(0);
+            // margin-left: 0;
           }
           15% {
-            margin-top: 0;
-            margin-left: -30px;
+            transform: translateY(-5px);
+            // margin-left: -30px;
+            transform: translateX(-30px);
           }
           35% {
-            margin-top: 0;
-            margin-left: -60px;
+            // margin-top: 0;
+            transform: translateY(-10px);
+            // margin-left: -60px;
+            transform: translateX(-60px);
           }
           51% {
-            margin-top: -18px;
-            margin-left: -90px;
+            // margin-top: -18px;
+            transform: translateY(-18px);
+            // margin-left: -90px;
+            transform: translateX(-90px);
           }
           67% {
-            margin-top: -36px;
-            margin-left: -60px;
+            // margin-top: -36px;
+            transform: translateY(-36px);
+            // margin-left: -60px;
+            transform: translateX(-60px);
           }
           85% {
-            margin-top: -72px;
-            margin-left: -30px;
+            // margin-top: -72px;
+            transform: translateY(-72px);
+            // margin-left: -30px;
+            transform: translateX(-30px);
           }
           100% {
-            margin-top: -105px;
-            margin-left: 0;
+            // margin-top: -105px;
+            transform: translateY(-105px);
+            // margin-left: 0;
           }
         }
         @keyframes bg-b {
           0% {
-            margin-top: 0;
-            margin-left: 0;
+            // margin-top: 0;
+            transform: translateX(0);
+            // margin-left: 0;
+            transform: translateY(0);
           }
           25% {
-            margin-top: -105px;
-            margin-left: -202.5px;
+            // margin-top: -105px;
+            transform: translateY(-50px);
+            // margin-left: -202.5px;
+            transform: translateX(-100px);
           }
           50% {
-            margin-top: 0;
-            margin-left: -202.5px;
+            // margin-top: 0;
+            transform: translateY(0);
+            // margin-left: -202.5px;
+            transform: translateX(-200px);
           }
           75% {
-            margin-top: -105px;
-            margin-left: -303.75px;
+            // margin-top: -105px;
+            transform: translateY(-105px);
+            // margin-left: -303.75px;
+            transform: translateX(-300px);
           }
           100% {
-            margin-top: -105px;
-            margin-left: -405px;
+            // margin-top: -105px;
+            transform: translateY(-105px);
+            // margin-left: -405px;
+            // transform: translateX(-405px);
           }
         }
       }
