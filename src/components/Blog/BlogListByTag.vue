@@ -117,7 +117,7 @@ export default {
       });
     },
     _toBlogDetils(id) {
-      this.$router.push({ name: "BlogDetils", params: { id } });
+      this.$router.push({ name: "BlogDetails", params: { id } });
     }
   }
 };

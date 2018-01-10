@@ -16,7 +16,7 @@ const Home = () => import('@/components/Home/Home');
 const Blog = () => import('@/components/Blog/Blog');
 const BlogList = () => import('@/components/Blog/BlogList');
 const BlogListByTag = () => import('@/components/Blog/BlogListByTag');
-const BlogDetils = () => import('@/components/Blog/BlogDetils');
+const BlogDetails = () => import('@/components/Blog/BlogDetails');
 const Music = () => import('@/components/Music/Music');
 const About = () => import('@/components/About/About');
 const Collection = () => import('@/components/Collection/Collection');
@@ -47,9 +47,9 @@ const router = new Router({
             },
             
             {
-              path: 'blogdetils/:id',
-              name: 'BlogDetils',
-              component: BlogDetils,
+              path: 'blogdetails/:id',
+              name: 'BlogDetails',
+              component: BlogDetails,
             },
             {
               path: 'bloglistbytag/:tagName/:tagAliasName/:tagIcon/:tagDsc/:animationClass',
