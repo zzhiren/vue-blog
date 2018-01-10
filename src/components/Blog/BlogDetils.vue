@@ -1,7 +1,21 @@
 <template lang="pug">
   div.blog-detils
-    h3.title(v-html="data.title")
-    p(v-html="compiledMarkdown")
+    div.markdown
+      h3.title(v-html="data.title")
+      p(v-html="compiledMarkdown")
+    div.share
+      div.share-item.hover-deepgreen
+      div.share-item
+      div.share-item
+      div.share-item
+      div.share-item
+      div.share-item
+      div.share-item
+      div.share-item
+      div.share-item
+      div.share-item
+      div.share-item
+      div.share-item
 </template>
 <script>
 import axios from "axios";
@@ -42,7 +56,29 @@ export default {
 <style lang="scss">
 @import "src/components/common/scss/base.scss";
 
-.blog-detils {
+.blog-detils{
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+}
+
+.share{
+    margin-top: 14px;
+    widht: 595px;
+    height: 53.17px;
+    background-color: $background-white;
+    padding: 11.2px;
+    display: flex;
+    .share-item{
+      width: 42px;
+      height: 100%;
+      // background: red;
+      margin-right: 6.230px;
+      &:last-child{
+        margin-right: 0;
+      }
+    }
+  }
+.markdown {
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   color: black;
@@ -59,6 +95,7 @@ export default {
     letter-spacing: 1px;
     margin-bottom: 20px;
   }
+  
   h1,
   h2,
   h3,

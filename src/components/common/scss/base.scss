@@ -18,7 +18,7 @@ $blog-list-meta-font-size: 12.6px;
   color: red;
 }
 .orange{
-  color: rgb(255,128,0);
+  color: #FF8000;
 }
 .yellow{
   color: yellow;
@@ -31,7 +31,7 @@ $blog-list-meta-font-size: 12.6px;
   color: #0088f5;
 }
 .purple{
-  color:rgb(128,0,255);
+  color:#8000FF;
 }
 .white{
   color:white;
@@ -50,4 +50,66 @@ $blog-list-meta-font-size: 12.6px;
 }
 .opacity{
   opacity: .8!important;
+}
+
+.hover-red{
+  transition: background .2s linear;
+  &:hover{
+    background: red;
+  }
+}
+.hover-orange{
+  transition: background .2s linear;
+  &:hover{
+    background: #FF8000;
+  }
+}
+.hover-deepgreen{
+  transition: background .2s linear;
+  &:hover{
+    background: green;
+  }
+}
+.hover-yellow{
+  transition: background .2s linear;
+  &:hover{
+    background: yellow;
+  }
+}
+.hover-green{
+  transition: background .2s linear;
+  &:hover{
+    background: #42b983;
+  }
+}
+
+.hover-blue{
+  transition: background .2s linear;
+  &:hover{
+    background: #0088f5;
+  }
+}
+.hover-purple{
+  transition: background .2s linear;
+  &:hover{
+    background: #8000FF;
+  }
+}
+.hover-white{
+  transition: background .2s linear;
+  &:hover{
+    background: white;
+  }
+}
+.hover-pink{
+  transition: background .2s linear;
+  &:hover{
+    background: pink;
+  }
+}
+.hover-coffee{
+  transition: background .2s linear;
+  &:hover{
+    background: #A52A2A;
+  }
 }

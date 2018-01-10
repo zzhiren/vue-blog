@@ -260,19 +260,18 @@ export default {
       transition: background 0.5s linear;
       z-index: 555;
       &:hover .wechat {
-        opacity: 0.7;
+        opacity: 0.8;
       }
       &:hover .simple-desc {
         opacity: 0.2;
       }
-
       .head-pic {
-        width: 90px;
-        height: 90px;
+        width: 100px;
+        height: 100px;
         border-radius: 96px;
-        border: 3px solid rgba(255, 255, 255, 0.5);
-        margin-top: - 50px;
-        margin-left: 68px;
+        border: 5px solid rgba(255, 255, 255, 0.5);
+        margin-top: - 55px;
+        margin-left: 63px;
         z-index: 2;
         overflow: hidden;
         .pic {
@@ -340,7 +339,7 @@ export default {
         margin-right: -10px;
         font-family: "Kite One", sans-serif;
       }
-      .food{
+      .food {
         font-size: 14px;
         color: black;
         letter-spacing: 1px;
@@ -404,7 +403,8 @@ export default {
             margin-top: -6px;
             line-height: 10px;
             margin-left: 1px;
-          }&::after {
+          }
+          &::after {
             content: url(../../assets/xiaohuangji.svg);
             vertical-align: middle;
             display: inline-block;

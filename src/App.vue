@@ -2,10 +2,10 @@
 div#app
   vue-particles(
         color="#dedede"
-        :particleOpacity="0.8"
+        :particleOpacity=".7"
         :particlesNumber="60"
         shapeType="circle"
-        :particleSize="12"
+        :particleSize="14"
         linesColor="#dedede"
         :linesWidth="2"
         :lineLinked="true"
@@ -22,7 +22,7 @@ div#app
       keep-alive(include ="Home")
         router-view.home-router
     
-  Footer
+  Footer(v-show="state == 1")
 </template>
 
 <script>
@@ -31,9 +31,34 @@ import Footer from "./components/common/vue/Footer";
 
 export default {
   name: "app",
+  data(){
+    return{
+      state: 1
+    }
+  },
   components: {
     TopHeader,
     Footer
+  },
+  beforeRouteUpdate (to, from, next) {
+    this.state = 1
+    console.log(11111111111111111111)
+  },
+  watch:{
+    '$route': 'watchFooter'
+  },
+  created(){
+    setTimeout(() => {
+      this.state == 0
+    }, 10000);
+  },
+  mounted(){
+    console.log(1111111111111)
+  },
+  methods:{
+    watchFooter(){
+      this.state = 1
+    }
   }
 };
 </script>

@@ -2,8 +2,8 @@
   div.project(ref="project")
     a.project-item(target="_blank" v-for="(item,index) in projects" v-bind:key="index" v-bind:href="item.projectUrl")
       p.item-icon
-        img(v-if="item.projectIcon == 'Vue'" src="./../../assets/vue.svg" width="64")
-        Icon.icon(v-if="item.projectIcon" v-bind:type="item.projectIcon")
+        img(v-if="item.icon == 'Vue'" src="./../../assets/vue.svg" width="64")
+        Icon.icon(v-if="item.icon != 'Vue'" v-bind:type="item.icon")
       p.item-title(v-html="item.name")
       p.item-dsc {{item.description}}
       p.item-github

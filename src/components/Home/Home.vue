@@ -9,20 +9,19 @@
           router-link.nav-item(tag="div" to="/about") 
             Icon.icon-font(type="android-person") 
             span ABOUT
-          router-link.nav-item(tag="div" to="/music") 
-            Icon.icon-font(type="headphone") 
-            span MUSIC
+          //- router-link.nav-item(tag="div" to="/music") 
+          //-   Icon.icon-font(type="headphone") 
+          //-   span MUSIC
           router-link.nav-item(tag="div" to="/project") 
             Icon.icon-font(type="folder") 
             span PROJECT
-          //- router-link.nav-item(tag="div" to="/" v-on:click.native="itemActive(6)") GitHub
-          router-link.nav-item(tag="div" to="/collection") 
-            Icon.icon-font(type="star") 
-            span COLLECTION
+          //- router-link.nav-item(tag="div" to="/collection") 
+          //-   Icon.icon-font(type="star") 
+          //-   span COLLECTION
       div.main-content
         transition(name="slide-fade" appear mode="out-in")
           keep-alive(include ="BlogList")
-            router-view 
+            router-view
 </template>
 <script>
 import Footer from '../common/vue/Footer'
