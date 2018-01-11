@@ -3,10 +3,6 @@
     div.markdown
       h3.title(v-html="data.title")
       p(v-html="compiledMarkdown")
-    //- div.share
-    //-   div.share-item.hover-deepgreen
-    //-     span.icon
-    //-       img(src="../../assets/wechat.svg")
     div.comment
       div.tools
         div.total
@@ -36,8 +32,113 @@
                 p 我再使用富文本编辑器vue-quill-editor的时候， 使用图片上传发现它是把图片转为base后插在文本中， 然后我直接是提交了，但发现太大了在查询的时候很慢。我再使用富文本编辑器vue-quill-editor的时候， 使用图片上传发现它是把图片转为base后插在文本中， 然后我直接是提交了，但发现太大了在查询的时候很慢。
               div.cm-footer
                 span 2018/01/01 下午
-        div.post-box
-          
+          li.comment-item
+            div.cm-avatar
+              img.cm-avatar-img(src="../../assets/me960x960.jpg")
+            div.cm-body
+              div.cm-heaer
+                a.user-name() Zzhiren
+                Icon.os-icon(type="social-windows")
+                //- Icon(type="social-apple")
+                span.user-os Windows 10
+                Icon.os-icon(type="earth")
+                span.user-browser Chrome
+              div.cm-content 
+                p 我再使用富文本编辑器vue-quill-editor的时候， 使用图片上传发现它是把图片转为base后插在文本中， 然后我直接是提交了，但发现太大了在查询的时候很慢。我再使用富文本编辑器vue-quill-editor的时候， 使用图片上传发现它是把图片转为base后插在文本中， 然后我直接是提交了，但发现太大了在查询的时候很慢。
+              div.cm-footer
+                span 2018/01/01 下午
+          //- div.xxx
+      div.post-box
+        div.user
+          input.input(v-model="userName" placeholder="name*")
+          input.input(v-model="userEmail" placeholder="email*")
+          input.input.focus-black(v-model="userSite" placeholder="site")
+        div.editor-box
+          div.user-avatar-img
+            img.img(src="../../assets/me960x960.jpg")
+            div.avatar-list
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-item
+                img.avatar-img(src="../../assets/me960x960.jpg")
+          div.markdown-editor
+            textarea.textarea(placeholder="show me your think" oninput="this.style.height = this.scrollHeight+'px'")
+            div.editor-tools
+              div.submit 发布
 </template>
 <script>
 import axios from "axios";
@@ -49,7 +150,13 @@ export default {
       data: "",
       content: "",
       os: "",
-      browser: ""
+      browser: "",
+      userName: "",
+      userEmail: "",
+      userSite: "",
+      emotions: [],
+      emotion: "[表情]",
+      emotionsMap: {}
     };
   },
   computed: {
@@ -63,6 +170,9 @@ export default {
     this._clientBrowser();
   },
   methods: {
+    map: function(data) {
+      this.emotionsMap = data;
+    },
     _initData() {
       this.$axios({
         method: "post",
@@ -77,10 +187,10 @@ export default {
       });
     },
     _clientOS() {
-      var sUserAgent = navigator.userAgent;
-      var isWin =
+      let sUserAgent = navigator.userAgent;
+      let isWin =
         navigator.platform == "Win32" || navigator.platform == "Windows";
-      var isMac =
+      let isMac =
         navigator.platform == "Mac68K" ||
         navigator.platform == "MacPPC" ||
         navigator.platform == "Macintosh" ||
@@ -141,35 +251,37 @@ export default {
 <style lang="scss">
 @import "src/components/common/scss/base.scss";
 
+$bg: hsla(0, 0%, 77%, 0.3);
+$hover-bg: hsla(0, 0%, 57%, 0.2);
 $height: 24.48px;
-
+.xxx {
+  clear: both;
+}
 .blog-details {
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   .comment {
     width: 595px;
-    height: 600px;
     margin-top: 14px;
     background: $background-white;
     padding: 14px;
+    position: relative;
     .tools {
       width: 100%;
       height: 39.46px;
-      // background: red;
       border-bottom: 1px solid rgba(197, 197, 197, 0.4);
       margin-bottom: 14px;
       .total {
         width: 200px;
-        height: $height;
         font-family: "Asap", sans-serif;
         float: left;
         display: flex;
         font-size: 13px;
 
         div {
-          background-color: rgba(0, 0, 0, 0.1);
-          height: $height;
+          background-color: $bg;
           line-height: $height;
+          height: $height;
           padding-left: 7px;
           padding-right: 7px;
           color: #555;
@@ -178,7 +290,7 @@ $height: 24.48px;
           margin-right: 7px;
           transition: background-color 0.4s linear;
           &:hover {
-            background-color: rgba(0, 0, 0, 0.2);
+            background-color: $hover-bg;
             cursor: pointer;
             color: black;
           }
@@ -194,7 +306,7 @@ $height: 24.48px;
           padding: 0;
           transition: background-color 0.4s linear;
           &:hover {
-            background-color: rgba(0, 0, 0, 0.2);
+            background-color: $hover-bg;
             cursor: pointer;
             color: black;
           }
@@ -217,15 +329,16 @@ $height: 24.48px;
       }
     }
     .list-box {
-      // width: 595px;
       .comment-list {
+        overflow: hidden;
         width: 100%;
         .comment-item {
+          margin-bottom: 14px;
           position: relative;
           float: right;
           width: 546px;
           // height: 154px;
-          background-color: rgba(0, 0, 0, 0.1);
+          background-color: $bg;
           padding-left: 21px;
           padding-top: 8.4px;
           padding-bottom: 8.4px;
@@ -292,6 +405,146 @@ $height: 24.48px;
               height: 15.56px;
               text-align: right;
               color: rgba(0, 0, 0, 0.38);
+            }
+          }
+        }
+      }
+    }
+    .post-box {
+      width: 100%;
+      border-top: 1px dashed hsla(0, 0%, 47%, 0.4);
+      padding-top: 10.66px;
+      .user {
+        width: 100%;
+        height: 27.99px;
+        // background: red;
+        margin-bottom: 10.66px;
+        padding-left: 56.66px;
+        display: flex;
+        .input {
+          color: #555;
+          flex: 1;
+          margin-right: 14px;
+          background-color: $bg;
+          padding: 4px;
+          padding-left: 8px;
+          box-sizing: border-box;
+          flex: 1;
+          outline-color: rgba(255, 255, 255, 0);
+          border: 0 !important;
+          transition: background-color 0.25s linear;
+          caret-color: red;
+          &::placeholder {
+            color: #777;
+          }
+          &:hover {
+            background-color: $hover-bg;
+          }
+          &:last-child {
+            margin-right: 0;
+          }
+          &:focus {
+            background-color: $hover-bg;
+          }
+        }
+        .focus-black {
+          caret-color: #555 !important;
+        }
+      }
+      .editor-box {
+        width: 100%;
+        // height: 107.78px;
+        display: flex;
+        .user-avatar-img {
+          width: 42.66px;
+          height: 100%;
+          margin-right: 14px;
+          position: relative;
+          .img {
+            width: 42.66px;
+            height: 42.66px;
+          }
+          .avatar-list {
+            overflow-x: hidden;
+            width: 435px;
+            padding: 7px;
+            max-height: 200px;
+            padding-right: 0 !important;
+            max-height: 200px;
+            background: white;
+            // background: hsla(0, 0%, 77%, 0.9);;
+            position: absolute;
+            display: flex;
+            flex-wrap: wrap;
+            &::-webkit-scrollbar {
+              width: 4px;
+              height: 16px;
+              background-color: white;
+              opacity: 1;
+              // display: none;
+            }
+            // top: 10px;
+            bottom: 60px;
+            left: -184px;
+            .avatar-item {
+              width: 40px;
+              height: 40px;
+              margin-right: 7px;
+              margin-bottom: 7px;
+              .avatar-img {
+                width: 40px;
+                height: 40px;
+              }
+            }
+          }
+        }
+        .markdown-editor {
+          flex: 1;
+          height: 100%;
+          // background-color: rgba(0, 0, 0, 0.1);
+          background-color: $bg;
+
+          .textarea {
+            border: none;
+            flex: 1;
+            min-height: 80px;
+            max-height: 200px;
+            border-radius: 2px;
+            resize: none;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0);
+            outline-color: rgba(255, 255, 255, 0);
+            padding: 10px;
+            transition: background-color 0.25s linear;
+            caret-color: red;
+            font-size: 12px;
+            color: #555;
+            &:hover {
+              background-color: hsla(0, 0%, 77%, 0.1);
+            }
+            &::placeholder {
+              color: #777;
+            }
+          }
+          .editor-tools {
+            width: 100%;
+            height: 28px;
+            background-color: $bg;
+            margin-top: -4px;
+            .submit {
+              width: 98px;
+              background-color: hsla(0, 0%, 77%, 0.7);
+              height: 100%;
+              float: right;
+              text-align: center;
+              line-height: 30px;
+              letter-spacing: 3px;
+              font-size: 14px;
+              transition: background-color 0.2s linear;
+              &:hover {
+                background-color: hsla(0, 0%, 69%, 0.8);
+                cursor: pointer;
+              }
             }
           }
         }
@@ -366,7 +619,7 @@ $height: 24.48px;
     font-size: 14px;
     margin-top: 14px !important;
     // margin-bottom: 7px !important;
-    background: rgba(0, 0, 0, 0.1);
+    background: $bg;
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
     height: 28px;
@@ -376,7 +629,8 @@ $height: 24.48px;
   }
   pre {
     // background: #21252b;
-    background: rgba(0, 0, 0, 0.1);
+
+    background: $bg;
     border-radius: 2px;
     padding: 7px 7px;
     box-sizing: border-box;
