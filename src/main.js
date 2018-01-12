@@ -6,13 +6,11 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import iView from 'iview'
 import './components/common/css/iview.css'
 import VueParticles from 'vue-particles'
-import VueSinaEmotion from 'vue-sina-emotion';
 
 Vue.config.productionTip = false;
 Vue.use(VueAwesomeSwiper);
 Vue.use(iView);
 Vue.use(VueParticles);
-Vue.component('vue-sina-emotion', VueSinaEmotion);
 
 Vue.prototype.$axios = axios;
 

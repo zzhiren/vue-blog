@@ -64,8 +64,8 @@ export default {
       }
     },
     _initData() {
-      var date = new Date();
-      var timer = date.getTime().toString();
+      let date = new Date();
+      let timer = date.getTime().toString();
       this.$axios({
         method: "get",
         url: "/getpostedblogs",

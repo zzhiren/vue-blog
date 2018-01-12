@@ -57,84 +57,15 @@
           div.user-avatar-img
             img.img(src="../../assets/me960x960.jpg")
             div.avatar-list
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
-              div.avatar-item
-                img.avatar-img(src="../../assets/me960x960.jpg")
+              div.avatar-items(v-if="avatarList.length > 0")
+                transition-group(name="cell" tag="p")
+                  li.avatar-item(v-for="(item,index) in avatarList" v-bind:key="index")
+                    img.avatar-img(v-bind:src="item")
+              div.btn
+                div.avatar-btn(@click="_chooseSex(0)" v-bind:class="{active: sexState == 0}")
+                  Icon.icon.blue(type="male")
+                div.avatar-btn(@click="_chooseSex(1)" v-bind:class="{active: sexState == 1}")
+                  Icon.icon.hot-pink.female(type="female")
           div.markdown-editor
             textarea.textarea(placeholder="show me your think" oninput="this.style.height = this.scrollHeight+'px'")
             div.editor-tools
@@ -156,7 +87,11 @@ export default {
       userSite: "",
       emotions: [],
       emotion: "[表情]",
-      emotionsMap: {}
+      emotionsMap: {},
+      sexState: 0,
+      male: [],
+      female: [],
+      avatarList: []
     };
   },
   computed: {
@@ -168,10 +103,39 @@ export default {
     this._initData();
     this._clientOS();
     this._clientBrowser();
+    this._getAvatarList();
   },
   methods: {
-    map: function(data) {
-      this.emotionsMap = data;
+    _getAvatarList() {
+      let date = new Date();
+      let timer = date.getTime().toString();
+      this.$axios({
+        method: "get",
+        url: "/getavatarlist",
+        params: {
+          t: timer
+        }
+      }).then(res => {
+        console.log(res.data.data);
+        this.male = res.data.data[0].list.male;
+        this.female = res.data.data[0].list.female;
+        this.avatarList = res.data.data[0].list.male;
+      });
+    },
+    _chooseSex(value) {
+      // this.sexState = value;
+      // this.avatarList = [];
+      // if (value == 0) {
+      //   // setTimeout(() => {
+      //     this.avatarList = this.male;
+          
+      //   // }, 1);
+      // } else if (value == 1) {
+      //   setTimeout(() => {
+      //     this.avatarList = this.female;
+      //   }, 1);
+      // }
+      this.avatarList = _.shuffle(this.avatarList)
     },
     _initData() {
       this.$axios({
@@ -254,8 +218,23 @@ export default {
 $bg: hsla(0, 0%, 77%, 0.3);
 $hover-bg: hsla(0, 0%, 57%, 0.2);
 $height: 24.48px;
-.xxx {
-  clear: both;
+
+.cell-move {
+  transition: transform 1s;
+}
+
+.list-complete-item {
+  transition: all 1s;
+  display: inline-block;
+  margin-right: 10px;
+}
+.list-complete-enter, .list-complete-leave-to
+/* .list-complete-leave-active for below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.list-complete-leave-active {
+  position: absolute;
 }
 .blog-details {
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
@@ -465,36 +444,116 @@ $height: 24.48px;
             height: 42.66px;
           }
           .avatar-list {
-            overflow-x: hidden;
-            width: 435px;
-            padding: 7px;
-            max-height: 200px;
+            width: 525px;
+            // padding: 7px;
+
+            height: 155px;
             padding-right: 0 !important;
             max-height: 200px;
-            background: white;
-            // background: hsla(0, 0%, 77%, 0.9);;
-            position: absolute;
             display: flex;
-            flex-wrap: wrap;
-            &::-webkit-scrollbar {
-              width: 4px;
-              height: 16px;
-              background-color: white;
-              opacity: 1;
-              // display: none;
-            }
-            // top: 10px;
-            bottom: 60px;
-            left: -184px;
-            .avatar-item {
-              width: 40px;
-              height: 40px;
-              margin-right: 7px;
-              margin-bottom: 7px;
-              .avatar-img {
-                width: 40px;
-                height: 40px;
+            flex-direction: column;
+            background: hsla(0, 0%, 87%, 0.9);
+            position: absolute;
+            top: -40px;
+            left: 45px;
+            @-webkit-keyframes zoomInLeft {
+              from {
+                opacity: 0;
+                -webkit-transform: scale3d(0.1, 0.1, 0.1)
+                  translate3d(-1000px, 0, 0);
+                transform: scale3d(0.1, 0.1, 0.1) translate3d(-1000px, 0, 0);
+                -webkit-animation-timing-function: cubic-bezier(
+                  0.55,
+                  0.055,
+                  0.675,
+                  0.19
+                );
+                animation-timing-function: cubic-bezier(
+                  0.55,
+                  0.055,
+                  0.675,
+                  0.19
+                );
               }
+              60% {
+                opacity: 1;
+                -webkit-transform: scale3d(0.475, 0.475, 0.475)
+                  translate3d(10px, 0, 0);
+                transform: scale3d(0.475, 0.475, 0.475) translate3d(10px, 0, 0);
+                -webkit-animation-timing-function: cubic-bezier(
+                  0.175,
+                  0.885,
+                  0.32,
+                  1
+                );
+                animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+              }
+            }
+            .avatar-items {
+              // animation: zoomInLeft 1s;
+              overflow-x: hidden;
+              display: flex;
+              flex-wrap: wrap;
+              margin-top: 7px;
+              margin-left: 7px;
+              flex: 1;
+              &::-webkit-scrollbar {
+                width: 4px;
+                height: 16px;
+                background: hsla(0, 0%, 77%, 0.9);
+                opacity: 1;
+                // display: none;
+              }
+              &::-webkit-scrollbar-track {
+                // -webkit-box-shadow: inset 0 0 6px white;
+                border-radius: 10px;
+                background: hsla(0, 0%, 77%, 0.9);
+                display: block;
+              }
+              &::-webkit-scrollbar-thumb {
+                border-radius: 10px; // -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
+                // background-color: rgba(150, 150, 150, 0.9);
+                background-color: black;
+                &:hover {
+                  background-color: #0088f5;
+                }
+              }
+              .avatar-item {
+                $size: 50px;
+                width: $size;
+                height: $size;
+                margin-right: 7px;
+                margin-bottom: 7px;
+                .avatar-img {
+                  width: $size;
+                  height: $size;
+                }
+              }
+            }
+            .btn {
+              height: 30px;
+              width: 100%;
+              background: hsla(0, 0%, 77%, 0.9);
+              bottom: 0;
+              display: flex;
+              .active {
+                background: rgba(0, 0, 0, 0.3);
+              }
+              .female {
+                font-size: 17px !important;
+              }
+              .avatar-btn {
+                flex: 1;
+                text-align: center;
+                line-height: 35px;
+                &:hover {
+                  cursor: pointer;
+                }
+                .icon {
+                  font-size: 15px;
+                }
+              }
+              // margin-left: -7px;
             }
           }
         }
@@ -503,7 +562,6 @@ $height: 24.48px;
           height: 100%;
           // background-color: rgba(0, 0, 0, 0.1);
           background-color: $bg;
-
           .textarea {
             border: none;
             flex: 1;
@@ -552,7 +610,6 @@ $height: 24.48px;
     }
   }
 }
-
 .share {
   margin-top: 14px;
   widht: 595px;
@@ -564,6 +621,7 @@ $height: 24.48px;
     width: 42px;
     height: 100%;
     // background: red;
+
     margin-right: 6.23px;
     &:last-child {
       margin-right: 0;
@@ -590,7 +648,6 @@ $height: 24.48px;
     letter-spacing: 1px;
     margin-bottom: 20px;
   }
-
   h1,
   h2,
   h3,
@@ -609,8 +666,7 @@ $height: 24.48px;
   }
   p {
     color: #abb2bf;
-    margin-bottom: 10px !important;
-    // border-left: 2px solid #3d96e9;
+    margin-bottom: 10px !important; // border-left: 2px solid #3d96e9;
   }
   blockquote > p {
     color: #42b983;
@@ -629,7 +685,6 @@ $height: 24.48px;
   }
   pre {
     // background: #21252b;
-
     background: $bg;
     border-radius: 2px;
     padding: 7px 7px;
@@ -642,6 +697,7 @@ $height: 24.48px;
     overflow-x: auto;
     &::-webkit-scrollbar {
       width: 5px;
+
       height: 7px;
       background-color: white;
       opacity: 1;
