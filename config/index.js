@@ -86,6 +86,20 @@ module.exports = {
           pathRewrite: {
             '^/getavatarlist': '/getavatarlist'
           }
+      },
+      '/addcomment':{
+          target:'http://127.0.0.1:3000',
+          changeOrigin: true,
+          pathRewrite: {
+            '^/addcomment': '/addcomment'
+          }
+      },
+      '/getcomments':{
+          target:'http://127.0.0.1:3000',
+          changeOrigin: true,
+          pathRewrite: {
+            '^/getcomments': '/getcomments'
+          }
       }
     },
   }

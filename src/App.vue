@@ -21,7 +21,6 @@ div#app
     transition(name="slide-fade" appear mode="out-in")
       keep-alive(include ="Home")
         router-view.home-router
-    
   Footer(v-show="state == 1")
 </template>
 
@@ -31,33 +30,30 @@ import Footer from "./components/common/vue/Footer";
 
 export default {
   name: "app",
-  data(){
-    return{
+  data() {
+    return {
       state: 1
-    }
+    };
   },
   components: {
     TopHeader,
     Footer
   },
-  beforeRouteUpdate (to, from, next) {
-    this.state = 1
-    console.log(11111111111111111111)
+  beforeRouteUpdate(to, from, next) {
+    this.state = 1;
   },
-  watch:{
-    '$route': 'watchFooter'
+  watch: {
+    $route: "watchFooter"
   },
-  created(){
+  created() {
     setTimeout(() => {
-      this.state == 0
+      this.state == 0;
     }, 10000);
   },
-  mounted(){
-    console.log(1111111111111)
-  },
-  methods:{
-    watchFooter(){
-      this.state = 1
+  mounted() {},
+  methods: {
+    watchFooter() {
+      this.state = 1;
     }
   }
 };
@@ -65,8 +61,8 @@ export default {
 
 <style lang="scss">
 @import "src/components/common/scss/base.scss";
-.content{
-  .home-router{
+.content {
+  .home-router {
     min-height: calc(100vh - 14px - 63px);
   }
 }
@@ -84,8 +80,8 @@ export default {
   height: 100%;
   z-index: -1;
   pointer-events: none;
-  background: rgba(255,255,255,0);
-  .particles-js-canvas-el{
+  background: rgba(255, 255, 255, 0);
+  .particles-js-canvas-el {
     pointer-events: none;
   }
 }

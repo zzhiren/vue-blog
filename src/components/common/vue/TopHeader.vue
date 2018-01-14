@@ -29,7 +29,7 @@ $height: 63px;
         content: url(../../../assets/code.svg);
         vertical-align: middle;
         display: inline-block;
-        margin-top: -8px;
+        margin-top: -6px;
         line-height: 10px;
         margin-right: 8px;
         margin-left: 4px;

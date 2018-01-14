@@ -1,5 +1,6 @@
 <template lang="pug">
   div.blog-details
+    div.mask(v-show="avatarListState" @click="_showAvatarList()")
     div.markdown
       h3.title(v-html="data.title")
       p(v-html="compiledMarkdown")
@@ -17,81 +18,81 @@
           span 最热
       div.list-box
         ul.comment-list
-          li.comment-item
+          li.comment-item(v-for="(item,index) in commentList" v-bind:key="index")
             div.cm-avatar
-              img.cm-avatar-img(src="../../assets/me960x960.jpg")
+              img.cm-avatar-img(v-bind:src="item.avatarImg")
             div.cm-body
               div.cm-heaer
-                a.user-name() Zzhiren
-                Icon.os-icon(type="social-windows")
-                //- Icon(type="social-apple")
-                span.user-os Windows 10
+                a.user-name(v-bind:href="item.userSite") {{item.userName}}
+                Icon.os-icon(v-if="item.OS.indexOf('Windows') != -1 " type="social-windows")
+                Icon.mac-icon(v-if="item.OS.indexOf('Mac') != -1 " type="social-apple")
+                Icon.mac-icon(v-if="item.OS.indexOf('Unix') != -1 " type="social-tux")
+                Icon.mac-icon(v-if="item.OS.indexOf('Linux') != -1 " type="social-tux")
+                span.user-os {{item.OS}}
                 Icon.os-icon(type="earth")
-                span.user-browser Chrome
+                span.user-browser {{item.browser}}
               div.cm-content 
-                p 我再使用富文本编辑器vue-quill-editor的时候， 使用图片上传发现它是把图片转为base后插在文本中， 然后我直接是提交了，但发现太大了在查询的时候很慢。我再使用富文本编辑器vue-quill-editor的时候， 使用图片上传发现它是把图片转为base后插在文本中， 然后我直接是提交了，但发现太大了在查询的时候很慢。
+                p(v-html="item.theComment")
               div.cm-footer
-                span 2018/01/01 下午
-          li.comment-item
-            div.cm-avatar
-              img.cm-avatar-img(src="../../assets/me960x960.jpg")
-            div.cm-body
-              div.cm-heaer
-                a.user-name() Zzhiren
-                Icon.os-icon(type="social-windows")
-                //- Icon(type="social-apple")
-                span.user-os Windows 10
-                Icon.os-icon(type="earth")
-                span.user-browser Chrome
-              div.cm-content 
-                p 我再使用富文本编辑器vue-quill-editor的时候， 使用图片上传发现它是把图片转为base后插在文本中， 然后我直接是提交了，但发现太大了在查询的时候很慢。我再使用富文本编辑器vue-quill-editor的时候， 使用图片上传发现它是把图片转为base后插在文本中， 然后我直接是提交了，但发现太大了在查询的时候很慢。
-              div.cm-footer
-                span 2018/01/01 下午
-          //- div.xxx
+                span {{item.creationTime}}
       div.post-box
         div.user
-          input.input(v-model="userName" placeholder="name*")
-          input.input(v-model="userEmail" placeholder="email*")
-          input.input.focus-black(v-model="userSite" placeholder="site")
+          div.container
+            input.input(v-model="userName" placeholder="name*" @focus="_clearTip(0)")
+            pop-tip(:tip="userNameTip" v-show="this.userNameTip != ''")
+          div.container
+            input.input(v-model="userEmail" placeholder="email*" type="email" @focus="_clearTip(1)")
+            pop-tip(:tip="userEmailTip" v-show="this.userEmailTip != ''")
+          div.container
+            input.input.focus-blue(v-model="userSite" placeholder="site" )
+            //- pop-tip(:tip="userSiteTip" v-show="this.userSiteTip != ''")
         div.editor-box
           div.user-avatar-img
-            img.img(src="../../assets/me960x960.jpg")
-            div.avatar-list
-              div.avatar-items(v-if="avatarList.length > 0")
-                transition-group(name="cell" tag="p")
-                  li.avatar-item(v-for="(item,index) in avatarList" v-bind:key="index")
-                    img.avatar-img(v-bind:src="item")
-              div.btn
-                div.avatar-btn(@click="_chooseSex(0)" v-bind:class="{active: sexState == 0}")
-                  Icon.icon.blue(type="male")
-                div.avatar-btn(@click="_chooseSex(1)" v-bind:class="{active: sexState == 1}")
-                  Icon.icon.hot-pink.female(type="female")
+            img.img(v-bind:src="avatarImg" @click="_showAvatarList()")
+            transition(name="fade")
+              div.avatar-list(v-show="avatarListState" v-cloak)
+                div.avatar-items
+                  transition-group#male.group(v-show="sexState == 0" name="fade" tag="div" ref="avatarItems")
+                    div.avatar-item(@click="_selectAvatar(item)" v-for="(item,index) in male" v-bind:key="index")
+                      img.avatar-img(v-bind:src="item")
+                  transition-group#female.group(v-show="sexState == 1" name="fade" tag="div")
+                    div.avatar-item(@click="_selectAvatar(item)" v-for="(item,index) in female" v-bind:key="index")
+                      img.avatar-img(v-bind:src="item")
+                div.btn
+                  div.avatar-btn(@click="_chooseSex(0)" v-bind:class="{active: sexState == 0}")
+                    Icon.icon.blue(type="male")
+                  div.avatar-btn(@click="_chooseSex(1)" v-bind:class="{active: sexState == 1}")
+                    Icon.icon.hot-pink.female(type="female")
           div.markdown-editor
-            textarea.textarea(placeholder="show me your think" oninput="this.style.height = this.scrollHeight+'px'")
+            textarea.textarea(v-model="theComment" placeholder="show me your think" oninput="this.style.height = this.scrollHeight+'px'")
             div.editor-tools
-              div.submit 发布
+              div.submit(@click="_submit()") 发布
 </template>
 <script>
 import axios from "axios";
 import Marked from "marked";
+import default_avatar from "../../assets/default_avatar.png";
+import PopTip from "../common/vue/PopTip";
 
 export default {
   data() {
     return {
       data: "",
       content: "",
-      os: "",
+      OS: "",
       browser: "",
       userName: "",
       userEmail: "",
       userSite: "",
-      emotions: [],
-      emotion: "[表情]",
-      emotionsMap: {},
+      userNameTip: "",
+      userEmailTip: "",
+      commentList: [],
+      theComment: "",
       sexState: 0,
       male: [],
       female: [],
-      avatarList: []
+      avatarListState: false,
+      avatarImg: default_avatar
     };
   },
   computed: {
@@ -99,13 +100,81 @@ export default {
       return Marked(this.content);
     }
   },
+  components: {
+    PopTip
+  },
   mounted() {
-    this._initData();
+    this._getBlogDetails();
+    this._getComments();
     this._clientOS();
     this._clientBrowser();
     this._getAvatarList();
   },
   methods: {
+    // 关闭提示
+    _clearTip(value) {
+      switch (value) {
+        case 0:
+          this.userNameTip = "";
+          break;
+        case 1:
+          this.userEmailTip = "";
+          console.log(111);
+          break;
+        default:
+          break;
+      }
+    },
+    // 发布评论
+    _submit() {
+      if (this.userName == "" || this.userName == null) {
+        this.userNameTip = "( ) => { name != ' ' 😯 }";
+      }
+      if (this.userEmail == "" || this.userEmail == null) {
+        this.userEmailTip = "( ) => { email格式不正确 😯 }";
+      }
+      if (this.theComment == "") {
+        alert("请输入评论内容☺！");
+      }
+      if (this.userName != "" && this.userEmail != "" && this.comment != "") {
+        let myDate = new Date();
+        let year = myDate.getFullYear();
+        let month = myDate.getMonth() + 1;
+        let day = myDate.getDate();
+        let hours = myDate.getHours();
+        let creationTime = "";
+        if (hours <= 12) {
+          creationTime = year + "/" + month + "/" + day + " " + "上午";
+        } else if (hours > 12) {
+          creationTime = year + "/" + month + "/" + day + " " + "下午";
+        }
+        console.log(111);
+        this.$axios({
+          method: "post",
+          url: "/addcomment",
+          data: {
+            _id: this.$route.params.id,
+            avatarImg: this.avatarImg,
+            userName: this.userName,
+            userEmail: this.userEmail,
+            userSite: this.userSite,
+            theComment: this.theComment,
+            creationTime: creationTime,
+            OS: this.OS,
+            browser: this.browser
+          }
+        }).then(res => {});
+      }
+    },
+    // 选择头像
+    _selectAvatar(value) {
+      this.avatarImg = value;
+    },
+    // 显示选择头像窗口
+    _showAvatarList() {
+      this.avatarListState = !this.avatarListState;
+    },
+    // 获取头像列表数据
     _getAvatarList() {
       let date = new Date();
       let timer = date.getTime().toString();
@@ -119,25 +188,14 @@ export default {
         console.log(res.data.data);
         this.male = res.data.data[0].list.male;
         this.female = res.data.data[0].list.female;
-        this.avatarList = res.data.data[0].list.male;
       });
     },
     _chooseSex(value) {
-      // this.sexState = value;
-      // this.avatarList = [];
-      // if (value == 0) {
-      //   // setTimeout(() => {
-      //     this.avatarList = this.male;
-          
-      //   // }, 1);
-      // } else if (value == 1) {
-      //   setTimeout(() => {
-      //     this.avatarList = this.female;
-      //   }, 1);
-      // }
-      this.avatarList = _.shuffle(this.avatarList)
+      this.sexState = value;
+      document.getElementById("male").scrollTop = 0;
+      document.getElementById("female").scrollTop = 0;
     },
-    _initData() {
+    _getBlogDetails() {
       this.$axios({
         method: "post",
         url: "/getblogdetils",
@@ -150,6 +208,20 @@ export default {
         console.log(res.data.data);
       });
     },
+    _getComments() {
+      let date = new Date();
+      let timer = date.getTime().toString();
+      this.$axios({
+        method: "get",
+        url: "/getcomments",
+        params: {
+          id: this.$route.params.id,
+          t: timer
+        }
+      }).then(res => {
+        this.commentList = res.data.data;
+      });
+    },
     _clientOS() {
       let sUserAgent = navigator.userAgent;
       let isWin =
@@ -160,28 +232,28 @@ export default {
         navigator.platform == "Macintosh" ||
         navigator.platform == "MacIntel";
       if (isMac) {
-        this.os = "Mac OSX";
+        this.OS = "Mac OSX";
       }
       let isUnix = navigator.platform == "X11" && !isWin && !isMac;
       if (isUnix) {
-        this.os = "Unix";
+        this.OS = "Unix";
       }
       let isLinux = String(navigator.platform).indexOf("Linux") > -1;
       if (isLinux) {
-        this.os = "Linux";
+        this.OS = "Linux";
       }
       if (isWin) {
         let isWin7 =
           sUserAgent.indexOf("Windows NT 6.1") > -1 ||
           sUserAgent.indexOf("Windows 7") > -1;
         if (isWin7) {
-          this.os = "Windows 7";
+          this.OS = "Windows 7";
         }
         let isWin10 =
           sUserAgent.indexOf("Windows NT 10.0") > -1 ||
           sUserAgent.indexOf("Windows 10") > -1;
         if (isWin10) {
-          this.os = "Windows 10";
+          this.OS = "Windows 10";
         }
       }
       return "other";
@@ -191,17 +263,13 @@ export default {
       let isOpera = userAgent.indexOf("Opera") > -1;
       if (isOpera) {
         this.browser = "Opera";
-      }
-      if (userAgent.indexOf("Firefox") > -1) {
+      } else if (userAgent.indexOf("Firefox") > -1) {
         this.browser = "FF";
-      }
-      if (userAgent.indexOf("Chrome") > -1) {
+      } else if (userAgent.indexOf("Chrome") > -1) {
         this.browser = "Chrome";
-      }
-      if (userAgent.indexOf("Safari") > -1) {
+      } else if (userAgent.indexOf("Safari") > -1) {
         this.browser = "Safari";
-      }
-      if (
+      } else if (
         userAgent.indexOf("compatible") > -1 &&
         userAgent.indexOf("MSIE") > -1 &&
         !isOpera
@@ -216,20 +284,25 @@ export default {
 @import "src/components/common/scss/base.scss";
 
 $bg: hsla(0, 0%, 77%, 0.3);
-$hover-bg: hsla(0, 0%, 57%, 0.2);
+$hover-bg: hsla(0, 0%, 57%, 0.3);
 $height: 24.48px;
-
-.cell-move {
-  transition: transform 1s;
+[v-cloak] {
+  display: none;
 }
-
+.mask {
+  position: fixed;
+  z-index: 10;
+  width: 4000px;
+  height: 3000px;
+  left: -1000px;
+}
 .list-complete-item {
   transition: all 1s;
   display: inline-block;
   margin-right: 10px;
 }
-.list-complete-enter, .list-complete-leave-to
-/* .list-complete-leave-active for below version 2.1.8 */ {
+.list-complete-enter,
+.list-complete-leave-to {
   opacity: 0;
   transform: translateY(30px);
 }
@@ -362,7 +435,12 @@ $height: 24.48px;
               .os-icon {
                 margin-left: 11px;
                 margin-right: 4px;
-                font-size: 12px;
+                font-size: 11px;
+              }
+              .mac-icon{
+                margin-left: 11px;
+                margin-right: 4px;
+                font-size: 14px;
               }
               .user-os {
                 // margin-right: 11px;
@@ -400,34 +478,45 @@ $height: 24.48px;
         margin-bottom: 10.66px;
         padding-left: 56.66px;
         display: flex;
-        .input {
-          color: #555;
-          flex: 1;
+        .container {
+          width: 100%;
           margin-right: 14px;
-          background-color: $bg;
-          padding: 4px;
-          padding-left: 8px;
-          box-sizing: border-box;
+          position: relative;
           flex: 1;
-          outline-color: rgba(255, 255, 255, 0);
-          border: 0 !important;
-          transition: background-color 0.25s linear;
-          caret-color: red;
-          &::placeholder {
-            color: #777;
-          }
-          &:hover {
-            background-color: $hover-bg;
-          }
           &:last-child {
             margin-right: 0;
           }
-          &:focus {
-            background-color: $hover-bg;
+
+          .input {
+            color: #555;
+            // flex: 1;
+            height: 100%;
+            width: 100%;
+            background-color: $bg;
+            // background-color: $bg;
+            padding: 4px;
+            padding-left: 8px;
+            box-sizing: border-box;
+            // flex: 1;
+            outline-color: rgba(255, 255, 255, 0);
+            border: 0 !important;
+            transition: background-color 0.25s linear;
+            caret-color: red;
+            &::placeholder {
+              color: #777;
+            }
+            &:hover {
+              background-color: $hover-bg;
+            }
+
+            &:focus {
+              background-color: $hover-bg;
+            }
           }
         }
-        .focus-black {
-          caret-color: #555 !important;
+
+        .focus-blue {
+          caret-color: #0088f5 !important;
         }
       }
       .editor-box {
@@ -443,11 +532,19 @@ $height: 24.48px;
             width: 42.66px;
             height: 42.66px;
           }
+          .fade-enter-active,
+          .fade-leave-active {
+            transition: opacity 0.5s;
+          }
+          .fade-enter,
+          .fade-leave-to {
+            opacity: 0;
+          }
+
           .avatar-list {
             width: 525px;
-            // padding: 7px;
-
             height: 155px;
+            z-index: 11;
             padding-right: 0 !important;
             max-height: 200px;
             display: flex;
@@ -456,69 +553,53 @@ $height: 24.48px;
             position: absolute;
             top: -40px;
             left: 45px;
-            @-webkit-keyframes zoomInLeft {
+            @-webkit-keyframes fadeIn {
               from {
                 opacity: 0;
-                -webkit-transform: scale3d(0.1, 0.1, 0.1)
-                  translate3d(-1000px, 0, 0);
-                transform: scale3d(0.1, 0.1, 0.1) translate3d(-1000px, 0, 0);
-                -webkit-animation-timing-function: cubic-bezier(
-                  0.55,
-                  0.055,
-                  0.675,
-                  0.19
-                );
-                animation-timing-function: cubic-bezier(
-                  0.55,
-                  0.055,
-                  0.675,
-                  0.19
-                );
               }
-              60% {
+              to {
                 opacity: 1;
-                -webkit-transform: scale3d(0.475, 0.475, 0.475)
-                  translate3d(10px, 0, 0);
-                transform: scale3d(0.475, 0.475, 0.475) translate3d(10px, 0, 0);
-                -webkit-animation-timing-function: cubic-bezier(
-                  0.175,
-                  0.885,
-                  0.32,
-                  1
-                );
-                animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
               }
             }
+
             .avatar-items {
-              // animation: zoomInLeft 1s;
-              overflow-x: hidden;
+              // overflow-x: hidden;
               display: flex;
               flex-wrap: wrap;
               margin-top: 7px;
               margin-left: 7px;
               flex: 1;
-              &::-webkit-scrollbar {
-                width: 4px;
-                height: 16px;
-                background: hsla(0, 0%, 77%, 0.9);
-                opacity: 1;
-                // display: none;
-              }
-              &::-webkit-scrollbar-track {
-                // -webkit-box-shadow: inset 0 0 6px white;
-                border-radius: 10px;
-                background: hsla(0, 0%, 77%, 0.9);
-                display: block;
-              }
-              &::-webkit-scrollbar-thumb {
-                border-radius: 10px; // -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
-                // background-color: rgba(150, 150, 150, 0.9);
-                background-color: black;
-                &:hover {
-                  background-color: #0088f5;
+              .group {
+                width: 525px;
+                display: flex;
+                height: 100%;
+                overflow-x: hidden;
+                flex-wrap: wrap;
+                &::-webkit-scrollbar {
+                  width: 4px;
+                  height: 16px;
+                  background: hsla(0, 0%, 77%, 0.9);
+                  opacity: 1;
+                  // display: none;
+                }
+                &::-webkit-scrollbar-track {
+                  // -webkit-box-shadow: inset 0 0 6px white;
+                  border-radius: 10px;
+                  background: hsla(0, 0%, 77%, 0.9);
+                  display: block;
+                }
+                &::-webkit-scrollbar-thumb {
+                  border-radius: 10px;
+                  // -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3); // background-color: rgba(150, 150, 150, 0.9);
+                  background-color: black;
+                  &:hover {
+                    background-color: #0088f5;
+                  }
                 }
               }
+
               .avatar-item {
+                animation: fadeIn 1s;
                 $size: 50px;
                 width: $size;
                 height: $size;
@@ -597,7 +678,10 @@ $height: 24.48px;
               text-align: center;
               line-height: 30px;
               letter-spacing: 3px;
+              outline-width: 0;
               font-size: 14px;
+              border: none;
+              border-radius: 0;
               transition: background-color 0.2s linear;
               &:hover {
                 background-color: hsla(0, 0%, 69%, 0.8);
@@ -619,9 +703,7 @@ $height: 24.48px;
   display: flex;
   .share-item {
     width: 42px;
-    height: 100%;
-    // background: red;
-
+    height: 100%; // background: red;
     margin-right: 6.23px;
     &:last-child {
       margin-right: 0;
@@ -673,8 +755,7 @@ $height: 24.48px;
     /* color: #bc78cd; */
     padding-left: 8px !important;
     font-size: 14px;
-    margin-top: 14px !important;
-    // margin-bottom: 7px !important;
+    margin-top: 14px !important; // margin-bottom: 7px !important;
     background: $bg;
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
@@ -697,7 +778,6 @@ $height: 24.48px;
     overflow-x: auto;
     &::-webkit-scrollbar {
       width: 5px;
-
       height: 7px;
       background-color: white;
       opacity: 1;

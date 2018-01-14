@@ -88,8 +88,8 @@ export default {
         this.tagName = this.$route.params.tagName;
         this.tagDsc = this.$route.params.tagDsc;
       }, 1);
-      var date = new Date();
-      var timer = date.getTime().toString();
+      let date = new Date();
+      let timer = date.getTime().toString();
       this.$axios({
         method: "get",
         url: "/getpostedblogsbytag",
