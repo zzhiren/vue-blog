@@ -7,12 +7,12 @@
     div.comment
       div.tools
         div.total
-          div.count 条评论
-          div.like
-            div.icon
+          div.count {{commentList.length}}条评论
+          div.like(@click="_addLove()")
+            div.icon(v-bind:class="{red: loveState == 1}")
               Icon.icon(type="android-favorite")
             div.count
-              span 4人喜欢
+              span {{data.love}}人喜欢
         div.sort
           span 最新
           span 最热
@@ -92,7 +92,8 @@ export default {
       male: [],
       female: [],
       avatarListState: false,
-      avatarImg: default_avatar
+      avatarImg: default_avatar,
+      loveState: 0
     };
   },
   computed: {
@@ -104,13 +105,61 @@ export default {
     PopTip
   },
   mounted() {
+    if (localStorage[this.$route.params.id]) {
+      this.loveState = 1;
+    }
     this._getBlogDetails();
     this._getComments();
     this._clientOS();
     this._clientBrowser();
     this._getAvatarList();
+    this._initGuestInformation();
   },
   methods: {
+    // addLove
+    _addLove() {
+      let _id = this.$route.params.id;
+      let date = new Date();
+      let timer = date.getTime().toString();
+      if (localStorage[_id]) {
+      } else {
+        this.$axios({
+          method: "get",
+          url: "/addlove",
+          params: {
+            _id: _id,
+            t: timer
+          }
+        }).then(res => {
+          if (res.data.status == 0) {
+            localStorage[_id] = _id;
+            this.data.love++
+            this.loveState = 1;
+          }
+        });
+      }
+    },
+    // localstorage保存用户信息
+    _initGuestInformation() {
+      if (localStorage.userName) {
+        this.userName = localStorage.userName;
+      }
+      if (localStorage.userEmail) {
+        this.userEmail = localStorage.userEmail;
+      }
+      if (localStorage.userName) {
+        this.userSite = localStorage.userSite;
+      }
+      if (localStorage.avatarImg) {
+        this.avatarImg = localStorage.avatarImg;
+      }
+    },
+    _saveGuestInformation() {
+      localStorage.userName = this.userName;
+      localStorage.userEmail = this.userEmail;
+      localStorage.userSite = this.userSite;
+      localStorage.avatarImg = this.avatarImg;
+    },
     // 关闭提示
     _clearTip(value) {
       switch (value) {
@@ -119,7 +168,6 @@ export default {
           break;
         case 1:
           this.userEmailTip = "";
-          console.log(111);
           break;
         default:
           break;
@@ -148,7 +196,7 @@ export default {
         } else if (hours > 12) {
           creationTime = year + "/" + month + "/" + day + " " + "下午";
         }
-        console.log(111);
+        this._saveGuestInformation();
         this.$axios({
           method: "post",
           url: "/addcomment",
@@ -205,7 +253,6 @@ export default {
       }).then(res => {
         this.data = res.data.data;
         this.content = res.data.data.content;
-        console.log(res.data.data);
       });
     },
     _getComments() {
@@ -336,6 +383,7 @@ $height: 24.48px;
           height: $height;
           padding-left: 7px;
           padding-right: 7px;
+          padding-top: 1px;
           color: #555;
         }
         .count {
@@ -349,7 +397,7 @@ $height: 24.48px;
         }
         .icon {
           line-height: 26px;
-          font-size: 16px;
+          font-size: 18px;
           padding-right: 2px;
           background-color: rgba(0, 0, 0, 0);
         }
@@ -365,6 +413,10 @@ $height: 24.48px;
           .count {
             background-color: rgba(0, 0, 0, 0);
             padding: 0;
+            padding-top: 1px!important;
+          }
+          .red {
+            color: red;
           }
         }
       }
@@ -437,7 +489,7 @@ $height: 24.48px;
                 margin-right: 4px;
                 font-size: 11px;
               }
-              .mac-icon{
+              .mac-icon {
                 margin-left: 11px;
                 margin-right: 4px;
                 font-size: 14px;
@@ -493,11 +545,9 @@ $height: 24.48px;
             height: 100%;
             width: 100%;
             background-color: $bg;
-            // background-color: $bg;
             padding: 4px;
             padding-left: 8px;
             box-sizing: border-box;
-            // flex: 1;
             outline-color: rgba(255, 255, 255, 0);
             border: 0 !important;
             transition: background-color 0.25s linear;
@@ -521,7 +571,6 @@ $height: 24.48px;
       }
       .editor-box {
         width: 100%;
-        // height: 107.78px;
         display: flex;
         .user-avatar-img {
           width: 42.66px;
@@ -749,6 +798,8 @@ $height: 24.48px;
   p {
     color: #abb2bf;
     margin-bottom: 10px !important; // border-left: 2px solid #3d96e9;
+    word-wrap: break-word;
+    word-break: break-all;
   }
   blockquote > p {
     color: #42b983;
@@ -759,7 +810,7 @@ $height: 24.48px;
     background: $bg;
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
-    height: 28px;
+    // height: 28px;
     line-height: 28px;
     font-family: Monaco, Consolas, Helvetica, "PingFang SC", "Hiragino Sans GB",
       "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
@@ -806,6 +857,11 @@ $height: 24.48px;
     width: 100%;
     opacity: 0.9;
     margin-bottom: 10px;
+  }
+  a {
+    margin-bottom: 10px !important;
+    color: #ff69b4;
+    text-decoration: underline;
   }
 }
 </style>

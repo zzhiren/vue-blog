@@ -59,8 +59,8 @@ export default {
     _more(state) {
       if (state === 0) {
         this.page++;
-        var date = new Date();
-        var timer = date.getTime().toString();
+        let date = new Date();
+        let timer = date.getTime().toString();
         this.$axios({
           method: "get",
           url: "/getpostedblogsbytag",

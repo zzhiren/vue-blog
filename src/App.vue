@@ -50,7 +50,23 @@ export default {
       this.state == 0;
     }, 10000);
   },
-  mounted() {},
+  mounted() {
+    if(!localStorage.userName){
+      localStorage.userName = ''
+    }
+    if(!localStorage.userEmail){
+      localStorage.userEmail = ''
+    }
+    if(!localStorage.userSite){
+      localStorage.userSite = ''
+    }
+    if(!localStorage.avatarImg){
+      localStorage.avatarImg = ''
+    }
+    if(!localStorage.love){
+      localStorage.love = {}
+    }
+  },
   methods: {
     watchFooter() {
       this.state = 1;
