@@ -42,8 +42,10 @@
             router-view
     div.top-down
       div.btn
-        div.box
-        div.box
+        div.box(@click="_scrollTop(0)")
+          Icon.iview-icon(type="chevron-up")
+        div.box(@click="_scrollTop(1)")
+          Icon.iview-icon(type="chevron-down")
 </template>
 <script>
 import Footer from "../common/vue/Footer";
@@ -57,7 +59,27 @@ export default {
   components: {
     Footer
   },
-  methods: {}
+  mounted(){
+    console.log(document.documentElement.scrollTop)
+  },
+  methods: {
+    _scrollTop(value) {
+      if (value == 0) {
+        let currentPosition, timer;
+        let speed = 10;
+        timer = setInterval(function() {
+          currentPosition = document.documentElement.scrollTop || document.body.scrollTop;
+          currentPosition -= speed; //speed变量
+          if (currentPosition > 0) {
+            window.scrollTo(0, currentPosition);
+          } else {
+            window.scrollTo(0, 0);
+            clearInterval(timer);
+          }
+        }, 1);
+      }
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -106,9 +128,15 @@ $margin-top: 76.99px;
         height: 42px;
         background: $background-white;
         transition: background 0.5s linear;
+        text-align: center;
         &:hover {
           background: hsla(0, 0%, 77%, 0.4);
           cursor: pointer;
+        }
+        .iview-icon {
+          line-height: 42px;
+          font-size: 15px;
+          color: #555;
         }
       }
     }
