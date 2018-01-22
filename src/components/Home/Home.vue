@@ -18,64 +18,119 @@
           //- router-link.nav-item(tag="div" to="/collection") 
           //-   Icon.icon-font(type="star") 
           //-   span COLLECTION
+          div.nav-item
+            Icon.icon-font(type="social-github")
+            a(href="https://github.com/Zzhiren" target="_blank") GITHUB
+          div.nav-item
+            //- img(src="./../../assets/vue.svg" width="16")
+            a.vue(href="https://cn.vuejs.org/v2/guide/" target="_blank") VUE.JS
+          div.nav-item
+            //- Icon.icon-font(type="social-github")
+            a.vue(href="https://vuex.vuejs.org/zh-cn/" target="_blank") VUEX
+          div.nav-item
+            //- Icon.icon-font(type="social-github")
+            a.vue(href="https://router.vuejs.org/zh-cn/" target="_blank") VUE-ROUTER
+          div.nav-item
+            //- img.img-icon(src="../../assets/iview.png")
+            a.iview(href="https://www.iviewui.com/" target="_blank") IVIEW
+          div.nav-item
+            //- Icon.icon-font(type="social-github")
+            a.webpack(href="https://doc.webpack-china.org/" target="_blank") WEBPACK
       div.main-content
         transition(name="slide-fade" appear mode="out-in")
-          keep-alive(include ="BlogList")
+          keep-alive(include ="Project,About" exclude="BlogListByTag,BlogDetails")
             router-view
+    div.top-down
+      div.btn
+        div.box
+        div.box
 </template>
 <script>
-import Footer from '../common/vue/Footer'
+import Footer from "../common/vue/Footer";
 export default {
-  name: 'Home',
+  name: "Home",
   data() {
     return {
       state: 2
-    }
+    };
   },
-  components:{
-    Footer,
+  components: {
+    Footer
   },
-  methods: {
-  }
-}
+  methods: {}
+};
 </script>
 <style lang="scss" scoped>
-@import 'src/components/common/scss/base.scss';
+@import "src/components/common/scss/base.scss";
 $margin-top: 76.99px;
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
-.fade-enter, .fade-leave-to{
-  opacity: 0
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 .slide-fade-enter-active {
-  transition: all .5s ease;
+  transition: all 0.5s ease;
 }
 .slide-fade-leave-active {
-  transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
 }
-.slide-fade-enter, .slide-fade-leave-to{
+.slide-fade-enter,
+.slide-fade-leave-to {
   transform: translateX(10px);
   opacity: 0;
 }
-.home{
+.home {
   width: 100%;
-  .content{
+  position: relative;
+  .top-down {
+    position: fixed;
+    // background:blue;
+    width: 1250px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0 auto;
+    height: calc(100vh - 28px - 63px);
+    .btn {
+      position: absolute;
+      width: 42px;
+      height: 84px;
+      bottom: 0;
+      right: 0;
+      .box {
+        width: 42px;
+        height: 42px;
+        background: $background-white;
+        transition: background 0.5s linear;
+        &:hover {
+          background: hsla(0, 0%, 77%, 0.4);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .content {
+    position: relative;
     width: $width;
     display: flex;
     margin: $margin-auto;
-    .left-side{
+    z-index: 9;
+    .left-side {
       position: fixed;
       margin-top: $margin-top;
       width: 161px;
       height: 100px;
-      .nav-list{
+      .nav-list {
         width: 161px;
-        .nav-item{
+        .nav-item {
           width: 161px;
           height: 40px;
           margin-bottom: 8px;
-          font-family: 'Asap', sans-serif;
+          font-family: "Asap", sans-serif;
           font-size: 14px;
           line-height: 40px;
           color: #777777;
@@ -83,22 +138,66 @@ $margin-top: 76.99px;
           font-weight: bold;
           padding-left: 15px;
           box-sizing: border-box;
-          &:hover{
+          &:hover {
             cursor: pointer;
             color: $font-color-blue;
           }
-          .icon-font{
+          &:hover .vue {
+            &::before {
+              content: url(../../assets/bluetagvue.svg);
+              display: inline-block;
+              vertical-align: middle;
+              margin-top: 4px;
+              margin-right: 11px;
+              margin-left: -1px;
+            }
+          }
+          .icon-font {
             font-size: 15px;
             margin-right: 13px;
           }
-          span{
+          span {
             letter-spacing: 1px;
           }
+          a {
+            color: inherit;
+            // font-size: 15px;
+          }
+          .vue {
+            // margin-right: 5px;
+            &::before {
+              content: url(../../assets/tagvue.svg);
+              display: inline-block;
+              vertical-align: middle;
+              margin-top: 4px;
+              margin-right: 11px;
+              margin-left: -1px;
+            }
+          }
+          .iview {
+            &::before {
+              content: url(../../assets/iview.svg);
+              vertical-align: middle;
+              display: inline-block;
+              margin-right: 11px;
+              margin-top: 4px;
+              margin-left: -1px;
+            }
+          }
+          .webpack {
+            &::before {
+              content: url(../../assets/webpack.svg);
+              vertical-align: middle;
+              display: inline-block;
+              margin-right: 11px;
+              margin-top: 4px;
+              margin-left: -1px;
+            }
+          }
         }
-        
       }
     }
-    .main-content{
+    .main-content {
       margin-top: $margin-top;
       width: 875px;
       margin-left: 175px;
@@ -106,7 +205,7 @@ $margin-top: 76.99px;
       // height: 1000px;
       // background: rgba(0, 0, 0, 0.7);
     }
-    .right-side{
+    .right-side {
       position: fixed;
       margin-left: 784px;
       margin-top: $margin-top;

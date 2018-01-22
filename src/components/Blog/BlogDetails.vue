@@ -7,34 +7,38 @@
     div.comment
       div.tools
         div.total
-          div.count {{commentList.length}}条评论
+          div.count 
+            span.bold {{commentList.length}}
+            span 条评论
           div.like(@click="_addLove()")
             div.icon(v-bind:class="{red: loveState == 1}")
               Icon.icon(type="android-favorite")
             div.count
-              span {{data.love}}人喜欢
+              span.bold {{data.love}}
+              span 人喜欢
         div.sort
-          span 最新
+          span.bold 最新
           span 最热
       div.list-box
         ul.comment-list
-          li.comment-item(v-for="(item,index) in commentList" v-bind:key="index")
-            div.cm-avatar
-              img.cm-avatar-img(v-bind:src="item.avatarImg")
-            div.cm-body
-              div.cm-heaer
-                a.user-name(v-bind:href="item.userSite") {{item.userName}}
-                Icon.os-icon(v-if="item.OS.indexOf('Windows') != -1 " type="social-windows")
-                Icon.mac-icon(v-if="item.OS.indexOf('Mac') != -1 " type="social-apple")
-                Icon.mac-icon(v-if="item.OS.indexOf('Unix') != -1 " type="social-tux")
-                Icon.mac-icon(v-if="item.OS.indexOf('Linux') != -1 " type="social-tux")
-                span.user-os {{item.OS}}
-                Icon.os-icon(type="earth")
-                span.user-browser {{item.browser}}
-              div.cm-content 
-                p(v-html="item.theComment")
-              div.cm-footer
-                span {{item.creationTime}}
+          transition(name="fade" v-for="(item,index) in commentList" v-bind:key="index")
+            li.comment-item()
+              div.cm-avatar
+                img.cm-avatar-img(v-bind:src="item.avatarImg")
+              div.cm-body
+                div.cm-heaer
+                  a.user-name(v-bind:href="item.userSite") {{item.userName}}
+                  Icon.os-icon(v-if="item.OS.indexOf('Windows') != -1 " type="social-windows")
+                  Icon.mac-icon(v-if="item.OS.indexOf('Mac') != -1 " type="social-apple")
+                  Icon.mac-icon(v-if="item.OS.indexOf('Unix') != -1 " type="social-tux")
+                  Icon.mac-icon(v-if="item.OS.indexOf('Linux') != -1 " type="social-tux")
+                  span.user-os {{item.OS}}
+                  Icon.os-icon(type="earth")
+                  span.user-browser {{item.browser}}
+                div.cm-content 
+                  p(v-html="item.theComment")
+                div.cm-footer
+                  span {{item.creationTime}}
       div.post-box
         div.user
           div.container
@@ -75,6 +79,7 @@ import default_avatar from "../../assets/default_avatar.png";
 import PopTip from "../common/vue/PopTip";
 
 export default {
+  name:"BlogDetails",
   data() {
     return {
       data: "",
@@ -133,7 +138,7 @@ export default {
         }).then(res => {
           if (res.data.status == 0) {
             localStorage[_id] = _id;
-            this.data.love++
+            this.data.love++;
             this.loveState = 1;
           }
         });
@@ -184,7 +189,7 @@ export default {
       if (this.theComment == "") {
         alert("请输入评论内容☺！");
       }
-      if (this.userName != "" && this.userEmail != "" && this.comment != "") {
+      if (this.userName != "" && this.userEmail != "" && this.theComment != "") {
         let myDate = new Date();
         let year = myDate.getFullYear();
         let month = myDate.getMonth() + 1;
@@ -197,21 +202,27 @@ export default {
           creationTime = year + "/" + month + "/" + day + " " + "下午";
         }
         this._saveGuestInformation();
+        let obj = {
+          id: this.$route.params.id,
+          avatarImg: this.avatarImg,
+          userName: this.userName,
+          userEmail: this.userEmail,
+          userSite: this.userSite,
+          theComment: this.theComment,
+          creationTime: creationTime,
+          OS: this.OS,
+          browser: this.browser
+        };
         this.$axios({
           method: "post",
           url: "/addcomment",
-          data: {
-            _id: this.$route.params.id,
-            avatarImg: this.avatarImg,
-            userName: this.userName,
-            userEmail: this.userEmail,
-            userSite: this.userSite,
-            theComment: this.theComment,
-            creationTime: creationTime,
-            OS: this.OS,
-            browser: this.browser
+          data: obj
+        }).then(res => {
+          if (res.data.status == 0) {
+            this.commentList.push(obj);
+            this.theComment = "";
           }
-        }).then(res => {});
+        });
       }
     },
     // 选择头像
@@ -343,18 +354,11 @@ $height: 24.48px;
   height: 3000px;
   left: -1000px;
 }
-.list-complete-item {
-  transition: all 1s;
-  display: inline-block;
-  margin-right: 10px;
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
 }
-.list-complete-enter,
-.list-complete-leave-to {
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
-  transform: translateY(30px);
-}
-.list-complete-leave-active {
-  position: absolute;
 }
 .blog-details {
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
@@ -365,6 +369,10 @@ $height: 24.48px;
     background: $background-white;
     padding: 14px;
     position: relative;
+    .bold {
+      font-weight: bold;
+      margin-right: 2px;
+    }
     .tools {
       width: 100%;
       height: 39.46px;
@@ -386,6 +394,7 @@ $height: 24.48px;
           padding-top: 1px;
           color: #555;
         }
+
         .count {
           margin-right: 7px;
           transition: background-color 0.4s linear;
@@ -396,7 +405,7 @@ $height: 24.48px;
           }
         }
         .icon {
-          line-height: 26px;
+          line-height: 25px;
           font-size: 18px;
           padding-right: 2px;
           background-color: rgba(0, 0, 0, 0);
@@ -413,10 +422,10 @@ $height: 24.48px;
           .count {
             background-color: rgba(0, 0, 0, 0);
             padding: 0;
-            padding-top: 1px!important;
+            padding-top: 1px !important;
           }
           .red {
-            color: red;
+            color: rgba(255, 0, 0, 0.8);
           }
         }
       }
@@ -429,6 +438,9 @@ $height: 24.48px;
         span {
           margin-left: 14px;
           font-size: 14px;
+          &:hover{
+            cursor: pointer;
+          }
         }
       }
     }

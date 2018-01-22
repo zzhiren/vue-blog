@@ -13,7 +13,7 @@ $height: 63px;
 .topheader {
   width: 100%;
   position: fixed;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: $background-white;
   z-index: 999;
   .content {
     width: $width;

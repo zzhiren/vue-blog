@@ -74,6 +74,7 @@
 </template>
 <script>
 export default {
+  name: "About",
   data() {
     return {
       address: "杭州"
@@ -452,6 +453,10 @@ export default {
   box-sizing: border-box;
   text-align: center;
   .content {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     width: 100%;
     height: 100%;
     padding-top: 55px;

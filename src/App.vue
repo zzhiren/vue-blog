@@ -79,7 +79,7 @@ export default {
 @import "src/components/common/scss/base.scss";
 .content {
   .home-router {
-    min-height: calc(100vh - 14px - 63px);
+    min-height: calc(100vh - 28px - 63px);
   }
 }
 #app {

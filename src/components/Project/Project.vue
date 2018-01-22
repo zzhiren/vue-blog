@@ -1,11 +1,12 @@
 <template lang="pug">
   div.project(ref="project")
-    a.project-item(target="_blank" v-for="(item,index) in projects" v-bind:key="index" v-bind:href="item.projectUrl")
+    a.project-item(target="_blank" v-for="(item,index) in projects" v-bind:key="index" v-bind:href="item.html_url")
       p.item-icon
         img(v-if="item.icon == 'Vue'" src="./../../assets/vue.svg" width="64")
         Icon.icon(v-if="item.icon != 'Vue'" v-bind:type="item.icon")
       p.item-title(v-html="item.name")
-      p.item-dsc {{item.description}}
+      p.item-dsc(v-if="item.description != null") {{item.description}}
+      p.item-dsc(v-if="item.description == null") No description (●'◡'●)！
       p.item-github
         span.meta
           Icon.star(type="android-star")  
@@ -19,6 +20,7 @@
 </template>
 <script>
 export default {
+  name:"Project",
   data() {
     return {
       projects:[]

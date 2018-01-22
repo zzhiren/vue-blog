@@ -15,7 +15,7 @@ import iView from 'iview';
 const Home = () => import('@/components/Home/Home');
 const Blog = () => import('@/components/Blog/Blog');
 const BlogList = () => import('@/components/Blog/BlogList');
-const BlogListByTag = () => import('@/components/Blog/BlogListByTag');
+const Tag = () => import('@/components/Blog/Tag');
 const BlogDetails = () => import('@/components/Blog/BlogDetails');
 const Music = () => import('@/components/Music/Music');
 const About = () => import('@/components/About/About');
@@ -52,9 +52,10 @@ const router = new Router({
               component: BlogDetails,
             },
             {
-              path: 'bloglistbytag/:tagName/:tagAliasName/:tagIcon/:tagDsc/:animationClass',
-              name: 'BlogListByTag',
-              component: BlogListByTag,
+              // path: 'bloglistbytag/:tagName/:tagAliasName/:tagIcon/:tagDsc',
+              path: 'tag/:tagName',
+              name: 'Tag',
+              component: Tag,
             },
           ]
         },

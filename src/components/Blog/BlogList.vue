@@ -1,9 +1,10 @@
 <template lang="pug">
   div#blog-list
     swiper.swiper(:options="swiperOption" ref="mySwiper")
-        swiper-slide.swiper-slide(v-for="(item, index) in blogs.slice(0,4)" v-bind:key="index")
+        swiper-slide.swiper-slide(v-for="(item, index) in blogs.slice(0,10)" v-bind:key="index")
           img.swiper-img(v-bind:src="item.firstPic" alt="" v-bind:key="item._id" @click="_toBlogDetils(item._id)")
-          div.title()  {{ item.title}}
+          div.title()  {{item.title}}
+        div(class="swiper-pagination"  slot="pagination")
     div.blog
       div.blog-item(v-for="(item,index) in blogs" v-bind:key="item._id" @click="_toBlogDetils(item._id)")
           div.item-thumb
@@ -15,14 +16,16 @@
                 span
                   Icon.icon-font(type="ios-clock")
                   span.meta-span {{item.creationTime}}
-                  Icon.icon-font(type="eye")
-                  span.meta-span {{item.eyes}}
+                  //- Icon.icon-font(type="eye")
+                  //- span.meta-span {{item.eyes}}
                   Icon.icon-font(type="chatbox-working")
-                  span.meta-span {{item.comment.length}}
+                  span.meta-span {{item.comment}}
                   Icon.icon-font(type="heart")
                   span.meta-span {{item.love}}
                   Icon.icon-font(type="ios-pricetags")
-                  span.meta-span {{item.tag[0]}}
+                  span.meta-span
+                    span.tag(v-for="(tag,index) in item.tag") {{tag}}
+                      span(v-if="index != (item.tag.length-1)") /
       div.more(@click="_initData(state)") 
         span(v-show="state === 0") 或许有更多
         span(v-show="state === 1") 我也是有底线的
@@ -42,6 +45,7 @@ export default {
         setWrapperSize: true,
         paginationClickable: false,
         mousewheelControl: false,
+        pagination: ".swiper-pagination",
         observeParents: true,
         autoplayDisableOnInteraction: false
         // loop: true
@@ -213,6 +217,9 @@ export default {
             "Microsoft YaHei", "\\5FAE软雅黑", sans-serif;
           font-weight: 100;
           font-size: $blog-list-meta-font-size;
+          .tag{
+            font-size: 12px;
+          }
         }
       }
     }
