@@ -20,7 +20,7 @@
                     //- Icon.icon-font(type="eye")
                     //- span.meta-span {{item.eyes}}
                     Icon.icon-font(type="chatbox-working")
-                    span.meta-span {{item.comment.length}}
+                    span.meta-span {{item.comment}}
                     Icon.icon-font(type="heart")
                     span.meta-span {{item.love}}
                     Icon.icon-font(type="ios-pricetags")
@@ -35,6 +35,8 @@
 </template>
 <script>
 import axios from "axios";
+import { mapGetters } from "vuex";
+
 export default {
   name: "Tag",
   data() {
@@ -57,6 +59,11 @@ export default {
     this._initData();
     this._initTagData();
   },
+  computed: {
+    ...mapGetters([
+      'tagName'
+    ])
+  },
   methods: {
     _more(state) {
       if (state === 0) {
@@ -69,7 +76,7 @@ export default {
           params: {
             t: timer,
             page: this.page,
-            tag: this.$route.params.tagName
+            tag: this.tagName
           }
         }).then(res => {
           if (res.data.status == "已发布") {
@@ -97,7 +104,7 @@ export default {
     },
     _initData() {
       this.tagName = "x";
-      this.tagIcon = this.$route.params.tagIcon;
+      // this.tagIcon = this.$route.params.tagIcon;
       // this.animationClass = this.$route.params.animationClass;
       let n = parseInt(Math.random() * 9);
       switch (n) {
@@ -139,7 +146,7 @@ export default {
         params: {
           t: timer,
           page: 1,
-          tag: this.$route.params.tagName
+          tag: this.tagName
         }
       }).then(res => {
         if (res.data.status == "已发布") {

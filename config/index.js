@@ -39,77 +39,77 @@ module.exports = {
     cssSourceMap: false,
     proxyTable: {
       '/login':{
-          target:'http://127.0.0.1:3000',
+          target:'http://127.0.0.1:30003',
           changeOrigin: true,
           pathRewrite: {
             '^/login': '/login'
           }
       },
       '/getpostedblogs':{
-          target:'http://127.0.0.1:3000',
+          target:'http://127.0.0.1:30003',
           changeOrigin: true,
           pathRewrite: {
             '^/getpostedblogs': '/getpostedblogs'
           }
       },
       '/getblogdetils':{
-          target:'http://127.0.0.1:3000',
+          target:'http://127.0.0.1:30003',
           changeOrigin: true,
           pathRewrite: {
             '^/getblogdetils': '/getblogdetils'
           }
       },
       '/searchnpm':{
-          target:'http://127.0.0.1:3000',
+          target:'http://127.0.0.1:30003',
           changeOrigin: true,
           pathRewrite: {
             '^/searchnpm': '/searchnpm'
           }
       },
       '/getgithubproject':{
-          target:'http://127.0.0.1:3000',
+          target:'http://127.0.0.1:30003',
           changeOrigin: true,
           pathRewrite: {
             '^/getgithubproject': '/getgithubproject'
           }
       },
       '/getpostedblogsbytag':{
-          target:'http://127.0.0.1:3000',
+          target:'http://127.0.0.1:30003',
           changeOrigin: true,
           pathRewrite: {
             '^/getpostedblogsbytag': '/getpostedblogsbytag'
           }
       },
       '/getavatarlist':{
-          target:'http://127.0.0.1:3000',
+          target:'http://127.0.0.1:30003',
           changeOrigin: true,
           pathRewrite: {
             '^/getavatarlist': '/getavatarlist'
           }
       },
       '/addcomment':{
-          target:'http://127.0.0.1:3000',
+          target:'http://127.0.0.1:30003',
           changeOrigin: true,
           pathRewrite: {
             '^/addcomment': '/addcomment'
           }
       },
       '/getcomments':{
-          target:'http://127.0.0.1:3000',
+          target:'http://127.0.0.1:30003',
           changeOrigin: true,
           pathRewrite: {
             '^/getcomments': '/getcomments'
           }
       },
       '/addlove':{
-          target:'http://127.0.0.1:3000',
+          target:'http://127.0.0.1:30003',
           changeOrigin: true,
           pathRewrite: {
             '^/addlove': '/addlove'
           }
       },
       '/gettag':{
-          target:'http://127.0.0.1:3000',
+          target:'http://127.0.0.1:30003',
           changeOrigin: true,
           pathRewrite: {
             '^/gettag': '/gettag'

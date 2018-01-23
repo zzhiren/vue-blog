@@ -17,11 +17,12 @@ div#app
         :clickEffect="false"
         clickMode="remove")
   top-header
-  div.content
+  div.app-content
     transition(name="slide-fade" appear mode="out-in")
       keep-alive(include ="Home")
         router-view.home-router
-  Footer(v-show="state == 1")
+  div
+    Footer(v-show="state == 1")
 </template>
 
 <script>
@@ -49,6 +50,7 @@ export default {
     setTimeout(() => {
       this.state == 0;
     }, 10000);
+    
   },
   mounted() {
     if(!localStorage.userName){
@@ -77,9 +79,9 @@ export default {
 
 <style lang="scss">
 @import "src/components/common/scss/base.scss";
-.content {
+.app-content {
+  min-height: calc(100vh - 28px - 63px);
   .home-router {
-    min-height: calc(100vh - 28px - 63px);
   }
 }
 #app {
@@ -166,7 +168,6 @@ h4,
 p {
   padding: 0;
   margin: 0;
-  // margin-bottom: 7px!important;
 }
 h4 {
   font-size: 14px;

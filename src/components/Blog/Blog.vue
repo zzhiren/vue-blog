@@ -10,7 +10,7 @@
           npm
         div.tags(ref="tag" v-bind:class="{tagsfixed: fixedState}")
           ul.items
-            li.item(v-for="(item,index) in tags" @click="_toBlogListByTag(item.name)") 
+            li.item(v-for="(item,index) in tags" @click="_toBlogListByTag(item.name,item.aliasName)") 
               Icon.icon(v-if="item.icon != ''" v-bind:type="item.icon")
               //- img.vue(v-if="item.svg != ''" src="./../../assets/vue.svg" width="13")
               span(v-if="item.name !='vue'") {{item.aliasName}}
@@ -20,6 +20,8 @@
 <script>
 import axios from "axios";
 import npm from "./Npm.vue"
+import {mapMutations} from 'vuex'
+
 export default {
   name: "Blog",
   data() {
@@ -39,8 +41,12 @@ export default {
     this._initNpmData();
     this._initTagData();
     this._addEventListener();
+
   },
   methods: {
+    ...mapMutations({
+      setTag: "SET_TAG"
+    }),
     _addEventListener() {
       document.addEventListener("scroll", this._setTagPosition);
     },
@@ -101,7 +107,8 @@ export default {
         });
       }
     },
-    _toBlogListByTag(name) {
+    _toBlogListByTag(name,aliasName) {
+      this.setTag(aliasName)
       let tagName = name;
       this.$router.push({
         name: "Tag",
@@ -141,9 +148,6 @@ $margin-top: 79px;
   .content {
     flex: 1;
   }
-  .right-content {
-    // position: fixed;
-  }
   .right-side {
     margin-left: 14px;
     width: 266px;
@@ -152,7 +156,6 @@ $margin-top: 79px;
       margin-top: -390px !important;
     }
     .tags {
-      // position: fixed;
       background-color: $background-white;
       width: 266px;
       height: 358.6px;

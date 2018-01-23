@@ -18,24 +18,24 @@
           //- router-link.nav-item(tag="div" to="/collection") 
           //-   Icon.icon-font(type="star") 
           //-   span COLLECTION
-          div.nav-item
+          a.nav-item(href="https://github.com/Zzhiren" target="_blank")
             Icon.icon-font(type="social-github")
-            a(href="https://github.com/Zzhiren" target="_blank") GITHUB
-          div.nav-item
+            span GITHUB
+          a.nav-item(href="https://cn.vuejs.org/v2/guide/" target="_blank")
             //- img(src="./../../assets/vue.svg" width="16")
-            a.vue(href="https://cn.vuejs.org/v2/guide/" target="_blank") VUE.JS
-          div.nav-item
+            span.vue VUE.JS
+          a.nav-item(href="https://vuex.vuejs.org/zh-cn/" target="_blank")
             //- Icon.icon-font(type="social-github")
-            a.vue(href="https://vuex.vuejs.org/zh-cn/" target="_blank") VUEX
-          div.nav-item
+            span.vue VUEX
+          a.nav-item(href="https://router.vuejs.org/zh-cn/" target="_blank")
             //- Icon.icon-font(type="social-github")
-            a.vue(href="https://router.vuejs.org/zh-cn/" target="_blank") VUE-ROUTER
-          div.nav-item
+            span.vue VUE-ROUTER
+          a.nav-item(href="https://www.iviewui.com/" target="_blank")
             //- img.img-icon(src="../../assets/iview.png")
-            a.iview(href="https://www.iviewui.com/" target="_blank") IVIEW
-          div.nav-item
+            span.iview IVIEW
+          a.nav-item(href="https://doc.webpack-china.org/" target="_blank")
             //- Icon.icon-font(type="social-github")
-            a.webpack(href="https://doc.webpack-china.org/" target="_blank") WEBPACK
+            span.webpack WEBPACK
       div.main-content
         transition(name="slide-fade" appear mode="out-in")
           keep-alive(include ="Project,About" exclude="BlogListByTag,BlogDetails")
@@ -59,21 +59,39 @@ export default {
   components: {
     Footer
   },
-  mounted(){
-    console.log(document.documentElement.scrollTop)
+  mounted() {
   },
   methods: {
     _scrollTop(value) {
       if (value == 0) {
-        let currentPosition, timer;
-        let speed = 10;
+        let currentPosition;
+        let timer;
+        let speed = 80;
         timer = setInterval(function() {
-          currentPosition = document.documentElement.scrollTop || document.body.scrollTop;
+          currentPosition =
+            document.documentElement.scrollTop || document.body.scrollTop;
           currentPosition -= speed; //speed变量
           if (currentPosition > 0) {
             window.scrollTo(0, currentPosition);
           } else {
             window.scrollTo(0, 0);
+            clearInterval(timer);
+          }
+        }, 1);
+      } else if (value == 1) {
+        let currentPosition = 0;
+        let timer;
+        let speed = 80;
+        // document.body.scrollHeight 文档总高度
+        // document.body.clientHeight视窗高度
+        let h = document.body.scrollHeight - document.body.clientHeight;
+        timer = setInterval(function() {
+          // let h = document.documentElement.scrollTop || document.body.scrollTop;
+          currentPosition += speed; //speed变量
+          if (currentPosition < h) {
+            window.scrollTo(0, currentPosition);
+          } else {
+            window.scrollTo(0, h);
             clearInterval(timer);
           }
         }, 1);
@@ -109,7 +127,6 @@ $margin-top: 76.99px;
   position: relative;
   .top-down {
     position: fixed;
-    // background:blue;
     width: 1250px;
     right: 0;
     top: 0;
@@ -155,6 +172,7 @@ $margin-top: 76.99px;
       .nav-list {
         width: 161px;
         .nav-item {
+          display: block;
           width: 161px;
           height: 40px;
           margin-bottom: 8px;
@@ -189,10 +207,8 @@ $margin-top: 76.99px;
           }
           a {
             color: inherit;
-            // font-size: 15px;
           }
           .vue {
-            // margin-right: 5px;
             &::before {
               content: url(../../assets/tagvue.svg);
               display: inline-block;
@@ -230,8 +246,6 @@ $margin-top: 76.99px;
       width: 875px;
       margin-left: 175px;
       margin-right: $margin-all;
-      // height: 1000px;
-      // background: rgba(0, 0, 0, 0.7);
     }
     .right-side {
       position: fixed;

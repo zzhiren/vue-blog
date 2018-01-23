@@ -351,7 +351,7 @@ export default {
           display: inline-block;
           margin-top: -10px;
           line-height: 10px;
-          margin-right: 24px;
+          margin-right: 22px;
           margin-left: -1px;
         }
         .chicken {
@@ -391,7 +391,7 @@ export default {
           display: inline-block;
           margin-top: -8px;
           line-height: 10px;
-          margin-right: 24px;
+          margin-right: 22px;
           margin-left: -1px;
         }
         .shengxiao {
