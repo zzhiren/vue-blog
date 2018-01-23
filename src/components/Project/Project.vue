@@ -89,8 +89,9 @@ export default {
     .item-dsc {
       color: inherit;
       text-indent: 20px;
-      font-size: 14px;
+      font-size: 13px;
       height: 56px;
+      line-height: 25px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.26);
     }
     .item-github {

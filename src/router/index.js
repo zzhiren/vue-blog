@@ -33,29 +33,42 @@ const router = new Router({
       name: 'Home',
       component: Home,
       redirect:"/blog",
+      meta: {
+      },
       children: [
         {
           path: 'blog',
           name: 'Blog',
           redirect: '/blog/bloglist',
           component: Blog,
+          meta: {
+          },
           children:[
             {
               path: 'bloglist',
               name: 'BlogList',
               component: BlogList,
+              meta: {
+                title: 'Zzhiren - BLOG'
+              },
             },
             
             {
               path: 'blogdetails/:id',
               name: 'BlogDetails',
               component: BlogDetails,
+              meta: {
+                title: 'Zzhiren - DETAILS'
+              },
             },
             {
               // path: 'bloglistbytag/:tagName/:tagAliasName/:tagIcon/:tagDsc',
               path: 'tag/:tagName',
               name: 'Tag',
               component: Tag,
+              meta: {
+                title: 'Zzhiren - TAG'
+              },
             },
           ]
         },
@@ -67,7 +80,10 @@ const router = new Router({
         {
           path: 'about',
           name: 'About',
-          component: About
+          component: About,
+          meta: {
+            title: 'Zzhiren - ABOUT'
+          },
         },
         {
           path: 'collection',
@@ -77,7 +93,10 @@ const router = new Router({
         {
           path: 'project',
           name: 'Project',
-          component: Project
+          component: Project,
+          meta: {
+            title: 'Zzhiren - Project'
+          },
         },
       ]
     }
@@ -86,6 +105,9 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   iView.LoadingBar.start();
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
   next();
 });
 
