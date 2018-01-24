@@ -49,7 +49,7 @@ const router = new Router({
               name: 'BlogList',
               component: BlogList,
               meta: {
-                title: 'Zzhiren - BLOG'
+                title: 'Zzhiren | Blog - To improve is to change; to be perfect is to change often！'
               },
             },
             
@@ -58,7 +58,7 @@ const router = new Router({
               name: 'BlogDetails',
               component: BlogDetails,
               meta: {
-                title: 'Zzhiren - DETAILS'
+                title: 'Zzhiren | Details - To improve is to change; to be perfect is to change often！'
               },
             },
             {
@@ -67,7 +67,7 @@ const router = new Router({
               name: 'Tag',
               component: Tag,
               meta: {
-                title: 'Zzhiren - TAG'
+                title: 'Zzhiren | Tag - To improve is to change; to be perfect is to change often！'
               },
             },
           ]
@@ -82,7 +82,7 @@ const router = new Router({
           name: 'About',
           component: About,
           meta: {
-            title: 'Zzhiren - ABOUT'
+            title: 'Zzhiren | About - To improve is to change; to be perfect is to change often！'
           },
         },
         {
@@ -95,7 +95,7 @@ const router = new Router({
           name: 'Project',
           component: Project,
           meta: {
-            title: 'Zzhiren - Project'
+            title: 'Zzhiren | Project - To improve is to change; to be perfect is to change often！'
           },
         },
       ]

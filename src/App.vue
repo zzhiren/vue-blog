@@ -50,26 +50,38 @@ export default {
     setTimeout(() => {
       this.state == 0;
     }, 10000);
-    
   },
   mounted() {
-    if(!localStorage.userName){
-      localStorage.userName = ''
-    }
-    if(!localStorage.userEmail){
-      localStorage.userEmail = ''
-    }
-    if(!localStorage.userSite){
-      localStorage.userSite = ''
-    }
-    if(!localStorage.avatarImg){
-      localStorage.avatarImg = ''
-    }
-    if(!localStorage.love){
-      localStorage.love = {}
-    }
+    this._initGustInformation();
+    this._watchNow();
   },
   methods: {
+    // 初始化localstorage信息
+    _initGustInformation() {
+      if (!localStorage.userName) {
+        localStorage.userName = "";
+      }
+      if (!localStorage.userEmail) {
+        localStorage.userEmail = "";
+      }
+      if (!localStorage.userSite) {
+        localStorage.userSite = "";
+      }
+      if (!localStorage.avatarImg) {
+        localStorage.avatarImg = "";
+      }
+      if (!localStorage.love) {
+        localStorage.love = {};
+      }
+    },
+    // 检测用户是否在浏览当前网页
+    _watchNow() {
+      document.addEventListener("visibilitychange", () => {
+        document.title = document.hidden
+          ? "去吧-皮卡丘~(￣▽￣)~*"
+          : this.$route.meta.title;
+      });
+    },
     watchFooter() {
       this.state = 1;
     }
@@ -81,8 +93,6 @@ export default {
 @import "src/components/common/scss/base.scss";
 .app-content {
   min-height: calc(100vh - 28px - 63px);
-  .home-router {
-  }
 }
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;

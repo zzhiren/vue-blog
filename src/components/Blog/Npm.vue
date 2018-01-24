@@ -75,7 +75,6 @@ export default {
   },
   methods: {
     _initNpmData() {
-      console.log("init");
       this.$axios({
         method: "get",
         url: "/searchnpm",
