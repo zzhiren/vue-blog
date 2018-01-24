@@ -1,11 +1,19 @@
 <template lang="pug">
   div.topheader
     div.content
-        div.my-name ZZHIREN
+        div.my-name(@click="_home()") ZZHIREN
         div.motto To improve is to change; to be perfect is to change often！
 </template>
 <script>
-export default {};
+export default {
+  methods:{
+    _home(){
+      this.$router.push({
+        name:"Blog"
+      })
+    }
+  }
+};
 </script>
 <style lang="scss" scoped>
 @import "src/components/common/scss/base.scss";
@@ -24,6 +32,10 @@ $height: 63px;
       line-height: $height;
       font-size: 28px;
       font-family: "Asap";
+      -moz-user-select: none;
+      -khtml-user-select: none;
+      user-select: none;
+      cursor: pointer;
       float: left;
       &::before {
         content: url(../../../assets/code.svg);
@@ -39,7 +51,7 @@ $height: 63px;
       font-size: 14px;
       margin-left: 40px;
       letter-spacing: 0.5px;
-      opacity: .9;
+      opacity: 0.9;
       line-height: $height;
       float: left;
     }

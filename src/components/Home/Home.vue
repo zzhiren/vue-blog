@@ -21,13 +21,16 @@
           a.nav-item(href="https://github.com/Zzhiren" target="_blank")
             Icon.icon-font(type="social-github")
             span GITHUB
-          a.nav-item(href="https://cn.vuejs.org/v2/guide/" target="_blank")
+          a.nav-item(href="https://zzhiren.github.io/" target="_blank")
+            //- Icon.icon-font(type="social-github")
+            span.hexo HEXO.ME
+          a.nav-item.vue-hover(href="https://cn.vuejs.org/v2/guide/" target="_blank")
             //- img(src="./../../assets/vue.svg" width="16")
             span.vue VUE.JS
-          a.nav-item(href="https://vuex.vuejs.org/zh-cn/" target="_blank")
+          a.nav-item.vue-hover(href="https://vuex.vuejs.org/zh-cn/" target="_blank")
             //- Icon.icon-font(type="social-github")
             span.vue VUEX
-          a.nav-item(href="https://router.vuejs.org/zh-cn/" target="_blank")
+          a.nav-item.vue-hover(href="https://router.vuejs.org/zh-cn/" target="_blank")
             //- Icon.icon-font(type="social-github")
             span.vue VUE-ROUTER
           a.nav-item(href="https://www.iviewui.com/" target="_blank")
@@ -171,6 +174,11 @@ $margin-top: 76.99px;
       height: 100px;
       .nav-list {
         width: 161px;
+        .vue-hover{
+          &:hover{
+            color: $font-color!important;
+          }
+        }
         .nav-item {
           display: block;
           width: 161px;
@@ -189,14 +197,14 @@ $margin-top: 76.99px;
             color: $font-color-blue;
           }
           &:hover .vue {
-            &::before {
-              content: url(../../assets/bluetagvue.svg);
-              display: inline-block;
-              vertical-align: middle;
-              margin-top: 4px;
-              margin-right: 11px;
-              margin-left: -1px;
-            }
+            // &::before {
+            //   content: url(../../assets/bluetagvue.svg);
+            //   display: inline-block;
+            //   vertical-align: middle;
+            //   margin-top: 4px;
+            //   margin-right: 11px;
+            //   margin-left: -1px;
+            // }
           }
           .icon-font {
             font-size: 15px;
@@ -208,9 +216,19 @@ $margin-top: 76.99px;
           a {
             color: inherit;
           }
+          .hexo {
+            &::before {
+              content: url(../../assets/hexo.svg);
+              display: inline-block;
+              vertical-align: middle;
+              margin-top: 4px;
+              margin-right: 11px;
+              margin-left: -1px;
+            }
+          }
           .vue {
             &::before {
-              content: url(../../assets/tagvue.svg);
+              content: url(../../assets/tagvue.png);
               display: inline-block;
               vertical-align: middle;
               margin-top: 4px;

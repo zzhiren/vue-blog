@@ -67,7 +67,7 @@
             span.fish , Fish
     div.location
       div#amap
-    div.projects
+    div.projects(@click="_toProject()")
       div.content
         p.title GET MORE PROJECT
         p.know-more 了解更多关于我的项目
@@ -84,6 +84,13 @@ export default {
     this._initBMap();
   },
   methods: {
+    // 跳转到project
+    _toProject(){
+      this.$router.push({
+        name:"Project"
+      })
+    },
+    // 初始化高德地图
     _initBMap() {
       var map = new AMap.Map("amap", {
         resizeEnable: true,
@@ -452,6 +459,7 @@ export default {
   padding: 7px;
   box-sizing: border-box;
   text-align: center;
+  cursor: pointer;
   .content {
     -webkit-user-select: none;
     -moz-user-select: none;

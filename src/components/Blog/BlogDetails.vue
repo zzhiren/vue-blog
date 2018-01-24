@@ -471,11 +471,13 @@ $height: 24.48px;
             height: 56px;
             top: 18px;
             left: -20px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
+            // border: 4px solid rgba(0, 0, 0, 0.2);
+            border: 4px solid rgba(255, 255, 255, 0.8);
             .cm-avatar-img {
               width: 48px;
               height: 48px;
               transition: transform 0.3s linear;
+              background: white;
             }
           }
           .cm-body {
@@ -623,13 +625,15 @@ $height: 24.48px;
               flex-wrap: wrap;
               margin-top: 7px;
               margin-left: 7px;
+              // height: 100%;
               flex: 1;
               .group {
                 width: 525px;
                 display: flex;
-                height: 100%;
+                height: 118px;
                 overflow-x: hidden;
                 flex-wrap: wrap;
+                // overflow:scroll;
                 &::-webkit-scrollbar {
                   width: 4px;
                   height: 16px;
