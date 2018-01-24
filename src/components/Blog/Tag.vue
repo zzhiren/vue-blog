@@ -60,9 +60,7 @@ export default {
     this._initTagData();
   },
   computed: {
-    ...mapGetters([
-      'tagName'
-    ])
+    ...mapGetters(["tagName"])
   },
   methods: {
     _more(state) {
@@ -510,25 +508,26 @@ export default {
         font-size: $iconfont-size;
         line-height: 30px;
         color: $blog-list-meta-font-color;
-        opacity: $blog-list-meta-font-opacity;
+        // opacity: 0.9;
         &:hover {
           cursor: pointer;
         }
         .icon-font {
-          font-size: $iconfont-size;
-          margin-right: 4px;
+          font-size: 12px;
+          margin-right: 6px;
           color: black !important;
           opacity: 0.7;
         }
         .meta-span {
           color: black;
+          font-weight: 400;
           letter-spacing: 1px;
           margin-right: 25px;
-          font-family: DINRegular, -apple-system, BlinkMacSystemFont,
-            "PingFang SC", "Helvetica Neue", "Hiragino Sans GB", "Segoe UI",
-            "Microsoft YaHei", "\\5FAE软雅黑", sans-serif;
-          font-weight: 100;
-          font-size: $iconfont-size;
+          // font-family: "Asap", sans-serif;
+          font-size: $blog-list-meta-font-size;
+          .tag {
+            font-size: 12px;
+          }
         }
       }
     }

@@ -225,13 +225,12 @@ export default {
     color: #777;
     display: flex;
     line-height: 42px;
-    font-size: 15px;
+    font-size: 14px;
     // text-align: center;
     padding-left: 10px;
     letter-spacing: 1px;
     overflow: hidden;
-    font-family: DINRegular, -apple-system, BlinkMacSystemFont, "PingFang SC",
-      "Helvetica Neue", "Hiragino Sans GB", "Segoe UI", "Microsoft YaHei",
+    font-family: "Microsoft YaHei",
       "\\5FAE软雅黑", sans-serif;
     font-weight: bold;
     .npm-div {

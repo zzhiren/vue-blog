@@ -19,8 +19,8 @@
 </template>
 <script>
 import axios from "axios";
-import npm from "./Npm.vue"
-import {mapMutations} from 'vuex'
+import npm from "./Npm.vue";
+import { mapMutations } from "vuex";
 
 export default {
   name: "Blog",
@@ -33,7 +33,7 @@ export default {
       tags: []
     };
   },
-  components:{
+  components: {
     npm
   },
 
@@ -41,7 +41,6 @@ export default {
     this._initNpmData();
     this._initTagData();
     this._addEventListener();
-
   },
   methods: {
     ...mapMutations({
@@ -58,16 +57,16 @@ export default {
         this.fixedState = false;
       }
     },
-    _initTagData(){
+    _initTagData() {
       this.$axios({
-        method:'get',
-        url:'/gettag',
-        params:{
-          name: 'all'
+        method: "get",
+        url: "/gettag",
+        params: {
+          name: "all"
         }
-      }).then(res=>{
-        this.tags = res.data.data
-      })
+      }).then(res => {
+        this.tags = res.data.data;
+      });
     },
     _initNpmData() {
       this.$axios({
@@ -107,14 +106,14 @@ export default {
         });
       }
     },
-    _toBlogListByTag(name,aliasName) {
-      this.setTag(aliasName)
+    _toBlogListByTag(name, aliasName) {
+      this.setTag(aliasName);
       let tagName = name;
       this.$router.push({
         name: "Tag",
         params: { tagName }
       });
-    },
+    }
   }
 };
 </script>
@@ -163,6 +162,8 @@ $margin-top: 79px;
       padding: 10.66px;
       .items {
         width: 226px;
+        font-family: "Asap", sans-serif;
+        // font-family: 'Exo 2', sans-serif;
         .item {
           color: #555;
           height: 28px;

@@ -185,6 +185,7 @@ $margin-top: 76.99px;
           height: 40px;
           margin-bottom: 8px;
           font-family: "Asap", sans-serif;
+          // font-family: 'Exo 2', sans-serif;
           font-size: 14px;
           line-height: 40px;
           color: #777777;
@@ -195,16 +196,6 @@ $margin-top: 76.99px;
           &:hover {
             cursor: pointer;
             color: $font-color-blue;
-          }
-          &:hover .vue {
-            // &::before {
-            //   content: url(../../assets/bluetagvue.svg);
-            //   display: inline-block;
-            //   vertical-align: middle;
-            //   margin-top: 4px;
-            //   margin-right: 11px;
-            //   margin-left: -1px;
-            // }
           }
           .icon-font {
             font-size: 15px;

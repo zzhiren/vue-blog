@@ -31,7 +31,8 @@ $height: 63px;
     .my-name {
       line-height: $height;
       font-size: 28px;
-      font-family: "Asap";
+      font-weight: 500;
+      font-family: 'Exo 2', sans-serif;
       -moz-user-select: none;
       -khtml-user-select: none;
       user-select: none;
@@ -51,7 +52,7 @@ $height: 63px;
       font-size: 14px;
       margin-left: 40px;
       letter-spacing: 0.5px;
-      opacity: 0.9;
+      opacity: 1;
       line-height: $height;
       float: left;
     }
