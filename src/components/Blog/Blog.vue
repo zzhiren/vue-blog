@@ -13,9 +13,9 @@
             li.item(v-for="(item,index) in tags" @click="_toBlogListByTag(item.name,item.aliasName)") 
               Icon.icon(v-if="item.icon != ''" v-bind:type="item.icon")
               //- img.vue(v-if="item.svg != ''" src="./../../assets/vue.svg" width="13")
-              span(v-if="item.name !='vue'") {{item.aliasName}}
+              span(v-if="item.name !='vue'") {{item.name}}
               span.vue(v-if="item.name == 'vue'")
-              span(v-if="item.name == 'vue'") {{item.aliasName}}
+              span(v-if="item.name == 'vue'") {{item.name}}
 </template>
 <script>
 import axios from "axios";
@@ -107,8 +107,8 @@ export default {
       }
     },
     _toBlogListByTag(name, aliasName) {
-      this.setTag(aliasName);
-      let tagName = name;
+      this.setTag(name);
+      let tagName = aliasName;
       this.$router.push({
         name: "Tag",
         params: { tagName }

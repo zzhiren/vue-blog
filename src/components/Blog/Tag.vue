@@ -2,9 +2,9 @@
   div#blog-list
     div.header
       p.logo
-        Icon.icon(v-bind:class="[animationClass]" v-if="tag.name != 'x'" v-bind:type="tag.icon")
-        img.icon.vue(v-bind:class="[animationClass]" v-if="tag.name == 'vue'" src="../../assets/vue.svg" width="90")
-      span.title(v-bind:class="[animationClass]" v-if="tag.name != 'x'") {{tag.dsc}}
+        Icon.icon(v-bind:class="[animationClass]" v-if="tag.aliasName !== 'x'" v-bind:type="tag.icon")
+        img.icon.vue(v-bind:class="[animationClass]" v-if="tag.aliasName === 'vue'" src="../../assets/vue.svg" width="90")
+      span.title(v-bind:class="[animationClass]" v-if="tag.aliasName !== 'x'") {{tag.dsc}}
     div.content
       transition-group(name="fade" mode="out-in" tag="p")
         div.blog-item(v-for="(item,index) in blogs" v-bind:key="item._id" @click="_toBlogDetils(item._id)")
@@ -56,8 +56,8 @@ export default {
   beforeRouteUpdate(to, from, next) {
     next();
     this.result = 0;
-    this._initData();
     this._initTagData();
+    this._initData();
   },
   computed: {
     ...mapGetters(["tagName"])
@@ -101,7 +101,7 @@ export default {
       });
     },
     _initData() {
-      this.tagName = "x";
+      // this.tagName = "x";
       // this.tagIcon = this.$route.params.tagIcon;
       // this.animationClass = this.$route.params.animationClass;
       let n = parseInt(Math.random() * 9);
@@ -134,7 +134,7 @@ export default {
           this.animationClass = "rubberBand";
           break;
       }
-      let tag = this.$route.params.tagAliasName;
+      // let tag = this.$route.params.tagAliasName;
 
       let date = new Date();
       let timer = date.getTime().toString();
