@@ -46,7 +46,7 @@ export default {
       page: 1,
       state: 1,
       tag: {},
-      result: 0,
+      result: 0
     };
   },
   mounted() {
