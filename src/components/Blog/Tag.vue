@@ -46,7 +46,7 @@ export default {
       page: 1,
       state: 1,
       tag: {},
-      result: 0
+      result: 0,
     };
   },
   mounted() {
@@ -63,6 +63,7 @@ export default {
     ...mapGetters(["tagName"])
   },
   methods: {
+    // 获取更多数据
     _more(state) {
       if (state === 0) {
         this.page++;
@@ -74,7 +75,7 @@ export default {
           params: {
             t: timer,
             page: this.page,
-            tag: this.tagName
+            tag: localStorage.tagName
           }
         }).then(res => {
           if (res.data.status == "已发布") {
@@ -100,6 +101,7 @@ export default {
         }, 1);
       });
     },
+    // 初次获取数据
     _initData() {
       // this.tagName = "x";
       // this.tagIcon = this.$route.params.tagIcon;
@@ -138,13 +140,14 @@ export default {
 
       let date = new Date();
       let timer = date.getTime().toString();
+      let tag = localStorage.tagName;
       this.$axios({
         method: "get",
         url: "/getpostedblogsbytag",
         params: {
           t: timer,
           page: 1,
-          tag: this.tagName
+          tag: localStorage.tagName
         }
       }).then(res => {
         if (res.data.status == "已发布") {

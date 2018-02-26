@@ -181,10 +181,15 @@ export default {
     // 发布评论
     _submit() {
       if (this.userName == "" || this.userName == null) {
-        this.userNameTip = "( ) => { name != ' ' 😯 }";
+        this.userNameTip = "昵称不能为空！";
       }
+      let reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
       if (this.userEmail == "" || this.userEmail == null) {
-        this.userEmailTip = "( ) => { email格式不正确 😯 }";
+        this.userEmailTip = "邮箱不能为空！";
+      }else{
+        if(!reg.test(this.userEmail)){
+          this.userEmailTip = "邮箱格式不正确！";
+        }
       }
       if (this.theComment == "") {
         alert("请输入评论内容☺！");

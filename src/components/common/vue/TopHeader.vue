@@ -2,7 +2,7 @@
   div.topheader
     div.content
         div.my-name(@click="_home()") ZZHIREN
-        div.motto To improve is to change; to be perfect is to change often！
+        div.motto To improve is to change, to be perfect is to change often！
 </template>
 <script>
 export default {
@@ -30,7 +30,7 @@ $height: 63px;
     color: #0088f5;
     .my-name {
       line-height: $height;
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 500;
       font-family: 'Exo 2', sans-serif;
       -moz-user-select: none;

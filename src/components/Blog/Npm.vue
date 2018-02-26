@@ -88,6 +88,8 @@ export default {
       });
     },
     _searchNPM() {
+      this.npmList = []
+      this.state = 0
       if (this.text == "") {
         this.$axios({
           method: "get",
@@ -97,6 +99,7 @@ export default {
             from: this.from
           }
         }).then(res => {
+          this.state = 1;
           this.npmList = res.data.objects;
         });
       } else {
@@ -108,6 +111,7 @@ export default {
             from: this.from
           }
         }).then(res => {
+          this.state = 1;
           this.npmList = res.data.objects;
         });
       }

@@ -12,10 +12,10 @@
           ul.items
             li.item(v-for="(item,index) in tags" @click="_toBlogListByTag(item.name,item.aliasName)") 
               Icon.icon(v-if="item.icon != ''" v-bind:type="item.icon")
-              //- img.vue(v-if="item.svg != ''" src="./../../assets/vue.svg" width="13")
-              span(v-if="item.name !='vue'") {{item.name}}
-              span.vue(v-if="item.name == 'vue'")
-              span(v-if="item.name == 'vue'") {{item.name}}
+              //- img.vue(v-if="item.svg != ''" src="./../../assets/tagvue.svg" width="13")
+              span(v-if="item.name !=='Vue'") {{item.name}}
+              span.vue(v-if="item.name == 'Vue'") {{item.name}}
+              //- span(v-if="item.name == 'vue'") {{item.name}}
 </template>
 <script>
 import axios from "axios";
@@ -107,6 +107,7 @@ export default {
       }
     },
     _toBlogListByTag(name, aliasName) {
+      localStorage.tagName = name;
       this.setTag(name);
       let tagName = aliasName;
       this.$router.push({
@@ -184,12 +185,12 @@ $margin-top: 79px;
             margin-right: 5px;
           }
           .vue {
-            margin-right: 5px;
             &::before {
-              content: url(../../assets/tagvue.svg);
+              content: url(./../../assets/tagvue.svg);
               display: inline-block;
               vertical-align: middle;
               margin-top: 4px;
+              margin-right: 3px;
             }
           }
         }
