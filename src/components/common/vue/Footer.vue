@@ -6,9 +6,9 @@
     a(target="_blank" href="http://www.expressjs.com.cn/") EXPRESS 
     span ADN 
     a(target="_blank" href="https://www.mongodb.com/") MONGODB
-    span .   DEVELOPED BY ME
-    span .   THE THEM DESIGNED BY 
-    a(target="_blank" href="https://surmon.me/") SURMON
+    span . DEVELOPED BY ME
+    //- span .   THE THEM DESIGNED BY 
+    //- a(target="_blank" href="https://surmon.me/") SURMON
 </template>
 <script>
 export default {
