@@ -1,7 +1,7 @@
 # blog
 
 > A Vue.js project
-
+![image](https://raw.githubusercontent.com/Zzhiren/vue-blog/master/src/assets/blog-pic.png)
 ## Build Setup
 
 ``` bash
