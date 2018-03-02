@@ -1,8 +1,21 @@
-# blog
+# Vue-Blog
 
-> A Vue.js project
-![image](https://raw.githubusercontent.com/Zzhiren/vue-blog/master/src/assets/blog-pic.png)
+### 网站截图
+#### 文章列表
+![image](https://raw.githubusercontent.com/Zzhiren/vue-blog/master/src/assets/zzhiren-blog.png)
+#### 关于我
+![image](https://raw.githubusercontent.com/Zzhiren/vue-blog/master/src/assets/zzhiren-about.png)
+#### 博客详情
+![image](https://raw.githubusercontent.com/Zzhiren/vue-blog/master/src/assets/zzhiren-details.png)
 ## Build Setup
+
+# 程序结构
+- vue.js组件化开发
+- webpack构建、打包
+- iViewUI框架
+- axios数据请求
+- [mavonEditor](https://github.com/hinesboy/mavonEditor)组件实现markdown功能
+- pug+scss+flex开发页面布局
 
 ``` bash
 # install dependencies
@@ -18,4 +31,3 @@ npm run build
 npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
