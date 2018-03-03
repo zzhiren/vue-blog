@@ -7,7 +7,6 @@
 ![image](https://raw.githubusercontent.com/Zzhiren/vue-blog/master/src/assets/zzhiren-about.png)
 #### 博客详情
 ![image](https://raw.githubusercontent.com/Zzhiren/vue-blog/master/src/assets/zzhiren-details.png)
-## Build Setup
 
 # 程序结构
 - vue.js组件化开发
