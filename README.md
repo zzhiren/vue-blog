@@ -17,6 +17,20 @@
 - [mavonEditor](https://github.com/hinesboy/mavonEditor)组件实现markdown功能
 - pug+scss+flex开发页面布局
 
+# 网页功能
+- ~~博客列表轮播图~~
+- ~~博客列表~~
+- ~~npm搜索功能~~
+- ~~按标签分类文章~~
+- ~~博客详情页评论功能~~
+- ~~加入高德地图~~
+- 评论功能支持markdown
+- 评论功能支持点对点回复
+- 微信、QQ空间、新浪微博等社交平台分享接口
+- 弹幕功能
+- 音乐播放界面，能够获取网易云音乐接口
+- 获取掘金、简书今日推荐并展示
+
 ``` bash
 # install dependencies
 npm install
